@@ -1,0 +1,35 @@
+{
+	"id": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
+	"name": "highfive-server",
+	"description": "The ReSTful API for the HighFive Server",
+	"order": [
+		"6a23fee7-a42e-442e-fa45-ea6c42e341b8"
+	],
+	"folders": [],
+	"timestamp": 1471631590758,
+	"owner": "933428",
+	"public": false,
+	"published": false,
+	"requests": [
+		{
+			"id": "6a23fee7-a42e-442e-fa45-ea6c42e341b8",
+			"headers": "",
+			"url": "localhost:5000/api/values",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:5000/api/values",
+			"description": "initial, test request",
+			"descriptionFormat": "html",
+			"time": 1471631611373,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
