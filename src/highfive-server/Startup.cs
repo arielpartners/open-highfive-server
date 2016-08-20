@@ -47,7 +47,12 @@ namespace highfive_server
             services.AddLogging();
 
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(config =>
+                {
+                    // make sure serialized JSON is camel-cased rather than pascal-cased.
+                    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
         }
 
 
