@@ -115,10 +115,7 @@ namespace highfive_server.Controllers
                 _repository.DeleteUser(user);
                 _repository.SaveChangesAsync();
 
-                HashSet<string> hashSet = new HashSet<string>();
-                hashSet.Add("User: " + user.Email + "Record deleted.");
-
-                return Ok(hashSet);
+                return Ok(new { Message = $"User {user.Email} record deleted" });
             }
             catch (Exception ex)
             {
