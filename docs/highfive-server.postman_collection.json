@@ -14,7 +14,7 @@
 		{
 			"id": "6a23fee7-a42e-442e-fa45-ea6c42e341b8",
 			"headers": "",
-			"url": "localhost:5000/api/values",
+			"url": "localhost:5000/api/users",
 			"pathVariables": {},
 			"preRequestScript": null,
 			"method": "GET",
