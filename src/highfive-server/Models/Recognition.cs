@@ -13,7 +13,7 @@ namespace highfive_server.Models
         public Organization Organization { get; set; }
         public CorporateValue Value { get; set; }
         public bool isPrivate { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         public string Description { get; set; }
         public ICollection<Comment> Comments { get; set; }
 

@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using highfive_server.Models;
+using highfive_server.ViewModels;
 
 namespace highfive_server.Controllers
 {
@@ -56,12 +57,39 @@ namespace highfive_server.Controllers
 
         // POST api/users
         [HttpPost]
-        public IActionResult Post([FromBody]string value)
+        public IActionResult Post([FromBody]UserViewModel newUser)
         {
-            // get the organization name from JSON
-            // lookup the organization by name in the DB
-            // create the user with the organization in DB
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                // create user in repo
+                try
+                {
+                    var theNewUser = Mapper.Map<HighFiveUser>(newUser);
+                    var organization = _repository.GetOrganizationByName(newUser.OrganizationName);
+                    if(organization == null)
+                    {
+                        return NotFound("Unable to find organization: " + organization);
+                    }
+                    else
+                    {
+                        theNewUser.Organization = organization;
+                    }
+
+                    _repository.AddUser(theNewUser);
+                    _repository.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Failed to add new user: {0}", ex);
+                    return BadRequest("Failed to add new user");
+                }
+
+                return Created($"api/users/{newUser.Email}", newUser);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT api/users/cstrong@arielpartners.com
@@ -85,7 +113,12 @@ namespace highfive_server.Controllers
                     return NotFound();
                 }
                 _repository.DeleteUser(user);
-                return Ok();
+                _repository.SaveChangesAsync();
+
+                HashSet<string> hashSet = new HashSet<string>();
+                hashSet.Add("User: " + user.Email + "Record deleted.");
+
+                return Ok(hashSet);
             }
             catch (Exception ex)
             {
