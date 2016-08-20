@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2BB0D3A4-54EC-4210-A4B9-5F440DE21F7E}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		docs\highfive-server.postman_collection.json = docs\highfive-server.postman_collection.json
 		README.md = README.md
 	EndProjectSection
 EndProject

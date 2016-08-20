@@ -32,7 +32,9 @@ namespace highfive_server.Models
     public IEnumerable<HighFiveUser> GetAllUsers()
     {
       _logger.LogInformation("Getting All Users from the Database");
-      return _context.Users.ToList();
+      return _context.Users
+                .Include(u => u.Organization.Values)
+                .ToList();
     }
 
     public IEnumerable<Recognition> GetAllRecognitions()
