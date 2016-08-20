@@ -4,14 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace highfive_server.Models
+namespace highfive_server.ViewModels
 {
-    public class Organization
+    public class UserViewModel
     {
-        public Guid Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        [StringLength(100, MinimumLength = 5)]
+        public string Email { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
-        public ICollection<CorporateValue> Values { get; set; }
+        [Required]
+        public string OrganizationName { get; set; }
+
     }
 }

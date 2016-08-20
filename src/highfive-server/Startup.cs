@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using highfive_server.Models;
 using System.IO;
+using highfive_server.ViewModels;
 
 namespace highfive_server
 {
@@ -62,7 +63,13 @@ namespace highfive_server
             HighFiveContextSeedData seeder, 
             ILoggerFactory loggerFactory)
         {
- 
+            // startup in Configure
+
+            Mapper.Initialize(config => 
+            {
+                config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
+                //config.CreateMap<UserViewModel, Organization>().ReverseMap();
+            });
 
             if (env.IsEnvironment("Development"))
             {

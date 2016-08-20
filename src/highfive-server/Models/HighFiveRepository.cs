@@ -24,10 +24,15 @@ namespace highfive_server.Models
       _context.Add(user);
     }
 
-
     public void DeleteUser(HighFiveUser user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Users.Remove(user);
+        }
+        catch(Exception ex)
+        {
+        }
     }
 
     public void AddOrganization(Organization org)
@@ -49,14 +54,22 @@ namespace highfive_server.Models
         return _context.Recognitions.ToList();
     }
 
-    public HighFiveUser GetUserByEmail(string email)
-    {
-      return _context.Users
-        .Where(u => u.Email == email)
-        .FirstOrDefault();
-    }
+        public HighFiveUser GetUserByEmail(string email)
+        {
+            return _context.Users
+              .Include(u => u.Organization.Values)
+              .Where(u => u.Email == email)
+              .FirstOrDefault();
+        }
 
-    public async Task<bool> SaveChangesAsync()
+        public Organization GetOrganizationByName(string organizationName)
+        {
+            return _context.Organizations
+              .Where(o => o.Name == organizationName)
+              .FirstOrDefault();
+        }
+
+        public async Task<bool> SaveChangesAsync()
     {
       return (await _context.SaveChangesAsync()) > 0;
     }
