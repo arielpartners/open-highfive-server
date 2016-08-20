@@ -40,27 +40,59 @@ namespace highfive_server.Controllers
 
         // GET api/users/cstrong@arielpartners.com
         [HttpGet("{email}")]
-        public string Get(string email)
+        public IActionResult Get(string email)
         {
-            return "value";
+            try
+            {
+                return Ok(_repository.GetUserByEmail(email));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed to get user: {0}", ex);
+            }
+
+            return BadRequest("Failed to get user");
         }
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]string value)
         {
+            // get the organization name from JSON
+            // lookup the organization by name in the DB
+            // create the user with the organization in DB
+            throw new NotImplementedException();
         }
 
         // PUT api/users/cstrong@arielpartners.com
         [HttpPut("{email}")]
-        public void Put(string email, [FromBody]string value)
+        public IActionResult Put(string email, [FromBody]string value)
         {
+            // get the user by email
+            // update the user with the passed in parameters
+            throw new NotImplementedException();
         }
 
         // DELETE api/users/cstrong@arielpartners.com
         [HttpDelete("{email}")]
-        public void Delete(string email)
+        public IActionResult Delete(string email)
         {
+            try
+            {
+                var user = _repository.GetUserByEmail(email);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                _repository.DeleteUser(user);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed to delete user: {0}", ex);
+            }
+
+            return BadRequest("Failed to delete user");
         }
     }
 }

@@ -24,6 +24,12 @@ namespace highfive_server.Models
       _context.Add(user);
     }
 
+
+    public void DeleteUser(HighFiveUser user)
+    {
+        throw new NotImplementedException();
+    }
+
     public void AddOrganization(Organization org)
     {
         _context.Add(org);
