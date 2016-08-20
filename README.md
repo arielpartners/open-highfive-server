@@ -17,7 +17,7 @@ High Five DHS FLASH server-side source code
 
 ## Steps to start the project
 * In visual studio: click highfive_server start
-* View http://localhost:5000/api/users in Chrome
+* View <http://localhost:5000/api/users> in Chrome
 
 ## Using Postman
 * Start Postman
