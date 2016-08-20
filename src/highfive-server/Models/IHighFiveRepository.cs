@@ -9,6 +9,7 @@ namespace highfive_server.Models
         HighFiveUser GetUserByEmail(string email);
 
         void AddUser(HighFiveUser user);
+        void DeleteUser(HighFiveUser user);
         void AddOrganization(Organization organization);
 
         Task<bool> SaveChangesAsync(); //object GetTripsByUsername(string name);
