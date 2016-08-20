@@ -42,6 +42,7 @@ jspm_packages
 # Visual Studio files
 .vs
 project.lock.json
+*.user
 
 # binary directories
 bin
