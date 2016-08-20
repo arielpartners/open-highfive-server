@@ -16,9 +16,10 @@ High Five DHS FLASH server-side source code
 * Postman
 
 ## Steps to start the project
-In visual studio: click highfive_server start
-Start Postman
-Load [Collection](docs/highfive-server.postman_collection) 
-Click on "GET Values" and observed returned JSON
+* In visual studio: click highfive_server start
+* Start Postman
+* Import Postman Collection from docs/highfive-server.postman_collection
+* Select "GET api/values" from the left side and click "SEND" 
+* observe returned JSON
 
 

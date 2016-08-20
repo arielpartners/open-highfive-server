@@ -2,42 +2,77 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using highfive_server.Models;
 
 namespace highfive_server
 {
     public class Startup
     {
+        private IHostingEnvironment _env;
+        private IConfigurationRoot _config;
+
         public Startup(IHostingEnvironment env)
         {
+            _env = env;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            _config = builder.Build();
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(_config);
+            services.AddDbContext<HighFiveContext>();
+
+            //.AddEntityFrameworkStores<HighFiveContext>();
+            services.AddScoped<IHighFiveRepository, HighFiveRepository>();
+            services.AddTransient<HighFiveContextSeedData>();
+
+            services.AddLogging();
+
             // Add framework services.
             services.AddMvc();
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            HighFiveContextSeedData seeder, 
+            ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+ 
+
+            if (env.IsEnvironment("Development"))
+            {
+                app.UseDeveloperExceptionPage();
+                loggerFactory.AddDebug(LogLevel.Information);
+                loggerFactory.AddConsole(_config.GetSection("Logging"));
+                loggerFactory.AddDebug();
+            }
+            else
+            {
+                loggerFactory.AddDebug(LogLevel.Error);
+            }
 
             app.UseMvc();
+
+            seeder.EnsureSeedData().Wait();
         }
     }
 }
