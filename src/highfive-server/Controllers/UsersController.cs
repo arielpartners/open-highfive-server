@@ -66,7 +66,7 @@ namespace highfive_server.Controllers
                 {
                     var theNewUser = Mapper.Map<HighFiveUser>(newUser);
                     var organization = _repository.GetOrganizationByName(newUser.OrganizationName);
-                    if(organization == null)
+                    if (organization == null)
                     {
                         return NotFound("Unable to find organization: " + organization);
                     }
@@ -96,8 +96,7 @@ namespace highfive_server.Controllers
         [HttpPut("{email}")]
         public IActionResult Put(string email, [FromBody]UserViewModel updatedUserVM)
         {
-            // get the user by email
-            // update the user with the passed in parameters
+            bool changed = false;
 
             if (ModelState.IsValid)
             {
@@ -110,29 +109,36 @@ namespace highfive_server.Controllers
                         return NotFound(new { Message = $"User {email} not found" });
                     }
 
-                    // see if the organization has changed. if not, no need to retrieve the org from the DB
-                    var organization = _repository.GetOrganizationByName(updatedUserVM.OrganizationName);
-                    if (organization == null)
+                    if (userToUpdate.Organization.Name != updatedUserVM.OrganizationName)
                     {
-                        return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
-                    }
-                    if (organization.Id != userToUpdate.Organization.Id)
-                    {
-                        return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
+                        // the orgnization changed, so we must retrieve it from the DB and set the new one
+                        var organization = _repository.GetOrganizationByName(updatedUserVM.OrganizationName);
+                        if (organization == null)
+                        {
+                            return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
+                        }
+                        changed = true;
+                        userToUpdate.Organization = organization;
                     }
 
                     // see if the email has changed. if not, return NoChange()
                     // if so, change the email and save the object in the context
-                    if (userToUpdate.Email == updatedUserVM.Email)
+                    if (userToUpdate.Email != updatedUserVM.Email)
+                    {
+                        userToUpdate.Email = updatedUserVM.Email;
+                        changed = true;
+                    }
+                    if (changed)
+                    {
+                        _repository.UpdateUser(userToUpdate);
+                        _repository.SaveChangesAsync();
+
+                        return Ok(new { Message = $"User {email} updated successfully" });
+                    }
+                    else
                     {
                         return Ok(new { Message = $"User {email} has not changed" });
                     }
-
-                    userToUpdate.Email = updatedUserVM.Email;
-                    _repository.UpdateUser(userToUpdate);
-                    _repository.SaveChangesAsync();
-
-                    return Created($"api/users/{userToUpdate.Email}", userToUpdate);
                 }
                 catch (Exception ex)
                 {
