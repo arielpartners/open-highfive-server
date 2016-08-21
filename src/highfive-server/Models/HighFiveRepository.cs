@@ -56,6 +56,12 @@ namespace highfive_server.Models
                 .FirstOrDefault();
         }
 
+        public void UpdateUser(HighFiveUser user)
+        {
+            _context.Update(user);
+        }
+
+
         public Organization GetOrganizationByName(string organizationName)
         {
             return _context.Organizations
