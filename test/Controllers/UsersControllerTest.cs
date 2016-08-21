@@ -1,22 +1,33 @@
-﻿using highfive_server.Models;
+﻿using AutoMapper;
+using highfive_server.Models;
+using highfive_server.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace highfive_server.Controllers
 {
     public class UsersControllerTest
     {
+        public UsersControllerTest()
+        {
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
+                //config.CreateMap<UserViewModel, Organization>().ReverseMap();
+            });
+        }
+
         [Fact]
         public void TestGetAll()
         {
@@ -28,7 +39,7 @@ namespace highfive_server.Controllers
             }
 
             using (var context = new HighFiveContext(_config, options))
-            { 
+            {
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
@@ -63,6 +74,41 @@ namespace highfive_server.Controllers
                 Assert.Equal("a@b.com", user.Email);
 
                 result = controller.GetByEmail("i@dontexist.com");
+                Assert.IsType(typeof(NotFoundObjectResult), result);
+            }
+        }
+
+        [Fact]
+        public void TestPost()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
+
+                var newUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var result = controller.Post(newUser);
+                Assert.IsType(typeof(CreatedResult), result);
+                var createdResult = result as CreatedResult;
+                var user = createdResult.Value as UserViewModel;
+                Assert.Equal("c@d.com", user.Email);
+
+                // TODO add this when duplicate email logic is added
+                //var duplicateUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                //result = controller.Post(duplicateUser);
+                //Assert.IsType(typeof(BadRequestResult), result);
+
+                var unknownOrgUser = new UserViewModel() { Email = "zip@zap.com", OrganizationName = "Bad Guys" };
+                result = controller.Post(unknownOrgUser);
                 Assert.IsType(typeof(NotFoundObjectResult), result);
             }
         }
