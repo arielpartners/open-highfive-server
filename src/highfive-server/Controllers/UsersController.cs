@@ -25,7 +25,7 @@ namespace highfive_server.Controllers
 
         // GET api/users
         [HttpGet("")]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             try
             {
@@ -41,11 +41,19 @@ namespace highfive_server.Controllers
 
         // GET api/users/cstrong@arielpartners.com
         [HttpGet("{email}")]
-        public IActionResult Get(string email)
+        public IActionResult GetByEmail(string email)
         {
             try
             {
-                return Ok(_repository.GetUserByEmail(email));
+                var user = _repository.GetUserByEmail(email);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return NotFound($"User {email} not found");
+                }
             }
             catch (Exception ex)
             {

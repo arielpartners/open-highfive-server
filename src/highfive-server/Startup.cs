@@ -16,6 +16,7 @@ using Newtonsoft.Json.Serialization;
 using highfive_server.Models;
 using System.IO;
 using highfive_server.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace highfive_server
 {
@@ -39,7 +40,9 @@ namespace highfive_server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(_config);
-            services.AddDbContext<HighFiveContext>();
+
+            var connection = _config["ConnectionStrings:HighFiveContextConnection"];
+            services.AddDbContext<HighFiveContext>(options => options.UseSqlServer(connection));
 
             //.AddEntityFrameworkStores<HighFiveContext>();
             services.AddScoped<IHighFiveRepository, HighFiveRepository>();
