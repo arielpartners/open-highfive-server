@@ -21,13 +21,21 @@ namespace highfive_server.Models
 
         public void AddUser(HighFiveUser user)
         {
+            HighFiveUser highFiveUser = GetUserByEmail(user.Email);
+
+            if(highFiveUser != null)
+            {
+                Exception ex = new Exception("Email address for this user already exists in the database");
+                throw ex;
+            }
+            
             _context.Add(user);
         }
 
-    public void DeleteUser(HighFiveUser user)
-    {
-            _context.Users.Remove(user);
-    }
+        public void DeleteUser(HighFiveUser user)
+        {
+                _context.Users.Remove(user);
+        }
 
         public void AddOrganization(Organization org)
         {
@@ -60,7 +68,6 @@ namespace highfive_server.Models
         {
             _context.Update(user);
         }
-
 
         public Organization GetOrganizationByName(string organizationName)
         {
