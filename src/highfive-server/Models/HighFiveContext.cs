@@ -11,7 +11,7 @@ namespace highfive_server.Models
     {
         private IConfigurationRoot _config;
 
-        public HighFiveContext(IConfigurationRoot config, DbContextOptions options) 
+        public HighFiveContext(IConfigurationRoot config, DbContextOptions<HighFiveContext> options) 
             : base(options)
         {
             _config = config;
@@ -25,7 +25,11 @@ namespace highfive_server.Models
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:HighFiveContextConnection"]);
+            if (!optionsBuilder.IsConfigured)
+            {
+                // DBContext for unit tests will already be pre-configured
+                optionsBuilder.UseSqlServer(_config["ConnectionStrings:HighFiveContextConnection"]);
+            }
         }
     }
 }
