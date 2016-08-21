@@ -66,7 +66,7 @@ namespace highfive_server.Controllers
                 {
                     var theNewUser = Mapper.Map<HighFiveUser>(newUser);
                     var organization = _repository.GetOrganizationByName(newUser.OrganizationName);
-                    if(organization == null)
+                    if (organization == null)
                     {
                         return NotFound("Unable to find organization: " + organization);
                     }
@@ -94,11 +94,62 @@ namespace highfive_server.Controllers
 
         // PUT api/users/cstrong@arielpartners.com
         [HttpPut("{email}")]
-        public IActionResult Put(string email, [FromBody]string value)
+        public IActionResult Put(string email, [FromBody]UserViewModel updatedUserVM)
         {
-            // get the user by email
-            // update the user with the passed in parameters
-            throw new NotImplementedException();
+            bool changed = false;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // retrieve the existing user by the email
+                    var userToUpdate = _repository.GetUserByEmail(email);
+                    if (userToUpdate == null)
+                    {
+                        return NotFound(new { Message = $"User {email} not found" });
+                    }
+
+                    if (userToUpdate.Organization.Name != updatedUserVM.OrganizationName)
+                    {
+                        // the orgnization changed, so we must retrieve it from the DB and set the new one
+                        var organization = _repository.GetOrganizationByName(updatedUserVM.OrganizationName);
+                        if (organization == null)
+                        {
+                            return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
+                        }
+                        changed = true;
+                        userToUpdate.Organization = organization;
+                    }
+
+                    // see if the email has changed. if not, return NoChange()
+                    // if so, change the email and save the object in the context
+                    if (userToUpdate.Email != updatedUserVM.Email)
+                    {
+                        userToUpdate.Email = updatedUserVM.Email;
+                        changed = true;
+                    }
+                    if (changed)
+                    {
+                        _repository.UpdateUser(userToUpdate);
+                        _repository.SaveChangesAsync();
+
+                        return Ok(new { Message = $"User {email} updated successfully" });
+                    }
+                    else
+                    {
+                        return Ok(new { Message = $"User {email} has not changed" });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Failed to update user: {0}", ex);
+                    return BadRequest("Failed to update new user");
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // DELETE api/users/cstrong@arielpartners.com
