@@ -102,14 +102,13 @@ namespace highfive_server.Controllers
                 var user = createdResult.Value as UserViewModel;
                 Assert.Equal("c@d.com", user.Email);
 
-                // TODO add this when duplicate email logic is added
-                //var duplicateUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
-                //result = controller.Post(duplicateUser);
-                //Assert.IsType(typeof(BadRequestResult), result);
+                var duplicateUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var result2 = controller.Post(duplicateUser);
+                Assert.IsType(typeof(BadRequestObjectResult), result2);
 
                 var unknownOrgUser = new UserViewModel() { Email = "zip@zap.com", OrganizationName = "Bad Guys" };
-                result = controller.Post(unknownOrgUser);
-                Assert.IsType(typeof(NotFoundObjectResult), result);
+                var result3 = controller.Post(unknownOrgUser);
+                Assert.IsType(typeof(NotFoundObjectResult), result3);
             }
         }
 
