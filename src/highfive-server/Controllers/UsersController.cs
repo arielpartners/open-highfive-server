@@ -122,7 +122,7 @@ namespace highfive_server.Controllers
                     }
 
                     // see if the email has changed. if not, return NoChange()
-                    // if so, change the email and save the object in the context
+                    // if so, change the email and save the object in the context xx
                     if (userToUpdate.Email != updatedUserVM.Email)
                     {
                         userToUpdate.Email = updatedUserVM.Email;
