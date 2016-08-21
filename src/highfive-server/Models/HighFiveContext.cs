@@ -20,16 +20,5 @@ namespace highfive_server.Models
         public DbSet<HighFiveUser> Users { get; set; }
         public DbSet<Organization> Organizations { get;set;}
         public DbSet<Recognition> Recognitions { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            if (!optionsBuilder.IsConfigured)
-            {
-                // DBContext for unit tests will already be pre-configured
-                optionsBuilder.UseSqlServer(_config["ConnectionStrings:HighFiveContextConnection"]);
-            }
-        }
     }
 }

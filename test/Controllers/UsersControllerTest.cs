@@ -18,7 +18,7 @@ namespace highfive_server.Controllers
     public class UsersControllerTest
     {
         [Fact]
-        public void TestGet()
+        public void TestGetAll()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -32,12 +32,38 @@ namespace highfive_server.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var result = controller.Get();
+                var result = controller.GetAll();
                 Assert.IsType(typeof(OkObjectResult), result);
                 var okResult = result as OkObjectResult;
                 var userList = okResult.Value as IList<HighFiveUser>;
                 Assert.Equal(1, userList.Count());
                 Assert.Equal("a@b.com", userList[0].Email);
+            }
+        }
+
+        [Fact]
+        public void TestGetByEmail()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                context.Users.Add(new HighFiveUser { Email = "a@b.com" });
+                context.SaveChanges();
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
+
+                var result = controller.GetByEmail("a@b.com");
+                Assert.IsType(typeof(OkObjectResult), result);
+                var okResult = result as OkObjectResult;
+                var user = okResult.Value as HighFiveUser;
+                Assert.Equal("a@b.com", user.Email);
+
+                result = controller.GetByEmail("i@dontexist.com");
+                Assert.IsType(typeof(NotFoundObjectResult), result);
             }
         }
 
