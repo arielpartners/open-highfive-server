@@ -94,11 +94,56 @@ namespace highfive_server.Controllers
 
         // PUT api/users/cstrong@arielpartners.com
         [HttpPut("{email}")]
-        public IActionResult Put(string email, [FromBody]string value)
+        public IActionResult Put(string email, [FromBody]UserViewModel updatedUserVM)
         {
             // get the user by email
             // update the user with the passed in parameters
-            throw new NotImplementedException();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // retrieve the existing user by the email
+                    var userToUpdate = _repository.GetUserByEmail(email);
+                    if (userToUpdate == null)
+                    {
+                        return NotFound(new { Message = $"User {email} not found" });
+                    }
+
+                    // see if the organization has changed. if not, no need to retrieve the org from the DB
+                    var organization = _repository.GetOrganizationByName(updatedUserVM.OrganizationName);
+                    if (organization == null)
+                    {
+                        return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
+                    }
+                    if (organization.Id != userToUpdate.Organization.Id)
+                    {
+                        return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
+                    }
+
+                    // see if the email has changed. if not, return NoChange()
+                    // if so, change the email and save the object in the context
+                    if (userToUpdate.Email == updatedUserVM.Email)
+                    {
+                        return Ok(new { Message = $"User {email} has not changed" });
+                    }
+
+                    userToUpdate.Email = updatedUserVM.Email;
+                    _repository.UpdateUser(userToUpdate);
+                    _repository.SaveChangesAsync();
+
+                    return Created($"api/users/{userToUpdate.Email}", userToUpdate);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Failed to update user: {0}", ex);
+                    return BadRequest("Failed to update new user");
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // DELETE api/users/cstrong@arielpartners.com

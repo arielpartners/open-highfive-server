@@ -10,6 +10,7 @@ namespace highfive_server.Models
         Organization GetOrganizationByName(string email);
 
         void AddUser(HighFiveUser user);
+        void UpdateUser(HighFiveUser user);
         void DeleteUser(HighFiveUser user);
         void AddOrganization(Organization organization);
 
