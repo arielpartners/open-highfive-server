@@ -185,17 +185,11 @@ namespace highfive_server.Models
                 context.SaveChanges();
             }
 
-            // check the repo add user method won't add the same users email
+            // check the repo add user method won't add a duplicate email
             using (var context = new HighFiveContext(_config, options))
             {
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
-
-                // TODO fix this below
-
-                //Assert.Throws<Exception>(() => { repo.AddUser(highFiveUser); });
-
-                //var exception = Record.Exception(() => { repo.AddUser(highFiveUser); });
-
+                Assert.Throws<Exception>(() => { repo.AddUser(highFiveUser); });
             }
         }
 
