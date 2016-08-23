@@ -12,7 +12,8 @@
     "highfive-server": "1.0.0-*",
     "Moq": "4.6.38-alpha",
     "Newtonsoft.Json": "9.0.1",
-    "System.Linq": "4.1.0"
+    "System.Linq": "4.1.0",
+    "OpenCover":  "4.6.519"
   },
   "testRunner": "xunit",
   "frameworks": {

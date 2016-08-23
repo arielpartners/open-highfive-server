@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -45,6 +46,18 @@ namespace highfive_server.Controllers
                 var userList = okResult.Value as IList<HighFiveUser>;
                 Assert.Equal(1, userList.Count());
                 Assert.Equal("a@b.com", userList[0].Email);
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new Mock<IHighFiveRepository>();
+                repo.Setup(r => r.GetAllUsers()).Throws<Exception>();
+                UsersController controller = new UsersController(repo.Object, _controllerLogger);
+
+                var result = controller.GetAll();
+                Assert.IsType(typeof(BadRequestObjectResult), result);
+                var badRequestResult = result as BadRequestObjectResult;
+                AssertMessageProperty("Failed to get users", badRequestResult.Value);
             }
         }
 
