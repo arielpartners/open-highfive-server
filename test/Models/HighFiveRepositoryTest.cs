@@ -44,7 +44,7 @@ namespace highfive_server.Models
 
                 Assert.Equal(1, userList2.Count);
 
-                // make sure the email address is the same as added. TODO, make this a lambda
+                // make sure the email address is the same as added
                 int userCount = 0;
                 foreach (HighFiveUser highFiveUser in userList2)
                 {
