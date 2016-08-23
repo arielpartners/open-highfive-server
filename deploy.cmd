@@ -73,6 +73,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 :: 2. Build and publish
 call :ExecuteCmd dotnet publish "src\highfive-server\project.json" --output "%DEPLOYMENT_TEMP%" --configuration Release
 IF !ERRORLEVEL! NEQ 0 goto error
+call :ExecuteCmd xcopy "src\highfive-server\Config" "%DEPLOYMENT_TEMP%\Config\ /Y /I"
 
 :: 3. KuduSync
 call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
