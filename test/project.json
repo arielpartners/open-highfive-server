@@ -7,13 +7,14 @@
     "System.Runtime.Serialization.Primitives": "4.1.1",
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "xunit": "2.1.0",
-    "dotnet-test-xunit": "1.0.0-rc2-build10015",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Microsoft.EntityFrameworkCore.InMemory": "1.0.0",
     "highfive-server": "1.0.0-*",
     "Moq": "4.6.38-alpha",
     "Newtonsoft.Json": "9.0.1",
     "System.Linq": "4.1.0",
-    "OpenCover":  "4.6.519"
+    "OpenCover": "4.6.519",
+    "ReportGenerator":  "2.4.6-beta2"
   },
   "testRunner": "xunit",
   "frameworks": {

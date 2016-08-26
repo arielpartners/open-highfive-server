@@ -26,7 +26,7 @@ namespace highfive_server.Controllers
         }
 
         [Fact]
-        public void TestGetAll()
+        public void TestGetAll_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -47,7 +47,12 @@ namespace highfive_server.Controllers
                 Assert.Equal(1, userList.Count());
                 Assert.Equal("a@b.com", userList[0].Email);
             }
+        }
 
+        [Fact]
+        public void TestGetAll_SimulatedServerFailure()
+        {
+            var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
             {
                 var repo = new Mock<IHighFiveRepository>();
@@ -62,7 +67,7 @@ namespace highfive_server.Controllers
         }
 
         [Fact]
-        public void TestGetByEmail()
+        public void TestGetByEmail_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -90,7 +95,24 @@ namespace highfive_server.Controllers
         }
 
         [Fact]
-        public void TestPost()
+        public void TestGetByEmail_SimulatedServerFailure()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new Mock<IHighFiveRepository>();
+                repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Throws<Exception>();
+                UsersController controller = new UsersController(repo.Object, _controllerLogger);
+
+                var result = controller.GetByEmail("i@dontexist.com");
+                Assert.IsType(typeof(BadRequestObjectResult), result);
+                var badRequestResult = result as BadRequestObjectResult;
+                AssertMessageProperty("Failed to get user", badRequestResult.Value);
+            }
+        }
+
+        [Fact]
+        public void TestPost_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -112,13 +134,42 @@ namespace highfive_server.Controllers
                 var createdResult = result as CreatedResult;
                 var user = createdResult.Value as UserViewModel;
                 Assert.Equal("c@d.com", user.Email);
+            }
+        }
 
-                var duplicateUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+        [Fact]
+        public void TestPost_DuplicateUser()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+            }
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
+
+                var duplicateUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "Ariel Partners" };
                 var result2 = controller.Post(duplicateUser);
                 Assert.IsType(typeof(BadRequestObjectResult), result2);
                 var badRequestResult = result2 as BadRequestObjectResult;
-                AssertMessageProperty("Failed to add new user c@d.com", badRequestResult.Value);
+                AssertMessageProperty("Failed to add new user a@b.com", badRequestResult.Value);
 
+            }
+        }
+
+        [Fact]
+        public void TestPost_UnknownOrganization()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
                 var unknownOrgUser = new UserViewModel() { Email = "zip@zap.com", OrganizationName = "Bad Guys" };
                 var result3 = controller.Post(unknownOrgUser);
                 Assert.IsType(typeof(NotFoundObjectResult), result3);
@@ -128,7 +179,31 @@ namespace highfive_server.Controllers
         }
 
         [Fact]
-        public void TestDelete()
+        public void TestPost_SimulatedServerFailure()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+           
+                var repo = new Mock<IHighFiveRepository>();
+                repo.Setup(r => r.GetOrganizationByName(It.IsAny<String>())).Returns(organization);
+                repo.Setup(r => r.AddUser(It.IsAny<HighFiveUser>())).Throws<Exception>();
+                UsersController controller = new UsersController(repo.Object, _controllerLogger);
+
+                var newUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var result = controller.Post(newUser);
+                Assert.IsType(typeof(BadRequestObjectResult), result);
+                var badRequestResult = result as BadRequestObjectResult;
+                AssertMessageProperty("Failed to add new user c@d.com", badRequestResult.Value);
+            }
+        }
+
+        [Fact]
+        public void TestDelete_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -162,7 +237,31 @@ namespace highfive_server.Controllers
         }
 
         [Fact]
-        public void TestPut()
+        public void TestDelete_SimulatedServerFailure()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                var user = new HighFiveUser() { Email = "a@b.com", Organization = organization };
+                context.Users.Add(user);
+                context.SaveChanges();
+           
+                var repo = new Mock<IHighFiveRepository>();
+                repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Returns(user);
+                repo.Setup(r => r.DeleteUser(It.IsAny<HighFiveUser>())).Throws<Exception>();
+                UsersController controller = new UsersController(repo.Object, _controllerLogger);
+
+                var result = controller.Delete("a@b.com");
+                Assert.IsType(typeof(BadRequestObjectResult), result);
+                var badRequestResult = result as BadRequestObjectResult;
+                AssertMessageProperty("Failed to delete user a@b.com", badRequestResult.Value);
+            }
+        }
+
+        [Fact]
+        public void TestPut_UserNotFound()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -185,28 +284,119 @@ namespace highfive_server.Controllers
                 Assert.IsType(typeof(NotFoundObjectResult), result);
                 var notFoundResult = result as NotFoundObjectResult;
                 AssertMessageProperty("User c@d.com not found", notFoundResult.Value);
+            }
+        }
 
-                updatedUser.Email = "c@e.com";
-                result = controller.Put("a@b.com", updatedUser);
+        [Fact]
+        public void TestPut_SunnyDay()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                var organization2 = new Organization() { Name = "Acme" };
+                context.Organizations.Add(organization2);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
+
+                var updatedUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var result = controller.Put("a@b.com", updatedUser);
                 Assert.IsType(typeof(OkObjectResult), result);
                 var okObjectResult = result as OkObjectResult;
-                AssertMessageProperty("User c@e.com updated successfully", okObjectResult.Value);
+                AssertMessageProperty("User c@d.com updated successfully", okObjectResult.Value);
 
-                updatedUser.OrganizationName = "Acme" ;
-                result = controller.Put("c@e.com", updatedUser);
+                updatedUser.OrganizationName = "Acme";
+                result = controller.Put("c@d.com", updatedUser);
                 Assert.IsType(typeof(OkObjectResult), result);
                 okObjectResult = result as OkObjectResult;
-                AssertMessageProperty("User c@e.com updated successfully", okObjectResult.Value);
+                AssertMessageProperty("User c@d.com updated successfully", okObjectResult.Value);
+            }
+        }
 
-                result = controller.Put("c@e.com", updatedUser);
+        [Fact]
+        public void TestPut_NoChange()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                var organization2 = new Organization() { Name = "Acme" };
+                context.Organizations.Add(organization2);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
+
+                var updatedUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "Ariel Partners" };
+                var result = controller.Put("a@b.com", updatedUser);
                 Assert.IsType(typeof(OkObjectResult), result);
-                okObjectResult = result as OkObjectResult;
-                AssertMessageProperty("User c@e.com was not changed", okObjectResult.Value);
+                var okObjectResult = result as OkObjectResult;
+                AssertMessageProperty("User a@b.com was not changed", okObjectResult.Value);
+            }
+        }
 
-                updatedUser.OrganizationName = "IDontExist";
-                result = controller.Put("c@e.com", updatedUser);
+        [Fact]
+        public void TestPut_OrganizationNotFound()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                var organization2 = new Organization() { Name = "Acme" };
+                context.Organizations.Add(organization2);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                UsersController controller = new UsersController(repo, _controllerLogger);
+
+                var updatedUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "IDontExist" };
+                var result = controller.Put("a@b.com", updatedUser);
                 Assert.IsType(typeof(NotFoundObjectResult), result);
-                notFoundResult = result as NotFoundObjectResult;
+                var notFoundResult = result as NotFoundObjectResult;
+                AssertMessageProperty("Organization IDontExist not found", notFoundResult.Value);
+            }
+        }
+
+        [Fact]
+        public void TestPut_SimulateServerFailure()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                var organization2 = new Organization() { Name = "Acme" };
+                context.Organizations.Add(organization2);
+                var user = new HighFiveUser() { Email = "a@b.com", Organization = organization };
+                context.Users.Add(user);
+                context.SaveChanges();
+           
+                var repo = new Mock<IHighFiveRepository>();
+                UsersController controller = new UsersController(repo.Object, _controllerLogger);
+                repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Returns(user);
+                repo.Setup(r => r.UpdateUser(It.IsAny<HighFiveUser>())).Throws<Exception>();
+
+                var updatedUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "IDontExist" };
+                var result = controller.Put("a@b.com", updatedUser);
+                Assert.IsType(typeof(NotFoundObjectResult), result);
+                var notFoundResult = result as NotFoundObjectResult;
                 AssertMessageProperty("Organization IDontExist not found", notFoundResult.Value);
             }
         }
