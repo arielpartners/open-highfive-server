@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region references
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +19,8 @@ using highfive_server.Models;
 using System.IO;
 using highfive_server.ViewModels;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace highfive_server
 {
