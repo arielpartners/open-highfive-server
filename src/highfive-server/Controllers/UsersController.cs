@@ -180,7 +180,7 @@ namespace highfive_server.Controllers
                 _logger.LogError("Failed to delete user: {0}", ex);
             }
 
-            return BadRequest(new { Message = "Failed to delete user {email}" });
+            return BadRequest(new { Message = $"Failed to delete user {email}" });
         }
     }
 }
