@@ -1,7 +1,7 @@
 ﻿using System;
 using TechTalk.SpecFlow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HighFive.Server;
+using HighFive.Server.Models;
 
 namespace HighFive.Server.SpecFlow.StepDefinitions
 {
@@ -9,7 +9,7 @@ namespace HighFive.Server.SpecFlow.StepDefinitions
     public class RecognitionFeedSteps
     {
         private int result { get; set; }
-        private HighFive.Server.Program calculator = new Calculator();
+        private Calculator calculator = new Calculator();
 
         [Given]
         public void Given_I_have_entered_P0_into_the_calculator(int p0)

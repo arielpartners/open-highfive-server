@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HighFive.Server">
+      <HintPath>..\HighFive.Server\bin\Debug\net461\HighFive.Server.dll</HintPath>
+    </Reference>
     <Reference Include="SpecRun.SpecFlowPlugin, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecRun.SpecFlow.1.5.2\lib\net45\SpecRun.SpecFlowPlugin.dll</HintPath>
       <Private>True</Private>
@@ -90,12 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Support\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HighFive.Server\HighFive.Server.xproj">
-      <Project>{e55877da-53ad-4da8-a62e-cd8c85b4d0d4}</Project>
-      <Name>HighFive.Server</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
