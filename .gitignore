@@ -47,3 +47,5 @@ project.lock.json
 # binary directories
 bin
 obj
+packages
+TestResults

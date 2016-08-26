@@ -12,6 +12,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HighFive.Server", "HighFive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighFive.Server.Tests", "HighFive.Server.Tests\HighFive.Server.Tests.csproj", "{4B9E6C55-AF95-4795-98A6-C177A3A66FD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighFive.Server.Specs", "HighFive.Server.SpecFlow\HighFive.Server.Specs.csproj", "{BA862CB5-A7E6-4A72-B866-ACBB402DFBCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{4B9E6C55-AF95-4795-98A6-C177A3A66FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B9E6C55-AF95-4795-98A6-C177A3A66FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B9E6C55-AF95-4795-98A6-C177A3A66FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA862CB5-A7E6-4A72-B866-ACBB402DFBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA862CB5-A7E6-4A72-B866-ACBB402DFBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA862CB5-A7E6-4A72-B866-ACBB402DFBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA862CB5-A7E6-4A72-B866-ACBB402DFBCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
