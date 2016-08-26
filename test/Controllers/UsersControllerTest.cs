@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿#region project references
+
+using AutoMapper;
 using highfive_server.Models;
 using highfive_server.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,14 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
+#endregion
+
 namespace highfive_server.Controllers
 {
     public class UsersControllerTest
     {
+        #region Constructor
+
         public UsersControllerTest()
         {
             Mapper.Initialize(config =>
@@ -24,6 +30,10 @@ namespace highfive_server.Controllers
                 config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
             });
         }
+
+        #endregion
+
+        #region TestGetAll
 
         [Fact]
         public void TestGetAll_SunnyDay()
@@ -66,6 +76,10 @@ namespace highfive_server.Controllers
             }
         }
 
+        #endregion
+
+        #region TestGetByEmail
+
         [Fact]
         public void TestGetByEmail_SunnyDay()
         {
@@ -93,6 +107,10 @@ namespace highfive_server.Controllers
                 AssertMessageProperty("User i@dontexist.com not found", notFoundResult.Value);
             }
         }
+
+        #endregion
+
+        #region TestPost
 
         [Fact]
         public void TestGetByEmail_SimulatedServerFailure()
@@ -178,6 +196,10 @@ namespace highfive_server.Controllers
             }
         }
 
+        #endregion
+
+        #region TestDelete
+
         [Fact]
         public void TestPost_SimulatedServerFailure()
         {
@@ -235,6 +257,10 @@ namespace highfive_server.Controllers
                 AssertMessageProperty("User a@b.com not found", notFoundResult.Value);
             }
         }
+
+        #endregion
+
+        #region TestPut
 
         [Fact]
         public void TestDelete_SimulatedServerFailure()
@@ -401,11 +427,19 @@ namespace highfive_server.Controllers
             }
         }
 
+        #endregion
+
+        #region AssertMessageProperty
+
         private void AssertMessageProperty(string expectedMessage, object result)
         {
             object actualMessage = result.GetType().GetProperty("Message").GetValue(result, null);
             Assert.Equal(expectedMessage, actualMessage as string);
         }
+
+        #endregion
+
+        #region DbContextOptions
 
         private static DbContextOptions<HighFiveContext> CreateNewContextOptions()
         {
@@ -423,6 +457,10 @@ namespace highfive_server.Controllers
 
             return builder.Options;
         }
+
+        #endregion
+
+        #region properties
 
         private IConfigurationRoot _config
         {
@@ -447,5 +485,8 @@ namespace highfive_server.Controllers
                 return new Mock<ILogger<HighFiveRepository>>().Object;
             }
         }
+
+        #endregion
+
     }
 }

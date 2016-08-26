@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region project references
+
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -7,6 +9,8 @@ using Moq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using highfive_server.Controllers;
+
+#endregion
 
 namespace highfive_server.Models
 {
@@ -299,6 +303,51 @@ namespace highfive_server.Models
         }
 
         #endregion
+        
+        #region TestAddOrganization()
+
+        [Fact]
+        public void TestAddOrganization()
+        {
+            var options = CreateNewContextOptions();
+
+            Organization organization;
+
+            // make sure this user is not on file
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                organization = repo.GetOrganizationByName("Macys");
+                Assert.Null(organization);
+            }
+
+            // add the organization
+            organization = new Organization();
+            organization.Name = "Macys";
+            Guid organizationId;
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var abc = context.Organizations.Add(organization);
+                context.SaveChanges();
+                organizationId = organization.Id;
+            }
+
+            organization = null;
+
+            // get the user by email
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                organization = repo.GetOrganizationByName("Macys");
+                Assert.NotNull(organization);
+                Assert.Equal("Macys", organization.Name);
+                Assert.Equal(organizationId, organization.Id);
+            }
+        }
+
+        #endregion
+
 
         #region CreateNewContextOptions()
 
