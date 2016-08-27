@@ -6,11 +6,13 @@ using HighFive.Server.Models;
 using HighFive.Server.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 #endregion
 
 namespace HighFive.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class OrganizationsController : Controller
     {

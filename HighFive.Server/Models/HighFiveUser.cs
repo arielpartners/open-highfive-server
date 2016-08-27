@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace HighFive.Server.Models
 {
-    public class HighFiveUser
+    public class HighFiveUser: IdentityUser
     {
         [Key]
         public Guid Id { get; set; }
