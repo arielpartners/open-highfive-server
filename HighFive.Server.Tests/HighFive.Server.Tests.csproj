@@ -73,7 +73,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="HighFive.Server">
-      <HintPath>..\HighFive.Server\bin\Debug\net461\win7-x64\HighFive.Server.exe</HintPath>
+      <HintPath>..\HighFive.Server\bin\Debug\net461\HighFive.Server.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

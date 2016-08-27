@@ -30,8 +30,7 @@
     },
 
   "buildOptions": {
-    "platform": "x86",
-    "emitEntryPoint": true,
+    "emitEntryPoint": false,
     "preserveCompilationContext": true
   },
 
