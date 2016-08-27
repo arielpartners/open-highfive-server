@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,18 +36,22 @@ namespace HighFive.Server.Models
                 _context.Organizations.Add(org);
                 await _context.SaveChangesAsync();
 
-                if (await _userManager.FindByEmailAsync("test.user@email.com") == null)
-                {
-                    var user = new HighFiveUser()
-                    {
-                        Email = "sam.hastings@arielpartners.com",
-                        Organization = org
-                    };
-                    await _userManager.CreateAsync(user, "password");
-                }
+                
             }
 
-            
+            Organization existingOrg = _context.Organizations.FirstOrDefault();
+
+            if (await _userManager.FindByEmailAsync("test.user@email.com") == null)
+            {
+                var user = new HighFiveUser()
+                {
+                    UserName = "Bob",
+                    Email = "test.user@email.com",
+                    Organization = existingOrg
+                };
+                //TODO Mark - adjust password requirements
+                IdentityResult result = await _userManager.CreateAsync(user, "$*Uhhdddddoiu6667");
+            }
         }
     }
 }
