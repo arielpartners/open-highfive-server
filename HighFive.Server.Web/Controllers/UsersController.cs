@@ -18,11 +18,17 @@ namespace HighFive.Server.Web.Controllers
         private IHighFiveRepository _repository;
         private ILogger<UsersController> _logger;
 
+        #region Constructor
+
         public UsersController(IHighFiveRepository repository, ILogger<UsersController> logger)
         {
             _repository = repository;
             _logger = logger;
         }
+
+        #endregion
+
+        #region GetAll - GET api/users
 
         // GET api/users
         [HttpGet("")]
@@ -39,6 +45,10 @@ namespace HighFive.Server.Web.Controllers
 
             return BadRequest(new { Message = "Failed to get users" });
         }
+
+        #endregion
+
+        #region GetByEmailv- GET api/users/cstrong@arielpartners.com
 
         // GET api/users/cstrong@arielpartners.com
         [HttpGet("{email}")]
@@ -63,6 +73,10 @@ namespace HighFive.Server.Web.Controllers
 
             return BadRequest(new { Message = "Failed to get user" });
         }
+
+        #endregion
+
+        #region Post - POST api/users
 
         // POST api/users
         [HttpPost]
@@ -100,6 +114,10 @@ namespace HighFive.Server.Web.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        #endregion
+
+        #region Put - PUT api/users/cstrong@arielpartners.com
 
         // PUT api/users/cstrong@arielpartners.com
         [HttpPut("{email}")]
@@ -160,6 +178,10 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
+        #endregion
+
+        #region Delete - DELETE api/users/cstrong@arielpartners.com
+
         // DELETE api/users/cstrong@arielpartners.com
         [HttpDelete("{email}")]
         public IActionResult Delete(string email)
@@ -184,4 +206,7 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = $"Failed to delete user {email}" });
         }
     }
+
+    #endregion
+
 }

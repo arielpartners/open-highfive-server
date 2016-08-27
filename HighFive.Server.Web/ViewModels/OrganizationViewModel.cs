@@ -18,7 +18,5 @@ namespace HighFive.Server.Web.ViewModels
         [Required]
         //public string CorporateValueName { get; set; }
         public ICollection<CorporateValue> Values { get; set; }
-
-
     }
 }

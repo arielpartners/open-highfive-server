@@ -1,4 +1,4 @@
-﻿#region project references
+﻿#region references
 
 using AutoMapper;
 using HighFive.Server.Services.Models;
@@ -33,7 +33,9 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestGetAll
+        #region Users
+
+        #region TestGetAll_SunnyDay
 
         [TestMethod]
         public void TestGetAll_SunnyDay()
@@ -79,7 +81,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestGetByEmail
+        #region TestGetByEmail_SunnyDay
 
         [TestMethod]
         public void TestGetByEmail_SunnyDay()
@@ -111,7 +113,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestPost
+        #region TestGetByEmail_SimulatedServerFailure
 
         [TestMethod]
         public void TestGetByEmail_SimulatedServerFailure()
@@ -199,7 +201,11 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestDelete
+        #endregion
+
+        #region Organization
+
+        #region TestPost_SimulatedServerFailure
 
         [TestMethod]
         public void TestPost_SimulatedServerFailure()
@@ -224,6 +230,10 @@ namespace HighFive.Server.Web.Controllers
                 AssertMessageProperty("Failed to add new user c@d.com", badRequestResult.Value);
             }
         }
+
+        #endregion
+
+        #region TestDelete_SunnyDay
 
         [TestMethod]
         public void TestDelete_SunnyDay()
@@ -262,7 +272,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestPut
+        #region TestDelete_SimulatedServerFailure
 
         [TestMethod]
         public void TestDelete_SimulatedServerFailure()
@@ -428,6 +438,8 @@ namespace HighFive.Server.Web.Controllers
                 AssertMessageProperty("Organization IDontExist not found", notFoundResult.Value);
             }
         }
+
+        #endregion
 
         #endregion
 
