@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HighFive.Server.Api.Models;
+using HighFive.Server.Services.Models;
 
 namespace HighFive.Server.Tests
 {

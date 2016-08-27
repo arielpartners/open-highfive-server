@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HighFive.Server.Api.Models
+namespace HighFive.Server.Services.Models
 {
     public interface IHighFiveRepository
     {

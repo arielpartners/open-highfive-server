@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 #endregion
 
-namespace HighFive.Server.Api.Models
+namespace HighFive.Server.Services.Models
 {
     public class Organization
     {

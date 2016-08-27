@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HighFive.Server.Api.Models
+namespace HighFive.Server.Services.Models
 {
     public class Calculator
     {

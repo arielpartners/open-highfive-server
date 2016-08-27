@@ -84,8 +84,8 @@
       <HintPath>..\packages\SpecRun.SpecFlow.1.5.2\lib\net45\TechTalk.SpecRun.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HighFive.Server">
-      <HintPath>..\HighFive.Server.Api\bin\Debug\net461\HighFive.Server.Api.dll</HintPath>
+    <Reference Include="HighFive.Server.Services">
+      <HintPath>..\HighFive.Server.Services\bin\Debug\net461\HighFive.Server.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

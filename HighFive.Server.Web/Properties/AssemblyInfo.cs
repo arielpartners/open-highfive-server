@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HighFive.Server.Api")]
+[assembly: AssemblyProduct("HighFive.Server.Web")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b792febb-7da3-4ee2-a55b-4cdea076f432")]
+[assembly: Guid("3b370d0d-40f0-43ee-8689-3de85b8df4e5")]

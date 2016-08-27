@@ -3,14 +3,14 @@
 using System;
 using System.Linq;
 using AutoMapper;
-using HighFive.Server.Api.Models;
-using HighFive.Server.ViewModels;
+using HighFive.Server.Services.Models;
+using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace HighFive.Server.Controllers
+namespace HighFive.Server.Web.Controllers
 {
     [Route("api/[controller]")]
     public class UsersController : Controller

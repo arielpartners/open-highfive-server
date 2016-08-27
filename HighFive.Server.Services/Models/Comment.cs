@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HighFive.Server.Api.Models
+namespace HighFive.Server.Services.Models
 {
     public class Comment
     {

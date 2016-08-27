@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 #endregion
 
-namespace HighFive.Server.ViewModels
+namespace HighFive.Server.Web.ViewModels
 {
     public class UserViewModel
     {

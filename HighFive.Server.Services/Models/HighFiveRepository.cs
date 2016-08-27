@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace HighFive.Server.Api.Models
+namespace HighFive.Server.Services.Models
 {
     public class HighFiveRepository : IHighFiveRepository
     {

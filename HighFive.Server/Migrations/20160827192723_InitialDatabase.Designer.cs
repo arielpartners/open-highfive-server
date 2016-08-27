@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using HighFive.Server.Api.Models;
+using HighFive.Server.Services.Models;
 
 namespace HighFive.Server.Migrations
 {
     [DbContext(typeof(HighFiveContext))]
-    [Migration("20160827164129_Db-Update1")]
-    partial class DbUpdate1
+    [Migration("20160827192723_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace HighFive.Server.Migrations
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HighFive.Server.Models.Comment", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -39,7 +39,7 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.CorporateValue", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.CorporateValue", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -57,7 +57,7 @@ namespace HighFive.Server.Migrations
                     b.ToTable("CorporateValues");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.HighFiveUser", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.HighFiveUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -77,7 +77,7 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.Organization", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.Organization", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -93,7 +93,7 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Organizations");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.Recognition", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.Recognition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -125,46 +125,46 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Recognitions");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.Comment", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.Comment", b =>
                 {
-                    b.HasOne("HighFive.Server.Models.Recognition")
+                    b.HasOne("HighFive.Server.Services.Models.Recognition")
                         .WithMany("Comments")
                         .HasForeignKey("RecognitionId");
 
-                    b.HasOne("HighFive.Server.Models.HighFiveUser", "Sender")
+                    b.HasOne("HighFive.Server.Services.Models.HighFiveUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.CorporateValue", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.CorporateValue", b =>
                 {
-                    b.HasOne("HighFive.Server.Models.Organization")
+                    b.HasOne("HighFive.Server.Services.Models.Organization")
                         .WithMany("Values")
                         .HasForeignKey("OrganizationId");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.HighFiveUser", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.HighFiveUser", b =>
                 {
-                    b.HasOne("HighFive.Server.Models.Organization", "Organization")
+                    b.HasOne("HighFive.Server.Services.Models.Organization", "Organization")
                         .WithMany()
                         .HasForeignKey("OrganizationId");
                 });
 
-            modelBuilder.Entity("HighFive.Server.Models.Recognition", b =>
+            modelBuilder.Entity("HighFive.Server.Services.Models.Recognition", b =>
                 {
-                    b.HasOne("HighFive.Server.Models.Organization", "Organization")
+                    b.HasOne("HighFive.Server.Services.Models.Organization", "Organization")
                         .WithMany()
                         .HasForeignKey("OrganizationId");
 
-                    b.HasOne("HighFive.Server.Models.HighFiveUser", "Receiver")
+                    b.HasOne("HighFive.Server.Services.Models.HighFiveUser", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId");
 
-                    b.HasOne("HighFive.Server.Models.HighFiveUser", "Sender")
+                    b.HasOne("HighFive.Server.Services.Models.HighFiveUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId");
 
-                    b.HasOne("HighFive.Server.Models.CorporateValue", "Value")
+                    b.HasOne("HighFive.Server.Services.Models.CorporateValue", "Value")
                         .WithMany()
                         .HasForeignKey("ValueId");
                 });
