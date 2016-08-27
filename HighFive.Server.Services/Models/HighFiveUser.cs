@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HighFive.Server.Models
+namespace HighFive.Server.Services.Models
 {
     public class HighFiveUser
     {

@@ -2,14 +2,14 @@
 
 using System;
 using AutoMapper;
-using HighFive.Server.Models;
-using HighFive.Server.ViewModels;
+using HighFive.Server.Services.Models;
+using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace HighFive.Server.Controllers
+namespace HighFive.Server.Web.Controllers
 {
     [Route("api/[controller]")]
     public class OrganizationsController : Controller

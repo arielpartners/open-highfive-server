@@ -1,6 +1,7 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HighFive.Server.Migrations
 {
@@ -14,7 +15,7 @@ namespace HighFive.Server.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -22,7 +23,7 @@ namespace HighFive.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CorporateValue",
+                name: "CorporateValues",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -32,9 +33,9 @@ namespace HighFive.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CorporateValue", x => x.Id);
+                    table.PrimaryKey("PK_CorporateValues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CorporateValue_Organizations_OrganizationId",
+                        name: "FK_CorporateValues_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
@@ -47,7 +48,7 @@ namespace HighFive.Server.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 100, nullable: false),
                     OrganizationId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -97,9 +98,9 @@ namespace HighFive.Server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Recognitions_CorporateValue_ValueId",
+                        name: "FK_Recognitions_CorporateValues_ValueId",
                         column: x => x.ValueId,
-                        principalTable: "CorporateValue",
+                        principalTable: "CorporateValues",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -142,8 +143,8 @@ namespace HighFive.Server.Migrations
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CorporateValue_OrganizationId",
-                table: "CorporateValue",
+                name: "IX_CorporateValues_OrganizationId",
+                table: "CorporateValues",
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
@@ -184,7 +185,7 @@ namespace HighFive.Server.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "CorporateValue");
+                name: "CorporateValues");
 
             migrationBuilder.DropTable(
                 name: "Organizations");

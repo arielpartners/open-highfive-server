@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HighFive.Server.Models
+namespace HighFive.Server.Services.Models
 {
     public class CorporateValue
     {

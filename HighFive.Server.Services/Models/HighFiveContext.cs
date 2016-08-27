@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace HighFive.Server.Models
+namespace HighFive.Server.Services.Models
 {
     public class HighFiveContext : DbContext
     {

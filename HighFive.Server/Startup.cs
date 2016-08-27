@@ -16,8 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using System.IO;
-using HighFive.Server.Models;
-using HighFive.Server.ViewModels;
+using HighFive.Server.Services.Models;
+using HighFive.Server.Web.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
@@ -46,7 +46,12 @@ namespace HighFive.Server
             services.AddSingleton(_config);
 
             var connection = _config["ConnectionStrings:HighFiveContextConnection"];
-            services.AddDbContext<HighFiveContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<HighFiveContext>(options => options.UseSqlServer(connection,
+                b => b.MigrationsAssembly("HighFive.Server")));
+            //
+            // Set migrations assembly to top level because it defaults to the same assmebly that the DbContext is in,
+            // but dotnet EF core does not yet support migrations from a class library
+            //
 
             //.AddEntityFrameworkStores<HighFiveContext>();
             services.AddScoped<IHighFiveRepository, HighFiveRepository>();

@@ -3,11 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using HighFive.Server.Models;
+using HighFive.Server.Services.Models;
 
 #endregion
 
-namespace HighFive.Server.ViewModels
+namespace HighFive.Server.Web.ViewModels
 {
     public class OrganizationViewModel
     {
