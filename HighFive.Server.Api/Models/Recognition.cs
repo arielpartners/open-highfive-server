@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HighFive.Server.Models
+namespace HighFive.Server.Api.Models
 {
     public class Recognition
     {

@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using System.IO;
-using HighFive.Server.Models;
+using HighFive.Server.Api.Models;
 using HighFive.Server.ViewModels;
 using Microsoft.EntityFrameworkCore;
 

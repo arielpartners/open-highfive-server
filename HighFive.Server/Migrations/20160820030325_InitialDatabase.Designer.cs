@@ -1,5 +1,5 @@
 ﻿using System;
-using HighFive.Server.Models;
+using HighFive.Server.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;

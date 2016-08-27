@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using HighFive.Server.Models;
+using HighFive.Server.Api.Models;
 
 namespace HighFive.Server.Migrations
 {

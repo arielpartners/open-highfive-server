@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using HighFive.Server.Models;
+using HighFive.Server.Api.Models;
 
 #endregion
 

@@ -85,7 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="HighFive.Server">
-      <HintPath>..\HighFive.Server\bin\Debug\net461\HighFive.Server.dll</HintPath>
+      <HintPath>..\HighFive.Server.Api\bin\Debug\net461\HighFive.Server.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

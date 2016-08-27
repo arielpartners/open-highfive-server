@@ -2,7 +2,7 @@
 
 using System;
 using AutoMapper;
-using HighFive.Server.Models;
+using HighFive.Server.Api.Models;
 using HighFive.Server.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
