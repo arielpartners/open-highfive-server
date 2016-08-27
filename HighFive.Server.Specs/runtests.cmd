@@ -10,7 +10,7 @@ REM %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "HighFive.Server.Spe
 @set profile=%1
 @if "%profile%" == "" set profile=Default
 
-SpecRun.exe run %profile%.srprofile "/baseFolder:%~dp0\bin\Debug" /log:specrun.log /report:SpecFlowReport.html %2 %3 %4 %5
+SpecRun.exe run "%~dp0\%profile%.srprofile" "/baseFolder:%~dp0\bin\Debug" /log:specrun.log "/report:%~dp0\SpecFlowReport.html" %2 %3 %4 %5
 
 :end
 
