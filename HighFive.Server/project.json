@@ -29,10 +29,11 @@
       "net461": {}
     },
 
-    "buildOptions": {
-      "emitEntryPoint": true,
-      "preserveCompilationContext": true
-    },
+  "buildOptions": {
+    "platform": "x86",
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
 
     "publishOptions": {
       "include": [
