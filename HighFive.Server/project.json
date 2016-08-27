@@ -46,6 +46,7 @@
     },
 
     "scripts": {
+      "prepublish": "dotnet ef database update",
       "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
     }
   }
