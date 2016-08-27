@@ -72,7 +72,6 @@ IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2. Build and publish
 call :ExecuteCmd dotnet publish "HighFive.Server\project.json" --output "%DEPLOYMENT_TEMP%" --configuration Release
-call :ExecuteCmd dotnet ef database update
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync
