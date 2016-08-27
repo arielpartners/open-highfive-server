@@ -69,7 +69,7 @@ echo Handling .NET Web Application deployment.
 
 :: 1. Restore NuGet packages
 IF /I "HighFive.Server.sln" NEQ "" (
-  call :ExecuteCmd nuget restore "%DEPLOYMENT_SOURCE%\HighFive.ServerHighFive.Server.xproj"
+  call :ExecuteCmd nuget restore "%DEPLOYMENT_SOURCE%\HighFive.Server\HighFive.Server.xproj"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
