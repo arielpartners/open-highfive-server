@@ -30,7 +30,7 @@
     },
 
     "buildOptions": {
-      "emitEntryPoint": false,
+      "emitEntryPoint": true,
       "preserveCompilationContext": true
     },
 
