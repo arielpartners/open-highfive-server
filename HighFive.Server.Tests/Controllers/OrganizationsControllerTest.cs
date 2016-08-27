@@ -1,8 +1,8 @@
 ﻿#region project references
 
 using AutoMapper;
-using highfive_server.Models;
-using highfive_server.ViewModels;
+using HighFive.Server.Services.Models;
+using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,13 +13,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 
 #endregion
 
-namespace highfive_server.Controllers
+namespace HighFive.Server.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [TestClass]
     public class OrganizationsControllerTest : Controller
     {
         //private IHighFiveRepository _repository;
@@ -39,7 +40,7 @@ namespace highfive_server.Controllers
         
         #region TestPost
 
-        [Fact]
+        [TestMethod]
         public void TestPost()
         {
             var options = CreateNewContextOptions();
@@ -58,10 +59,10 @@ namespace highfive_server.Controllers
 
                 var newOrganization = new OrganizationViewModel() { Name = "Macys"};
                 var result = controller.Post(newOrganization);
-                Assert.IsType(typeof(CreatedResult), result);
+                result.Should().BeOfType<CreatedResult>();
                 var createdResult = result as CreatedResult;
                 var organization = createdResult.Value as OrganizationViewModel;
-                Assert.Equal("Macys", organization.Name);
+                organization.Name.Should().Be("Macys");
             }
         }
 
