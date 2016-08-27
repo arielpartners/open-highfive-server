@@ -51,7 +51,7 @@ namespace HighFive.Server.Controllers
                 var user = _repository.GetUserByEmail(email);
                 if (user != null)
                 {
-                    return Ok(user);
+                    return Ok(Mapper.Map<UserViewModel>(user));
                 }
                 else
                 {
