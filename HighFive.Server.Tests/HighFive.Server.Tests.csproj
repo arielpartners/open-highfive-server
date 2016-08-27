@@ -464,6 +464,7 @@
   <ItemGroup>
     <Compile Include="Controllers\OrganizationsControllerTest.cs" />
     <Compile Include="Controllers\UsersControllerTest.cs" />
+    <Compile Include="Models\HighFiveRepositoryTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -472,9 +473,7 @@
     <None Include="CodeAnalysisRules.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
