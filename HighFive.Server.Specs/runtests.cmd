@@ -1,5 +1,7 @@
 @pushd %~dp0
 
+set BASE=%CD%
+
 REM Package is already built, no need to rebuild
 REM %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "HighFive.Server.Specs.csproj"
 
@@ -7,10 +9,7 @@ REM %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "HighFive.Server.Spe
 
 @cd ..\packages\SpecRun.Runner.*\tools
 
-@set profile=%1
-@if "%profile%" == "" set profile=Default
-
-SpecRun.exe run "%~dp0\%profile%.srprofile" "/baseFolder:%~dp0\bin\Debug" /log:specrun.log "/report:%~dp0\SpecFlowReport.html" %2 %3 %4 %5
+SpecRun.exe run "%BASE%\Default.srprofile" "/baseFolder:%BASE%\bin\Debug" /log:specrun.log "/report:%BASE%\SpecFlowReport.html" %2 %3 %4 %5
 
 :end
 
