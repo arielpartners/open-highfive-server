@@ -1,7 +1,7 @@
 ﻿using System;
 using TechTalk.SpecFlow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HighFive.Server.Models;
+using HighFive.Server.Services.Models;
 
 namespace HighFive.Server.Specs.StepDefinitions
 {
