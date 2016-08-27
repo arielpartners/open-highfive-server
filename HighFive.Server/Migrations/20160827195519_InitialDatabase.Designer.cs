@@ -8,9 +8,10 @@ using HighFive.Server.Models;
 namespace HighFive.Server.Migrations
 {
     [DbContext(typeof(HighFiveContext))]
-    partial class HighFiveContextModelSnapshot : ModelSnapshot
+    [Migration("20160827195519_InitialDatabase")]
+    partial class InitialDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
