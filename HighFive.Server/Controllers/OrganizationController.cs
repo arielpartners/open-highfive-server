@@ -1,19 +1,15 @@
 ﻿#region references
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
+using HighFive.Server.Models;
+using HighFive.Server.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using highfive_server.Models;
-using highfive_server.ViewModels;
 
 #endregion
 
-namespace highfive_server.Controllers
+namespace HighFive.Server.Controllers
 {
     [Route("api/[controller]")]
     public class OrganizationsController : Controller

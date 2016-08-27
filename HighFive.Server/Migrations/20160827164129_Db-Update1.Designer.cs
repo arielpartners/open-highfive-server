@@ -1,15 +1,15 @@
 ﻿using System;
-using HighFive.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using HighFive.Server.Models;
 
 namespace HighFive.Server.Migrations
 {
     [DbContext(typeof(HighFiveContext))]
-    [Migration("20160820030325_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20160827164129_Db-Update1")]
+    partial class DbUpdate1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace HighFive.Server.Migrations
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("highfive_server.Models.Comment", b =>
+            modelBuilder.Entity("HighFive.Server.Models.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -39,7 +39,7 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.CorporateValue", b =>
+            modelBuilder.Entity("HighFive.Server.Models.CorporateValue", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -54,17 +54,19 @@ namespace HighFive.Server.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("CorporateValue");
+                    b.ToTable("CorporateValues");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.HighFiveUser", b =>
+            modelBuilder.Entity("HighFive.Server.Models.HighFiveUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
 
                     b.Property<Guid?>("OrganizationId");
 
@@ -75,21 +77,23 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.Organization", b =>
+            modelBuilder.Entity("HighFive.Server.Models.Organization", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
 
                     b.HasKey("Id");
 
                     b.ToTable("Organizations");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.Recognition", b =>
+            modelBuilder.Entity("HighFive.Server.Models.Recognition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -121,46 +125,46 @@ namespace HighFive.Server.Migrations
                     b.ToTable("Recognitions");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.Comment", b =>
+            modelBuilder.Entity("HighFive.Server.Models.Comment", b =>
                 {
-                    b.HasOne("highfive_server.Models.Recognition")
+                    b.HasOne("HighFive.Server.Models.Recognition")
                         .WithMany("Comments")
                         .HasForeignKey("RecognitionId");
 
-                    b.HasOne("highfive_server.Models.HighFiveUser", "Sender")
+                    b.HasOne("HighFive.Server.Models.HighFiveUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.CorporateValue", b =>
+            modelBuilder.Entity("HighFive.Server.Models.CorporateValue", b =>
                 {
-                    b.HasOne("highfive_server.Models.Organization")
+                    b.HasOne("HighFive.Server.Models.Organization")
                         .WithMany("Values")
                         .HasForeignKey("OrganizationId");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.HighFiveUser", b =>
+            modelBuilder.Entity("HighFive.Server.Models.HighFiveUser", b =>
                 {
-                    b.HasOne("highfive_server.Models.Organization", "Organization")
+                    b.HasOne("HighFive.Server.Models.Organization", "Organization")
                         .WithMany()
                         .HasForeignKey("OrganizationId");
                 });
 
-            modelBuilder.Entity("highfive_server.Models.Recognition", b =>
+            modelBuilder.Entity("HighFive.Server.Models.Recognition", b =>
                 {
-                    b.HasOne("highfive_server.Models.Organization", "Organization")
+                    b.HasOne("HighFive.Server.Models.Organization", "Organization")
                         .WithMany()
                         .HasForeignKey("OrganizationId");
 
-                    b.HasOne("highfive_server.Models.HighFiveUser", "Receiver")
+                    b.HasOne("HighFive.Server.Models.HighFiveUser", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId");
 
-                    b.HasOne("highfive_server.Models.HighFiveUser", "Sender")
+                    b.HasOne("HighFive.Server.Models.HighFiveUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId");
 
-                    b.HasOne("highfive_server.Models.CorporateValue", "Value")
+                    b.HasOne("HighFive.Server.Models.CorporateValue", "Value")
                         .WithMany()
                         .HasForeignKey("ValueId");
                 });

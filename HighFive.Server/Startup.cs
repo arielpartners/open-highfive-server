@@ -15,9 +15,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using highfive_server.Models;
 using System.IO;
-using highfive_server.ViewModels;
+using HighFive.Server.Models;
+using HighFive.Server.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
