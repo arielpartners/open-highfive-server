@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TestProfile xmlns="http://www.specflow.org/schemas/plus/TestProfile/1.5">
-  <Settings projectName="HighFive.Server.SpecFlow" projectId="{ba862cb5-a7e6-4a72-b866-acbb402dfbcf}" />
+  <Settings projectName="HighFive.Server.Specs" projectId="{ba862cb5-a7e6-4a72-b866-acbb402dfbcf}"/>
   <Execution stopAfterFailures="3" testThreadCount="1" testSchedulingMode="Sequential" />
   <!-- For collecting by a SpecRun server update and enable the following element. For using the 
       collected statistics, set testSchedulingMode="Adaptive" attribute on the <Execution> element.
     <Server serverUrl="http://specrunserver:6365" publishResults="true" />
   -->
   <TestAssemblyPaths>
-    <TestAssemblyPath>HighFive.Server.SpecFlow.dll</TestAssemblyPath>
+    <TestAssemblyPath>HighFive.Server.Specs.dll</TestAssemblyPath>
   </TestAssemblyPaths>
+  <Report copyAlsoToBaseFolder="true"/>
   <DeploymentTransformation>
     <Steps>
       <!-- sample config transform to change the connection string-->

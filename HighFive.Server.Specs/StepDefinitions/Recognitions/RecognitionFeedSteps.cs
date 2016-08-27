@@ -3,7 +3,7 @@ using TechTalk.SpecFlow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HighFive.Server.Models;
 
-namespace HighFive.Server.SpecFlow.StepDefinitions
+namespace HighFive.Server.Specs.StepDefinitions
 {
     [Binding]
     public class RecognitionFeedSteps
