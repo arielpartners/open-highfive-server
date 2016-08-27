@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace highfive_server.Models
+namespace HighFive.Server.Models
 {
     public class Comment
     {

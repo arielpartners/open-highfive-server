@@ -1,14 +1,11 @@
 ﻿#region references
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 #endregion
 
-namespace highfive_server.ViewModels
+namespace HighFive.Server.ViewModels
 {
     public class UserViewModel
     {

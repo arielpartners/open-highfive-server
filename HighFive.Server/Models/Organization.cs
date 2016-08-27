@@ -3,12 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 #endregion
 
-namespace highfive_server.Models
+namespace HighFive.Server.Models
 {
     public class Organization
     {

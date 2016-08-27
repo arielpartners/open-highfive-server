@@ -1,15 +1,13 @@
 ﻿#region references
 
-using highfive_server.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using HighFive.Server.Models;
 
 #endregion
 
-namespace highfive_server.ViewModels
+namespace HighFive.Server.ViewModels
 {
     public class OrganizationViewModel
     {
