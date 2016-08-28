@@ -56,7 +56,7 @@ namespace HighFive.Server.Web.Controllers
                 var result = controller.GetAll();
                 result.Should().BeOfType<OkObjectResult>();
                 var okResult = result as OkObjectResult;
-                var userList = okResult.Value as IList<HighFiveUser>;
+                var userList = okResult.Value as IList<UserViewModel>;
                 userList.Should()
                     .HaveCount(1)
                     .And.ContainSingle(x => x.Email == "a@b.com");

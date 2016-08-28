@@ -35,37 +35,40 @@ namespace HighFive.Server.Web.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]OrganizationViewModel newOrganization)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            // create organization in repo
-            try
+            if (ModelState.IsValid)
             {
-                var theNewOrganization = Mapper.Map<Organization>(newOrganization);
-                //CorporateValue corporateValue = _repository.GetCorporateValueByName(newOrganization.CorporateValueName);
-                //if (corporateValue == null)
-                //{
-                //    return NotFound(new { Message = $"Unable to find corporateValue {newOrganization.Name}" });
-                //}
-                //else
-                //{
-                //    theNewOrganization.Name = newOrganization.Name;
-                //}
-                _repository.AddOrganization(theNewOrganization);
-                _repository.SaveChangesAsync();
+                // create organization in repo.
+                try
+                {
+                    var theNewOrganization = Mapper.Map<Organization>(newOrganization);
+                    //CorporateValue corporateValue = _repository.GetCorporateValueByName(newOrganization.CorporateValueName);
+                    //if (corporateValue == null)
+                    //{
+                    //    return NotFound(new { Message = $"Unable to find corporateValue {newOrganization.Name}" });
+                    //}
+                    //else
+                    //{
+                    //    theNewOrganization.Name = newOrganization.Name;
+                    //}
+
+                    _repository.AddOrganization(theNewOrganization);
+                    _repository.SaveChangesAsync();
+                }
+                catch (HighFiveException ex)
+                {
+                    _logger.LogError("Failed to add new organization: {0}", ex);
+                    return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
+                }
+
+                return Created($"api/users/{newOrganization.Name}", newOrganization);
             }
-            catch (HighFiveException ex)
+            else
             {
-                //string.Format(CultureInfo.InvariantCulture, newOrganization.Name);
-
-                _logger.LogError("Failed to add new organization: {0}", ex);
-                //return BadRequest(new { Message = string.Format(CultureInfo.InvariantCulture, newOrganization.Name) });
-                return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
-                //test pull setting off jenkins fxCop error
-
-                //_logger.LogError("Failed to add new organization: {0}", ex);
-                //return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
+                return BadRequest(ModelState);
             }
-            return Created($"api/users/{newOrganization.Name}", newOrganization);
+
+            #endregion
+
         }
-        #endregion
     }
 }
