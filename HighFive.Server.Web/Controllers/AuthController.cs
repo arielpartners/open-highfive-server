@@ -51,7 +51,7 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
-                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Pwd, true, false);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
 
                 if (signInResult.Succeeded)
                 {
