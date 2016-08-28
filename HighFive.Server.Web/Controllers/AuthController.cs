@@ -9,21 +9,19 @@ using Microsoft.Extensions.Logging;
 using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using HighFive.Server.Web.Controllers;
-using HighFive.Server.Web.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace HighFive.Server.Controllers
+namespace HighFive.Server.Web.Controllers
 {
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private IHighFiveRepository _repository;
-        private ILogger<UsersController> _logger;
+        private ILogger<AuthController> _logger;
         private SignInManager<HighFiveUser> _signInManager;
 
-        public AuthController(SignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<UsersController> logger)
+        public AuthController(SignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<AuthController> logger)
         {
             _repository = repository;
             _logger = logger;

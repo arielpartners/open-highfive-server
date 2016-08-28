@@ -92,10 +92,10 @@ namespace HighFive.Server.Web.Controllers
                 try
                 {
                     var theNewUser = Mapper.Map<HighFiveUser>(newUser);
-                    var organization = _repository.GetOrganizationByName(newUser.Organization);
+                    var organization = _repository.GetOrganizationByName(newUser.OrganizationName);
                     if (organization == null)
                     {
-                        return NotFound(new { Message = $"Unable to find organization {newUser.Organization}" });
+                        return NotFound(new { Message = $"Unable to find organization {newUser.OrganizationName}" });
                     }
                     else
                     {
@@ -139,13 +139,13 @@ namespace HighFive.Server.Web.Controllers
                         return NotFound(new { Message = $"User {email} not found" });
                     }
 
-                    if (userToUpdate.Organization.Name != updatedUserVM.Organization)
+                    if (userToUpdate.Organization.Name != updatedUserVM.OrganizationName)
                     {
                         // the organization changed, so we must retrieve it from the DB and set the new one
-                        var organization = _repository.GetOrganizationByName(updatedUserVM.Organization);
+                        var organization = _repository.GetOrganizationByName(updatedUserVM.OrganizationName);
                         if (organization == null)
                         {
-                            return NotFound(new { Message = $"Organization {updatedUserVM.Organization} not found" });
+                            return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
                         }
                         changed = true;
                         userToUpdate.Organization = organization;

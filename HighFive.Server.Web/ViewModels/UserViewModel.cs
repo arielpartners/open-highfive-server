@@ -16,7 +16,8 @@ namespace HighFive.Server.Web.ViewModels
         public string Email { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         [Required]
-        public string Organization { get; set; }
+        public string OrganizationName { get; set; }
+        public string Url { get; set; }
         public string ReportsTo { get; set; }
         public string Department { get; set; }
         public string Location { get; set; }
