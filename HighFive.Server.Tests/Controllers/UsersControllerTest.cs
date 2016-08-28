@@ -150,7 +150,7 @@ namespace HighFive.Server.Web.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var newUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var newUser = new UserViewModel() { Email = "c@d.com", Organization = "Ariel Partners" };
                 var result = controller.Post(newUser);
                 result.Should().BeOfType<CreatedResult>();
                 var createdResult = result as CreatedResult;
@@ -175,7 +175,7 @@ namespace HighFive.Server.Web.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var duplicateUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "Ariel Partners" };
+                var duplicateUser = new UserViewModel() { Email = "a@b.com", Organization = "Ariel Partners" };
                 var result = controller.Post(duplicateUser);
                 result.Should().BeOfType<BadRequestObjectResult>();
                 var badRequestResult = result as BadRequestObjectResult;
@@ -192,7 +192,7 @@ namespace HighFive.Server.Web.Controllers
             {
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
-                var unknownOrgUser = new UserViewModel() { Email = "zip@zap.com", OrganizationName = "Bad Guys" };
+                var unknownOrgUser = new UserViewModel() { Email = "zip@zap.com", Organization = "Bad Guys" };
                 var result = controller.Post(unknownOrgUser);
                 result.Should().BeOfType<NotFoundObjectResult>();
                 var notFoundResult = result as NotFoundObjectResult;
@@ -224,7 +224,7 @@ namespace HighFive.Server.Web.Controllers
                 repo.Setup(r => r.AddUser(It.IsAny<HighFiveUser>())).Throws<HighFiveException>();
                 UsersController controller = new UsersController(repo.Object, _controllerLogger);
 
-                var newUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var newUser = new UserViewModel() { Email = "c@d.com", Organization = "Ariel Partners" };
                 var result = controller.Post(newUser);
                 result.Should().BeOfType<BadRequestObjectResult>();
                 var badRequestResult = result as BadRequestObjectResult;
@@ -318,7 +318,7 @@ namespace HighFive.Server.Web.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var updatedUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var updatedUser = new UserViewModel() { Email = "c@d.com", Organization = "Ariel Partners" };
                 var result = controller.Put("c@d.com", updatedUser);
                 result.Should().BeOfType<NotFoundObjectResult>();
                 var notFoundResult = result as NotFoundObjectResult;
@@ -345,13 +345,13 @@ namespace HighFive.Server.Web.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var updatedUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
+                var updatedUser = new UserViewModel() { Email = "c@d.com", Organization = "Ariel Partners" };
                 var result = controller.Put("a@b.com", updatedUser);
                 result.Should().BeOfType<OkObjectResult>();
                 var okObjectResult = result as OkObjectResult;
                 AssertMessageProperty("User c@d.com updated successfully", okObjectResult.Value);
 
-                updatedUser.OrganizationName = "Acme";
+                updatedUser.Organization = "Acme";
                 result = controller.Put("c@d.com", updatedUser);
                 result.Should().BeOfType<OkObjectResult>();
                 okObjectResult = result as OkObjectResult;
@@ -378,7 +378,7 @@ namespace HighFive.Server.Web.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var updatedUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "Ariel Partners" };
+                var updatedUser = new UserViewModel() { Email = "a@b.com", Organization = "Ariel Partners" };
                 var result = controller.Put("a@b.com", updatedUser);
                 result.Should().BeOfType<OkObjectResult>();
                 var okObjectResult = result as OkObjectResult;
@@ -405,7 +405,7 @@ namespace HighFive.Server.Web.Controllers
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 UsersController controller = new UsersController(repo, _controllerLogger);
 
-                var updatedUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "IDontExist" };
+                var updatedUser = new UserViewModel() { Email = "a@b.com", Organization = "IDontExist" };
                 var result = controller.Put("a@b.com", updatedUser);
                 result.Should().BeOfType<NotFoundObjectResult>();
                 var notFoundResult = result as NotFoundObjectResult;
@@ -432,7 +432,7 @@ namespace HighFive.Server.Web.Controllers
                 repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Returns(user);
                 repo.Setup(r => r.UpdateUser(It.IsAny<HighFiveUser>())).Throws<Exception>();
 
-                var updatedUser = new UserViewModel() { Email = "a@b.com", OrganizationName = "IDontExist" };
+                var updatedUser = new UserViewModel() { Email = "a@b.com", Organization = "IDontExist" };
                 var result = controller.Put("a@b.com", updatedUser);
                 result.Should().BeOfType<NotFoundObjectResult>();
                 var notFoundResult = result as NotFoundObjectResult;

@@ -18,7 +18,7 @@ namespace HighFive.Server.Services.Models
         }
         public async Task EnsureSeedData()
         {
-            
+
             if (!_context.Organizations.Any())
             {
                 var org = new Organization()
@@ -35,8 +35,6 @@ namespace HighFive.Server.Services.Models
 
                 _context.Organizations.Add(org);
                 await _context.SaveChangesAsync();
-
-                
             }
 
             Organization existingOrg = _context.Organizations.FirstOrDefault();
@@ -45,15 +43,16 @@ namespace HighFive.Server.Services.Models
             {
                 var user = new HighFiveUser()
                 {
-                    UserName = "Bob",
+                    UserName = "test.user@email.com",
                     Email = "test.user@email.com",
+                    FirstName="Test",
+                    LastName="User",
                     Organization = existingOrg
                 };
-                //TODO Mark - adjust password requirements
-                IdentityResult result = await _userManager.CreateAsync(user, "$*Uhhdddddoiu6667");
+                IdentityResult result = await _userManager.CreateAsync(user, "password");
             }
         }
     }
 }
 
-  
+

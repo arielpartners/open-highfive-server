@@ -60,7 +60,11 @@ namespace HighFive.Server
             services.AddIdentity<HighFiveUser, IdentityRole>(config =>
             {
                 config.User.RequireUniqueEmail = true;
-                config.Password.RequiredLength = 8;
+                config.Password.RequiredLength = 4;
+                config.Password.RequireDigit = false;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
                 config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
                 {
                     OnRedirectToLogin = async ctx  =>

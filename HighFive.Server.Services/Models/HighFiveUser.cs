@@ -10,5 +10,12 @@ namespace HighFive.Server.Services.Models
         public string LastName { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         public Organization Organization { get; set; }
+        public string ReportsTo { get; set; }
+        public string Department { get; set; }
+        public string Location { get; set; }
+        public string Title { get; set; }
+        public string Phone { get; set; }
+        public DateTime HireDate { get; set; }
+
     }
 }

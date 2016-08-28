@@ -31,33 +31,35 @@ namespace HighFive.Server.Controllers
         }
 
         // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/values/5
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/values
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
+            if (model == null) return BadRequest(new { Message = $"User/Pwd information missing" });
             try
             {
                 //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
-                var signInResult = await _signInManager.PasswordSignInAsync("Bob", "$*Uhhdddddoiu6667", true, false);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Pwd, true, false);
 
                 if (signInResult.Succeeded)
                 {
                     var usr = _repository.GetUserByEmail(model.Email);
-                    return Ok(Mapper.Map<UserViewModel>(usr));
+                    if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
+                    return Ok(usr);
                 }
                 else
                 {
@@ -71,16 +73,26 @@ namespace HighFive.Server.Controllers
             return BadRequest(new { Message = "Failed to get user" });
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT api/values/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete()]
+        public IActionResult Delete()
         {
+            try
+            {
+                _signInManager.SignOutAsync();
+            }
+            catch(Exception e)
+            {
+                _logger.LogCritical("Excpetion trying to log user out", e.StackTrace);
+                return BadRequest(new { Message = "Failed to log user out." });
+            }
+            return Ok(null);
         }
     }
 }
