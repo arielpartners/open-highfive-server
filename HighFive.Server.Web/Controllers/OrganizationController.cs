@@ -40,7 +40,7 @@ namespace HighFive.Server.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // create organization in repo
+                // create organization in repo.
                 try
                 {
                     var theNewOrganization = Mapper.Map<Organization>(newOrganization);
