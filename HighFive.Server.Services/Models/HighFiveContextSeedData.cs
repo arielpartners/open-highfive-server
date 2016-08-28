@@ -49,8 +49,7 @@ namespace HighFive.Server.Services.Models
                     LastName="User",
                     Organization = existingOrg
                 };
-                //TODO Mark - adjust password requirements
-                IdentityResult result = await _userManager.CreateAsync(user, "$*Uhhdddddoiu6667");
+                IdentityResult result = await _userManager.CreateAsync(user, "password");
             }
         }
     }

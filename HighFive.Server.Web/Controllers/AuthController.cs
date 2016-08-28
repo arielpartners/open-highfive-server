@@ -31,18 +31,18 @@ namespace HighFive.Server.Controllers
         }
 
         // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/values/5
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/values
         [HttpPost]
@@ -73,16 +73,26 @@ namespace HighFive.Server.Controllers
             return BadRequest(new { Message = "Failed to get user" });
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT api/values/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete()]
+        public IActionResult Delete()
         {
+            try
+            {
+                _signInManager.SignOutAsync();
+            }
+            catch(Exception e)
+            {
+                _logger.LogCritical("Excpetion trying to log user out", e.StackTrace);
+                return BadRequest(new { Message = "Failed to log user out." });
+            }
+            return Ok(null);
         }
     }
 }

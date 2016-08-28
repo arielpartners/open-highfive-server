@@ -7,12 +7,14 @@ using HighFive.Server.Services.Models;
 using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 #endregion
 
 namespace HighFive.Server.Web.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class UsersController : Controller
     {
         private IHighFiveRepository _repository;
@@ -88,10 +90,10 @@ namespace HighFive.Server.Web.Controllers
                 try
                 {
                     var theNewUser = Mapper.Map<HighFiveUser>(newUser);
-                    var organization = _repository.GetOrganizationByName(newUser.OrganizationName);
+                    var organization = _repository.GetOrganizationByName(newUser.Organization);
                     if (organization == null)
                     {
-                        return NotFound(new { Message = $"Unable to find organization {newUser.OrganizationName}" });
+                        return NotFound(new { Message = $"Unable to find organization {newUser.Organization}" });
                     }
                     else
                     {
@@ -135,13 +137,13 @@ namespace HighFive.Server.Web.Controllers
                         return NotFound(new { Message = $"User {email} not found" });
                     }
 
-                    if (userToUpdate.Organization.Name != updatedUserVM.OrganizationName)
+                    if (userToUpdate.Organization.Name != updatedUserVM.Organization)
                     {
                         // the organization changed, so we must retrieve it from the DB and set the new one
-                        var organization = _repository.GetOrganizationByName(updatedUserVM.OrganizationName);
+                        var organization = _repository.GetOrganizationByName(updatedUserVM.Organization);
                         if (organization == null)
                         {
-                            return NotFound(new { Message = $"Organization {updatedUserVM.OrganizationName} not found" });
+                            return NotFound(new { Message = $"Organization {updatedUserVM.Organization} not found" });
                         }
                         changed = true;
                         userToUpdate.Organization = organization;
