@@ -7,6 +7,7 @@ using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Utils;
+using System.Globalization;
 
 #endregion
 
@@ -55,8 +56,14 @@ namespace HighFive.Server.Web.Controllers
                 }
                 catch (HighFiveException ex)
                 {
+                    string.Format(CultureInfo.InvariantCulture, newOrganization.Name);
+
                     _logger.LogError("Failed to add new organization: {0}", ex);
-                    return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
+                    return BadRequest(new { Message = string.Format(CultureInfo.InvariantCulture, newOrganization.Name) });
+
+
+                    //_logger.LogError("Failed to add new organization: {0}", ex);
+                    //return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
                 }
 
                 return Created($"api/users/{newOrganization.Name}", newOrganization);
