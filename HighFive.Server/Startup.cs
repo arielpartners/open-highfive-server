@@ -57,6 +57,28 @@ namespace HighFive.Server
             services.AddScoped<IHighFiveRepository, HighFiveRepository>();
             services.AddTransient<HighFiveContextSeedData>();
 
+            services.AddIdentity<HighFiveUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToLogin = async ctx  =>
+                    {
+                        if(ctx.Request.Path.StartsWithSegments("/api") &&
+                        ctx.Response.StatusCode == 200)
+                        {
+                            ctx.Response.StatusCode = 401;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        await Task.Yield();
+                    }
+                };
+            }).AddEntityFrameworkStores<HighFiveContext>();
+
             services.AddLogging();
 
             // Add framework services.
@@ -94,6 +116,8 @@ namespace HighFive.Server
             {
                 loggerFactory.AddDebug(LogLevel.Error);
             }
+
+            app.UseIdentity();
 
             app.UseMvc();
 
