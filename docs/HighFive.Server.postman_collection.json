@@ -65,9 +65,11 @@
 		{
 			"id": "0b8f475e-ef58-b49e-5798-086e6dad1769",
 			"headers": "",
-			"url": "{{host}}/api/organization/arielpartners",
+			"url": "{{host}}/api/organizations/:organizationId",
 			"preRequestScript": null,
-			"pathVariables": {},
+			"pathVariables": {
+				"organizationId": "arielpartners"
+			},
 			"method": "GET",
 			"data": [],
 			"dataMode": "raw",
@@ -75,8 +77,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406617892,
-			"name": "/api/organization/arielpartners",
+			"time": 1472409634689,
+			"name": "/api/organizations/arielpartners",
 			"description": "Get information for an organization",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
 			"responses": [],
@@ -103,8 +105,8 @@
 		},
 		{
 			"id": "499ca7c3-fbf4-979e-acfd-f6b5c24c3070",
-			"headers": "",
-			"url": "{{host}}/api/organization",
+			"headers": "Content-Type: application/javascript\n",
+			"url": "{{host}}/api/organizations",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "POST",
@@ -114,8 +116,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406614020,
-			"name": "/api/organization",
+			"time": 1472409527144,
+			"name": "/api/organizations",
 			"description": "Create a new organization",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
 			"responses": [],
@@ -134,7 +136,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406629996,
+			"time": 1472409581548,
 			"name": "/api/users/",
 			"description": "Get information for all users",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
@@ -172,19 +174,21 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406571415,
+			"time": 1472409756476,
 			"name": "/api/auth Login as Bob",
 			"description": "Login as Bob",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
 			"responses": [],
-			"rawModeData": "{\n    \"email\": \"testuser@email.com\",\n    \"pwd\": \"$*Uhhdddddoiu6667\"\n}"
+			"rawModeData": "{\n    \"email\": \"test.user@email.com\",\n    \"pwd\": \"password\"\n}"
 		},
 		{
 			"id": "ada0d075-759c-4a87-a925-f75f4ca0fc28",
 			"headers": "",
-			"url": "{{host}}/api/users/testuser@email.com",
+			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
-			"pathVariables": {},
+			"pathVariables": {
+				"email": "test.user@email.com"
+			},
 			"method": "PUT",
 			"data": [],
 			"dataMode": "raw",
@@ -192,7 +196,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406647384,
+			"time": 1472409785125,
 			"name": "/api/users/testuser@email.com Update Profile",
 			"description": "Update my user profile with additional information",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
@@ -222,9 +226,11 @@
 		{
 			"id": "c6b38f2d-2883-6c9a-9543-5e9400b21a5c",
 			"headers": "",
-			"url": "{{host}}/api/users/testuser@email.com",
+			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
-			"pathVariables": {},
+			"pathVariables": {
+				"email": "test.user@email.com"
+			},
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
@@ -232,7 +238,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406643039,
+			"time": 1472409780509,
 			"name": "/api/users/testuser@email.com",
 			"description": "Get information for testuser@email.com",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
@@ -241,9 +247,11 @@
 		{
 			"id": "e4a3f7d2-5fc3-9b78-81f5-fc531b63e2cc",
 			"headers": "Content-Type: application/json\n",
-			"url": "{{host}}/api/users/testuser@email.com",
+			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
-			"pathVariables": {},
+			"pathVariables": {
+				"email": "testuser@email.com"
+			},
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
@@ -251,19 +259,21 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406638617,
+			"time": 1472409769853,
 			"name": "/api/users/   Self Signup",
 			"description": "Create a new user: self signup",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
 			"responses": [],
-			"rawModeData": "{\n    \"email\": \"testuser@email.com\",\n    \"password\": \"abc123\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"organization\": \"arielpartners\"\n}"
+			"rawModeData": "{\n    \"email\": \"test.user@email.com\",\n    \"password\": \"abc123\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"organization\": \"arielpartners\"\n}"
 		},
 		{
 			"id": "eefc77ec-8608-10b9-c3d0-fbd3f5bbfec7",
 			"headers": "",
-			"url": "{{host}}/api/users/testuser@email.com",
+			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
-			"pathVariables": {},
+			"pathVariables": {
+				"email": "test.user@email.com"
+			},
 			"method": "DELETE",
 			"data": null,
 			"dataMode": "params",
@@ -271,7 +281,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406651311,
+			"time": 1472409790333,
 			"name": "/api/users/testuser@email.com",
 			"description": "Delete testuser@email.com",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
