@@ -216,12 +216,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472406598970,
+			"time": 1472410562300,
 			"name": "/api/auth   Logout",
 			"description": "Logout",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
 			"responses": [],
-			"rawModeData": "{\n    \"email\": \"testuser@email.com\",\n    \"pwd\": \"$*Uhhdddddoiu6667\"\n}"
+			"rawModeData": ""
 		},
 		{
 			"id": "c6b38f2d-2883-6c9a-9543-5e9400b21a5c",
@@ -247,11 +247,9 @@
 		{
 			"id": "e4a3f7d2-5fc3-9b78-81f5-fc531b63e2cc",
 			"headers": "Content-Type: application/json\n",
-			"url": "{{host}}/api/users/:email",
+			"url": "{{host}}/api/users/",
 			"preRequestScript": null,
-			"pathVariables": {
-				"email": "testuser@email.com"
-			},
+			"pathVariables": {},
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
@@ -259,7 +257,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472409769853,
+			"time": 1472410285100,
 			"name": "/api/users/   Self Signup",
 			"description": "Create a new user: self signup",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f",
