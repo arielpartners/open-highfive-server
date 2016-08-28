@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HighFive.Server.ViewModels
 {
-    public class LoginViewModel
+    public class AuthViewModel
     {
         public string Email { get; set; }
         public string Pwd { get; set; }
