@@ -34,7 +34,7 @@ namespace HighFive.Server.Web.Controllers
 
         private HighFiveRepository _repositry => new Mock<HighFiveRepository>().Object;
 
-        private SignInManager<HighFiveUser> _signInManager => new Mock<SignInManager<HighFiveUser>>();
+        private SignInManager<HighFiveUser> _signInManager => new Mock<SignInManager<HighFiveUser>>().Object;
 
         #endregion
     }
