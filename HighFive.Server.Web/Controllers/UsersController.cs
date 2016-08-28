@@ -68,7 +68,7 @@ namespace HighFive.Server.Web.Controllers
                     return NotFound(new { Message = $"User {email} not found" });
                 }
             }
-            catch (Exception ex)
+            catch (HighFiveException ex)
             {
                 _logger.LogError("Failed to get user: {0}", ex);
             }
@@ -103,7 +103,7 @@ namespace HighFive.Server.Web.Controllers
                     _repository.AddUser(theNewUser);
                     _repository.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                catch (HighFiveException ex)
                 {
                     _logger.LogError("Failed to add new user: {0}", ex);
                     return BadRequest(new { Message = $"Failed to add new user {newUser.Email}" });
@@ -168,7 +168,7 @@ namespace HighFive.Server.Web.Controllers
                         return Ok(new { Message = $"User {email} was not changed" });
                     }
                 }
-                catch (Exception ex)
+                catch (HighFiveException ex)
                 {
                     _logger.LogError($"Failed to update user {email} : {0}", ex);
                     return BadRequest(new { Message = $"Failed to update user {email}" });
@@ -200,7 +200,7 @@ namespace HighFive.Server.Web.Controllers
 
                 return Ok(new { Message = $"User {email} record deleted" });
             }
-            catch (Exception ex)
+            catch (HighFiveException ex)
             {
                 _logger.LogError("Failed to delete user: {0}", ex);
             }
