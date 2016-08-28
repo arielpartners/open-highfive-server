@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HighFive.Server.Services.Models
 {
-    public class HighFiveContext : DbContext
+    public class HighFiveContext : IdentityDbContext<HighFiveUser>
     {
         private IConfigurationRoot _config;
 

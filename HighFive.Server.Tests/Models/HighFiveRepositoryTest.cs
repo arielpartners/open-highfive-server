@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using HighFive.Server.Services.Models;
-using HighFive.Server.Web.ViewModels;
 using HighFive.Server.Web.Controllers;
 
 #endregion
@@ -35,7 +34,7 @@ namespace HighFive.Server.Models
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 IEnumerable<HighFiveUser> userList = repo.GetAllUsers();
                 List<HighFiveUser> userList2 = (List<HighFiveUser>)userList;
-                Assert.AreEqual(0, userList2.Count);
+                userList2.Should().BeEmpty();
             }
 
             // add a user
@@ -52,7 +51,8 @@ namespace HighFive.Server.Models
                 IEnumerable<HighFiveUser> userList = repo.GetAllUsers();
                 List<HighFiveUser> userList2 = (List<HighFiveUser>)userList;
 
-                Assert.AreEqual(1, userList2.Count);
+                //Assert.AreEqual(1, userList2.Count);
+                userList2.Should().HaveCount(1);
 
                 // make sure the email address is the same as added. TODO, make this a lambda expression
                 int userCount = 0;
@@ -84,7 +84,8 @@ namespace HighFive.Server.Models
             {
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 highFiveUser = repo.GetUserByEmail("clark.kent@metropolis.com");
-                Assert.IsNull(highFiveUser);
+                //Assert.IsNull(highFiveUser);
+                highFiveUser.Should().BeNull();
             }
 
             // add the user
@@ -107,7 +108,7 @@ namespace HighFive.Server.Models
                 HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
                 highFiveUser = repo.GetUserByEmail("clark.kent@metropolis.com");
                 Assert.IsNotNull(highFiveUser);
-                Assert.AreEqual("clark.kent@metropolis.com", highFiveUser.Email);
+                highFiveUser.Email.Should().Be("clark.kent@metropolis.com");
                 Assert.AreEqual("Ariel Partners", highFiveUser.Organization.Name);
             }
         }
@@ -203,7 +204,7 @@ namespace HighFive.Server.Models
 
                 repo.Invoking(y => y.AddUser(highFiveUser))
                     .ShouldThrow<Exception>()
-                    .WithMessage("Email for this user already exists in the database");
+                    .WithMessage("User clark.kent@metropolis.com already exists in the database");
             }
         }
 
