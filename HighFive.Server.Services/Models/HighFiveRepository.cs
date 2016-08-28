@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using HighFive.Server.Services.Utils;
 
 #endregion
 
@@ -34,7 +35,7 @@ namespace HighFive.Server.Services.Models
 
             if (highFiveUser != null)
             {
-                Exception ex = new Exception("Email address for this user already exists in the database");
+                HighFiveException ex = new HighFiveException($"User {user.Email} already exists in the database");
                 throw ex;
             }
 
@@ -123,7 +124,7 @@ namespace HighFive.Server.Services.Models
 
             if (corporateValue != null)
             {
-                Exception ex = new Exception("Corporate value already exists in the database");
+                HighFiveException ex = new HighFiveException("Corporate value already exists in the database");
                 throw ex;
             }
 

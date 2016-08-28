@@ -6,7 +6,10 @@ using HighFive.Server.Services.Models;
 using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using HighFive.Server.Services.Utils;
+using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
+
 
 #endregion
 
@@ -54,10 +57,17 @@ namespace HighFive.Server.Web.Controllers
                     _repository.AddOrganization(theNewOrganization);
                     _repository.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                catch (HighFiveException ex)
                 {
+                    string.Format(CultureInfo.InvariantCulture, newOrganization.Name);
+
                     _logger.LogError("Failed to add new organization: {0}", ex);
+                    //return BadRequest(new { Message = string.Format(CultureInfo.InvariantCulture, newOrganization.Name) });
                     return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
+                    //test pull setting off jenkins fxCop error
+
+                    //_logger.LogError("Failed to add new organization: {0}", ex);
+                    //return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
                 }
 
                 return Created($"api/users/{newOrganization.Name}", newOrganization);

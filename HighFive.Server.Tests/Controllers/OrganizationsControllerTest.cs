@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 #endregion
 
@@ -41,7 +42,7 @@ namespace HighFive.Server.Web.Controllers
         #region TestPost
 
         [TestMethod]
-        public void TestPost()
+        public void TestPost_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -63,6 +64,38 @@ namespace HighFive.Server.Web.Controllers
                 var createdResult = result as CreatedResult;
                 var organization = createdResult.Value as OrganizationViewModel;
                 organization.Name.Should().Be("Macys");
+            }
+        }
+
+        [TestMethod]
+        public void TestPost_InvalidModel()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var organization = new Organization() { Name = "Ariel Partners" };
+                context.Organizations.Add(organization);
+                context.Users.Add(new HighFiveUser() { Email = "a@b.com", Organization = organization });
+                context.SaveChanges();
+            }
+
+            using (var context = new HighFiveContext(_config, options))
+            {
+                HighFiveRepository repo = new HighFiveRepository(context, _repoLogger);
+                OrganizationsController controller = new OrganizationsController(repo, _controllerLogger);
+
+                controller.ViewData.ModelState.Clear();
+                
+                var noname = new OrganizationViewModel();
+                controller.ViewData.ModelState.AddModelError("Name", "The Name field is required.");
+
+                controller.ViewData.ModelState.Should().HaveCount(1);
+                controller.ViewData.ModelState["Name"].Errors.Should().HaveCount(1);
+                controller.ViewData.ModelState["Name"].Errors[0].ErrorMessage.Should().Be("The Name field is required.");
+
+                var result = controller.Post(noname);
+                result.Should().BeOfType<BadRequestObjectResult>();
+                var badRequestResult = result as BadRequestObjectResult;
             }
         }
 
@@ -89,6 +122,11 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
+        private void AssertMessageProperty(string expectedMessage, object result)
+        {
+            object actualMessage = result.GetType().GetProperty("Message").GetValue(result, null);
+            expectedMessage.Should().Be(actualMessage as string);
+        }
 
         #region properties
 
