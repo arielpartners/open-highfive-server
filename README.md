@@ -21,8 +21,9 @@ High Five DHS FLASH server-side source code
 
 ## Using Postman
 * Start Postman
-* Import Postman Collection from `docs/highfive-server.postman_collection`
+* Import Postman Collection from `docs/HighFive.Server.postman_collection`
 * Select `GET api/users` from the left side and click "SEND" 
 * observe returned JSON
 
-
+## Other Documentation
+* See wiki here: https://arielpartners.atlassian.net/wiki/display/HIG/
