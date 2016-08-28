@@ -34,7 +34,7 @@ namespace HighFive.Server.Services.Models
 
             if (highFiveUser != null)
             {
-                Exception ex = new Exception("Email address for this user already exists in the database");
+                Exception ex = new Exception($"User {user.Email} already exists in the database");
                 throw ex;
             }
 
