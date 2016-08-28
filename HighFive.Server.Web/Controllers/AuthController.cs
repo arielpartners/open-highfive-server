@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
+﻿#region references
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using HighFive.Server.Services.Models;
 using HighFive.Server.ViewModels;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using System;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using HighFive.Server.Web.Controllers;
 using HighFive.Server.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using HighFive.Server.Services.Utils;
+
+#endregion
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,12 +26,16 @@ namespace HighFive.Server.Controllers
         private ILogger<UsersController> _logger;
         private SignInManager<HighFiveUser> _signInManager;
 
+        #region Constructor
+
         public AuthController(SignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<UsersController> logger)
         {
             _repository = repository;
             _logger = logger;
             _signInManager = signInManager;
         }
+
+        #endregion
 
         // GET: api/values
         //[HttpGet]
@@ -44,16 +51,18 @@ namespace HighFive.Server.Controllers
         //    return "value";
         //}
 
+        #region Login - POST api/values
+
         // POST api/values
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
-            if (model == null) return BadRequest(new { Message = $"User/Pwd information missing" });
+            if (model == null) return BadRequest(new { Message = $"User/Password information missing" });
             try
             {
                 //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
-                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Pwd, true, false);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
 
                 if (signInResult.Succeeded)
                 {
@@ -63,21 +72,25 @@ namespace HighFive.Server.Controllers
                 }
                 else
                 {
-                    return NotFound(new { Message = $"Invalid User/Pwd {model.Email}" });
+                    return NotFound(new { Message = $"Invalid User/Password {model.Email}" });
                 }
             }
-            catch (Exception ex)
+            catch (HighFiveException ex)
             {
                 _logger.LogError("Login Failed for user: {0} {1}", model.Email, ex);
             }
             return BadRequest(new { Message = "Failed to get user" });
         }
 
+        #endregion
+
         //// PUT api/values/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody]string value)
         //{
         //}
+
+        #region Delete - DELETE api/values/5
 
         // DELETE api/values/5
         [HttpDelete()]
@@ -87,12 +100,14 @@ namespace HighFive.Server.Controllers
             {
                 _signInManager.SignOutAsync();
             }
-            catch(Exception e)
+            catch(HighFiveException e)
             {
                 _logger.LogCritical("Excpetion trying to log user out", e.StackTrace);
                 return BadRequest(new { Message = "Failed to log user out." });
             }
             return Ok(null);
         }
+
+        #endregion
     }
 }
