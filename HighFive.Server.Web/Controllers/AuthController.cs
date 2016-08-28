@@ -49,11 +49,11 @@ namespace HighFive.Server.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
-            if (model == null) return BadRequest(new { Message = $"User/Pwd information missing" });
+            if (model == null) return BadRequest(new { Message = $"User/Password information missing" });
             try
             {
                 //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
-                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Pwd, true, false);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
 
                 if (signInResult.Succeeded)
                 {
@@ -63,7 +63,7 @@ namespace HighFive.Server.Controllers
                 }
                 else
                 {
-                    return NotFound(new { Message = $"Invaild User/Pwd {model.Email}" });
+                    return NotFound(new { Message = $"Invaild User/Password {model.Email}" });
                 }
             }
             catch (Exception ex)
