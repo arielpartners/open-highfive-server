@@ -59,11 +59,11 @@ namespace HighFive.Server.Controllers
                 {
                     var usr = _repository.GetUserByEmail(model.Email);
                     if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
-                    return Ok(usr);
+                    return Ok(Mapper.Map<UserViewModel>(usr));
                 }
                 else
                 {
-                    return NotFound(new { Message = $"Invaild User/Pwd {model.Email}" });
+                    return NotFound(new { Message = $"Invalid User/Pwd {model.Email}" });
                 }
             }
             catch (Exception ex)

@@ -1,11 +1,14 @@
 ﻿Feature: RecognitionFeed
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to stay informed of the kudos that are being sent to people in my organization
+	As a user
+	I want to be see recognitions
 
-@mytag
-Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have also entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+Background:
+Given I am logged in as the following user:
+| Email               | Password | FirstName | LastName | Organization  |
+| test.user@email.com | password | Test      | User     | arielpartners |
+
+@ignore
+Scenario: View All Recognitions
+	When I view the home page
+	Then I should see a list of recognitions sorted by date
