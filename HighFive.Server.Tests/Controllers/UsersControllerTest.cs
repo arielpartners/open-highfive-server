@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using HighFive.Server.Services.Utils;
 
 #endregion
 
@@ -69,7 +70,7 @@ namespace HighFive.Server.Web.Controllers
             using (var context = new HighFiveContext(_config, options))
             {
                 var repo = new Mock<IHighFiveRepository>();
-                repo.Setup(r => r.GetAllUsers()).Throws<Exception>();
+                repo.Setup(r => r.GetAllUsers()).Throws<HighFiveException>();
                 UsersController controller = new UsersController(repo.Object, _controllerLogger);
 
                 var result = controller.GetAll();
@@ -122,7 +123,7 @@ namespace HighFive.Server.Web.Controllers
             using (var context = new HighFiveContext(_config, options))
             {
                 var repo = new Mock<IHighFiveRepository>();
-                repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Throws<Exception>();
+                repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Throws<HighFiveException>();
                 UsersController controller = new UsersController(repo.Object, _controllerLogger);
 
                 var result = controller.GetByEmail("i@dontexist.com");
@@ -220,7 +221,7 @@ namespace HighFive.Server.Web.Controllers
            
                 var repo = new Mock<IHighFiveRepository>();
                 repo.Setup(r => r.GetOrganizationByName(It.IsAny<String>())).Returns(organization);
-                repo.Setup(r => r.AddUser(It.IsAny<HighFiveUser>())).Throws<Exception>();
+                repo.Setup(r => r.AddUser(It.IsAny<HighFiveUser>())).Throws<HighFiveException>();
                 UsersController controller = new UsersController(repo.Object, _controllerLogger);
 
                 var newUser = new UserViewModel() { Email = "c@d.com", OrganizationName = "Ariel Partners" };
@@ -288,7 +289,7 @@ namespace HighFive.Server.Web.Controllers
            
                 var repo = new Mock<IHighFiveRepository>();
                 repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Returns(user);
-                repo.Setup(r => r.DeleteUser(It.IsAny<HighFiveUser>())).Throws<Exception>();
+                repo.Setup(r => r.DeleteUser(It.IsAny<HighFiveUser>())).Throws<HighFiveException>();
                 UsersController controller = new UsersController(repo.Object, _controllerLogger);
 
                 var result = controller.Delete("a@b.com");

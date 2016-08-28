@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Utils;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+
 
 #endregion
 
 namespace HighFive.Server.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class OrganizationsController : Controller
     {
@@ -59,8 +62,8 @@ namespace HighFive.Server.Web.Controllers
                     string.Format(CultureInfo.InvariantCulture, newOrganization.Name);
 
                     _logger.LogError("Failed to add new organization: {0}", ex);
-                    return BadRequest(new { Message = string.Format(CultureInfo.InvariantCulture, newOrganization.Name) });
-
+                    //return BadRequest(new { Message = string.Format(CultureInfo.InvariantCulture, newOrganization.Name) });
+                    return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
 
                     //_logger.LogError("Failed to add new organization: {0}", ex);
                     //return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });

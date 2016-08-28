@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using HighFive.Server.Services.Models;
 using HighFive.Server.Web.Controllers;
+using HighFive.Server.Services.Utils;
 
 #endregion
 
@@ -203,7 +204,7 @@ namespace HighFive.Server.Models
                 //Assert.Throws<Exception>(() => { repo.AddUser(highFiveUser); });
 
                 repo.Invoking(y => y.AddUser(highFiveUser))
-                    .ShouldThrow<Exception>()
+                    .ShouldThrow<HighFiveException>()
                     .WithMessage("User clark.kent@metropolis.com already exists in the database");
             }
         }
