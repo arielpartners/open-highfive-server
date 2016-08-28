@@ -102,18 +102,48 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Features\Administration\AdministerOrganization.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdministerOrganization.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Authentication\Login.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Authentication\Logout.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logout.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Recognitions\RecognitionFeed.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RecognitionFeed.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepDefinitions\Administration\AdministerOrganizationSteps.cs" />
+    <Compile Include="StepDefinitions\Authentication\LoginSteps.cs" />
+    <Compile Include="StepDefinitions\LogoutSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\RecognitionFeedSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Features\Administration\AdministerOrganization.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AdministerOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Authentication\Login.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Login.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Authentication\Logout.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Logout.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Recognitions\RecognitionFeed.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

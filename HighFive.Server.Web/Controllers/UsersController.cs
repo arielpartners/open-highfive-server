@@ -39,7 +39,8 @@ namespace HighFive.Server.Web.Controllers
         {
             try
             {
-                return Ok(_repository.GetAllUsers().ToList());
+                var users = _repository.GetAllUsers().ToList();
+                return Ok(Mapper.Map<UserViewModel>(users));
             }
 
             catch (HighFiveException ex)
@@ -52,7 +53,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region GetByEmailv- GET api/users/cstrong@arielpartners.com
+        #region GetByEmail- GET api/users/cstrong@arielpartners.com
 
         // GET api/users/cstrong@arielpartners.com
         [HttpGet("{email}")]

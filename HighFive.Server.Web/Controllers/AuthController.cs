@@ -1,5 +1,6 @@
 ﻿#region references
 
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -68,11 +69,11 @@ namespace HighFive.Server.Controllers
                 {
                     var usr = _repository.GetUserByEmail(model.Email);
                     if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
-                    return Ok(usr);
+                    return Ok(Mapper.Map<UserViewModel>(usr));
                 }
                 else
                 {
-                    return NotFound(new { Message = $"Invaild User/Password {model.Email}" });
+                    return NotFound(new { Message = $"Invalid User/Password {model.Email}" });
                 }
             }
             catch (HighFiveException ex)
