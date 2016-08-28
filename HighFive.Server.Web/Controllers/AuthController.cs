@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#region references
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 
 using HighFive.Server.Services.Models;
-using HighFive.Server.ViewModels;
+using HighFive.Server.Web.ViewModels;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+
+#endregion
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,41 +30,19 @@ namespace HighFive.Server.Web.Controllers
             _signInManager = signInManager;
         }
 
-        // GET: api/values
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST api/values
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
-            if (model == null) return BadRequest(new { Message = $"User/Pwd information missing" });
+            if (model == null) return BadRequest(new { Message = "User/Pwd information missing" });
             try
             {
-                //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
                 var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Pwd, true, false);
-
-                if (signInResult.Succeeded)
-                {
-                    var usr = _repository.GetUserByEmail(model.Email);
-                    if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
-                    return Ok(usr);
-                }
-                else
-                {
-                    return NotFound(new { Message = $"Invaild User/Pwd {model.Email}" });
-                }
+                if (!signInResult.Succeeded) return NotFound(new {Message = $"Invaild User/Pwd {model.Email}"});
+                var usr = _repository.GetUserByEmail(model.Email);
+                if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
+                return Ok(usr);
             }
             catch (Exception ex)
             {
@@ -79,11 +59,11 @@ namespace HighFive.Server.Web.Controllers
 
         // DELETE api/values/5
         [HttpDelete()]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
             try
             {
-                _signInManager.SignOutAsync();
+                await _signInManager.SignOutAsync();
             }
             catch(Exception e)
             {
