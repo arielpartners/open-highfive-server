@@ -2,14 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 
-using HighFive.Server.Models;
-using Newtonsoft.Json;
+using HighFive.Server.Services.Models;
 using HighFive.Server.ViewModels;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using HighFive.Server.Web.Controllers;
+using HighFive.Server.Web.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
