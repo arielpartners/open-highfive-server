@@ -1,13 +1,10 @@
 ﻿#region references
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 #endregion
 
-namespace HighFive.Server.ViewModels
+namespace HighFive.Server.Web.ViewModels
 {
     public class AuthViewModel
     {

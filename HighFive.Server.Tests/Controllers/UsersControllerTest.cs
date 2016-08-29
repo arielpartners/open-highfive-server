@@ -29,6 +29,9 @@ namespace HighFive.Server.Web.Controllers
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
+                config.CreateMap<HighFiveUser, UserViewModel>()
+                    .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
+                    .ForMember(g => g.Url, opt => opt.MapFrom(u => u.Organization.Url));
             });
         }
 

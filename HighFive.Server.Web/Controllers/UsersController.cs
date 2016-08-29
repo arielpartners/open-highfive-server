@@ -1,5 +1,6 @@
 ﻿#region references
 
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using HighFive.Server.Services.Models;
@@ -39,9 +40,9 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 var users = _repository.GetAllUsers().ToList();
-                return Ok(Mapper.Map<UserViewModel>(users));
+                if (users.Count > 0) return Ok(Mapper.Map<List<UserViewModel>>(users));
+                return NotFound(new { Message = "Users not found" });
             }
-
             catch (HighFiveException ex)
             {
                 _logger.LogError("Failed to get users: {0}", ex);
@@ -135,7 +136,7 @@ namespace HighFive.Server.Web.Controllers
                     userToUpdate.Email = updatedUserVm.Email;
                     changed = true;
                 }
-                if (!changed) return Ok(new {Message = $"User {email} was not changed"});
+                if (!changed) return Ok(new { Message = $"User {email} was not changed" });
                 _repository.UpdateUser(userToUpdate);
                 _repository.SaveChangesAsync();
 

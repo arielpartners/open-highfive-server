@@ -1,12 +1,8 @@
 ﻿#region references
 
 using AutoMapper;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using HighFive.Server.Services.Models;
-using HighFive.Server.ViewModels;
-using HighFive.Server.Web.Controllers;
 using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +14,7 @@ using HighFive.Server.Services.Utils;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace HighFive.Server.Controllers
+namespace HighFive.Server.Web.Controllers
 {
     [Route("api/[controller]")]
     public class AuthController : Controller
