@@ -1,6 +1,6 @@
 ﻿#region references
 
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using HighFive.Server.Services.Models;
@@ -40,9 +40,9 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 var users = _repository.GetAllUsers().ToList();
-                return Ok(Mapper.Map<UserViewModel>(users));
+                if (users.Count > 0) return Ok(Mapper.Map<List<UserViewModel>>(users));
+                return NotFound(new { Message = "Users not found" });
             }
-
             catch (HighFiveException ex)
             {
                 _logger.LogError("Failed to get users: {0}", ex);
@@ -62,14 +62,8 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 var user = _repository.GetUserByEmail(email);
-                if (user != null)
-                {
-                    return Ok(Mapper.Map<UserViewModel>(user));
-                }
-                else
-                {
-                    return NotFound(new { Message = $"User {email} not found" });
-                }
+                if (user != null) return Ok(Mapper.Map<UserViewModel>(user));
+                return NotFound(new { Message = $"User {email} not found" });
             }
             catch (HighFiveException ex)
             {
@@ -87,37 +81,25 @@ namespace HighFive.Server.Web.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]UserViewModel newUser)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            // create user in repo
+            try
             {
-                // create user in repo
-                try
-                {
-                    var theNewUser = Mapper.Map<HighFiveUser>(newUser);
-                    var organization = _repository.GetOrganizationByName(newUser.Organization);
-                    if (organization == null)
-                    {
-                        return NotFound(new { Message = $"Unable to find organization {newUser.Organization}" });
-                    }
-                    else
-                    {
-                        theNewUser.Organization = organization;
-                    }
+                var theNewUser = Mapper.Map<HighFiveUser>(newUser);
+                var organization = _repository.GetOrganizationByName(newUser.OrganizationName);
+                if (organization == null) return NotFound(new { Message = $"Unable to find organization {newUser.OrganizationName}" });
+                theNewUser.Organization = organization;
 
-                    _repository.AddUser(theNewUser);
-                    _repository.SaveChangesAsync();
-                }
-                catch (HighFiveException ex)
-                {
-                    _logger.LogError("Failed to add new user: {0}", ex);
-                    return BadRequest(new { Message = $"Failed to add new user {newUser.Email}" });
-                }
-
-                return Created($"api/users/{newUser.Email}", newUser);
+                _repository.AddUser(theNewUser);
+                _repository.SaveChangesAsync();
             }
-            else
+            catch (HighFiveException ex)
             {
-                return BadRequest(ModelState);
+                _logger.LogError("Failed to add new user: {0}", ex);
+                return BadRequest(new { Message = $"Failed to add new user {newUser.Email}" });
             }
+
+            return Created($"api/users/{newUser.Email}", newUser);
         }
 
         #endregion
@@ -126,60 +108,44 @@ namespace HighFive.Server.Web.Controllers
 
         // PUT api/users/cstrong@arielpartners.com
         [HttpPut("{email}")]
-        public IActionResult Put(string email, [FromBody]UserViewModel updatedUserVM)
+        public IActionResult Put(string email, [FromBody]UserViewModel updatedUserVm)
         {
-            bool changed = false;
-
-            if (ModelState.IsValid)
+            var changed = false;
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            try
             {
-                try
+                var userToUpdate = _repository.GetUserByEmail(email);
+                if (userToUpdate == null) return NotFound(new { Message = $"User {email} not found" });
+
+                if (userToUpdate.Organization.Name != updatedUserVm.OrganizationName)
                 {
-                    var userToUpdate = _repository.GetUserByEmail(email);
-                    if (userToUpdate == null)
+                    // the organization changed, so we must retrieve it from the DB and set the new one
+                    var organization = _repository.GetOrganizationByName(updatedUserVm.OrganizationName);
+                    if (organization == null)
                     {
-                        return NotFound(new { Message = $"User {email} not found" });
+                        return NotFound(new { Message = $"Organization {updatedUserVm.OrganizationName} not found" });
                     }
-
-                    if (userToUpdate.Organization.Name != updatedUserVM.Organization)
-                    {
-                        // the organization changed, so we must retrieve it from the DB and set the new one
-                        var organization = _repository.GetOrganizationByName(updatedUserVM.Organization);
-                        if (organization == null)
-                        {
-                            return NotFound(new { Message = $"Organization {updatedUserVM.Organization} not found" });
-                        }
-                        changed = true;
-                        userToUpdate.Organization = organization;
-                    }
-
-                    // see if the email has changed. if not, return NoChange()
-                    // if so, change the email and save the object in the context
-                    if (userToUpdate.Email != updatedUserVM.Email)
-                    {
-                        userToUpdate.Email = updatedUserVM.Email;
-                        changed = true;
-                    }
-                    if (changed)
-                    {
-                        _repository.UpdateUser(userToUpdate);
-                        _repository.SaveChangesAsync();
-
-                        return Ok(new { Message = $"User {userToUpdate.Email} updated successfully" });
-                    }
-                    else
-                    {
-                        return Ok(new { Message = $"User {email} was not changed" });
-                    }
+                    changed = true;
+                    userToUpdate.Organization = organization;
                 }
-                catch (HighFiveException ex)
+
+                // see if the email has changed. if not, return NoChange()
+                // if so, change the email and save the object in the context
+                if (userToUpdate.Email != updatedUserVm.Email)
                 {
-                    _logger.LogError($"Failed to update user {email} : {0}", ex);
-                    return BadRequest(new { Message = $"Failed to update user {email}" });
+                    userToUpdate.Email = updatedUserVm.Email;
+                    changed = true;
                 }
+                if (!changed) return Ok(new { Message = $"User {email} was not changed" });
+                _repository.UpdateUser(userToUpdate);
+                _repository.SaveChangesAsync();
+
+                return Ok(new { Message = $"User {userToUpdate.Email} updated successfully" });
             }
-            else
+            catch (HighFiveException ex)
             {
-                return BadRequest(ModelState);
+                _logger.LogError($"Failed to update user {email} : {0}", ex);
+                return BadRequest(new { Message = $"Failed to update user {email}" });
             }
         }
 
@@ -194,20 +160,15 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 var user = _repository.GetUserByEmail(email);
-                if (user == null)
-                {
-                    return NotFound(new { Message = $"User {email} not found" });
-                }
+                if (user == null) return NotFound(new { Message = $"User {email} not found" });
                 _repository.DeleteUser(user);
                 _repository.SaveChangesAsync();
-
                 return Ok(new { Message = $"User {email} record deleted" });
             }
             catch (HighFiveException ex)
             {
                 _logger.LogError("Failed to delete user: {0}", ex);
             }
-
             return BadRequest(new { Message = $"Failed to delete user {email}" });
         }
     }

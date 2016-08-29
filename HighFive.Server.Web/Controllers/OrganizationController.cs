@@ -1,15 +1,12 @@
 ﻿#region references
 
-using System;
 using AutoMapper;
 using HighFive.Server.Services.Models;
 using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Utils;
-using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
-
 
 #endregion
 

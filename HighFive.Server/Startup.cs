@@ -67,9 +67,9 @@ namespace HighFive.Server
                 config.Password.RequireUppercase = false;
                 config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
                 {
-                    OnRedirectToLogin = async ctx  =>
+                    OnRedirectToLogin = async ctx =>
                     {
-                        if(ctx.Request.Path.StartsWithSegments("/api") &&
+                        if (ctx.Request.Path.StartsWithSegments("/api") &&
                         ctx.Response.StatusCode == 200)
                         {
                             ctx.Response.StatusCode = 401;
@@ -96,17 +96,19 @@ namespace HighFive.Server
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, 
-            IHostingEnvironment env, 
-            HighFiveContextSeedData seeder, 
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
+            HighFiveContextSeedData seeder,
             ILoggerFactory loggerFactory)
         {
             // startup in Configure
 
-            Mapper.Initialize(config => 
+            Mapper.Initialize(config =>
             {
                 config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
-                //config.CreateMap<UserViewModel, Organization>().ReverseMap();
+                config.CreateMap<HighFiveUser, UserViewModel>()
+                    .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
+                    .ForMember(g => g.Url, opt => opt.MapFrom(u => u.Organization.Url));
             });
 
             if (env.IsEnvironment("Development"))
