@@ -20,12 +20,12 @@ namespace HighFive.Server.Web.Controllers
     public class AuthController : Controller
     {
         private IHighFiveRepository _repository;
-        private ILogger<UsersController> _logger;
+        private ILogger<AuthController> _logger;
         private SignInManager<HighFiveUser> _signInManager;
 
         #region Constructor
 
-        public AuthController(SignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<UsersController> logger)
+        public AuthController(SignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<AuthController> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -34,20 +34,6 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        // GET: api/values
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         #region Login - POST api/values
 
         // POST api/values
@@ -55,22 +41,15 @@ namespace HighFive.Server.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
-            if (model == null) return BadRequest(new { Message = $"User/Password information missing" });
+            if (model == null) return BadRequest(new { Message = "User/Password information missing" });
             try
             {
                 //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
                 var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
-
-                if (signInResult.Succeeded)
-                {
-                    var usr = _repository.GetUserByEmail(model.Email);
-                    if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
-                    return Ok(Mapper.Map<UserViewModel>(usr));
-                }
-                else
-                {
-                    return NotFound(new { Message = $"Invalid User/Password {model.Email}" });
-                }
+                if (!signInResult.Succeeded) return NotFound(new {Message = $"Invalid User/Password {model.Email}"});
+                var usr = _repository.GetUserByEmail(model.Email);
+                if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
+                return Ok(Mapper.Map<UserViewModel>(usr));
             }
             catch (HighFiveException ex)
             {
@@ -81,21 +60,15 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
         #region Delete - DELETE api/values/5
 
         // DELETE api/values/5
         [HttpDelete()]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
             try
             {
-                _signInManager.SignOutAsync();
+                await _signInManager.SignOutAsync();
             }
             catch(HighFiveException e)
             {

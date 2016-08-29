@@ -1,4 +1,4 @@
-﻿#region project references
+﻿#region references
 
 using AutoMapper;
 using HighFive.Server.Services.Models;

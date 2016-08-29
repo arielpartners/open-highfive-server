@@ -1,16 +1,11 @@
 ﻿#region references
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,12 +21,10 @@ namespace HighFive.Server
 {
     public class Startup
     {
-        private IHostingEnvironment _env;
-        private IConfigurationRoot _config;
+        private readonly IConfigurationRoot _config;
 
         public Startup(IHostingEnvironment env)
         {
-            _env = env;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(env.ContentRootPath, "Config"))
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -108,7 +101,7 @@ namespace HighFive.Server
                 config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
                 config.CreateMap<HighFiveUser, UserViewModel>()
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
-                    .ForMember(g => g.Url, opt => opt.MapFrom(u => u.Organization.Url));
+                    .ForMember(g => g.OrganizationUrl, opt => opt.MapFrom(u => u.Organization.UrlPath));
             });
 
             if (env.IsEnvironment("Development"))

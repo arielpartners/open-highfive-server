@@ -41,13 +41,12 @@ namespace HighFive.Server.Web.Controllers
             {
                 var users = _repository.GetAllUsers().ToList();
                 if (users.Count > 0) return Ok(Mapper.Map<List<UserViewModel>>(users));
-                return NotFound(new { Message = "Users not found" });
+                return NoContent();
             }
             catch (HighFiveException ex)
             {
                 _logger.LogError("Failed to get users: {0}", ex);
             }
-
             return BadRequest(new { Message = "Failed to get users" });
         }
 
@@ -69,7 +68,6 @@ namespace HighFive.Server.Web.Controllers
             {
                 _logger.LogError("Failed to get user: {0}", ex);
             }
-
             return BadRequest(new { Message = "Failed to get user" });
         }
 
@@ -108,7 +106,7 @@ namespace HighFive.Server.Web.Controllers
 
         // PUT api/users/cstrong@arielpartners.com
         [HttpPut("{email}")]
-        public IActionResult Put(string email, [FromBody]UserViewModel updatedUserVm)
+        public IActionResult Put(string email, [FromBody]UserViewModel updatedUserViewModel)
         {
             var changed = false;
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -117,13 +115,13 @@ namespace HighFive.Server.Web.Controllers
                 var userToUpdate = _repository.GetUserByEmail(email);
                 if (userToUpdate == null) return NotFound(new { Message = $"User {email} not found" });
 
-                if (userToUpdate.Organization.Name != updatedUserVm.OrganizationName)
+                if (userToUpdate.Organization.Name != updatedUserViewModel.OrganizationName)
                 {
                     // the organization changed, so we must retrieve it from the DB and set the new one
-                    var organization = _repository.GetOrganizationByName(updatedUserVm.OrganizationName);
+                    var organization = _repository.GetOrganizationByName(updatedUserViewModel.OrganizationName);
                     if (organization == null)
                     {
-                        return NotFound(new { Message = $"Organization {updatedUserVm.OrganizationName} not found" });
+                        return NotFound(new { Message = $"Organization {updatedUserViewModel.OrganizationName} not found" });
                     }
                     changed = true;
                     userToUpdate.Organization = organization;
@@ -131,9 +129,9 @@ namespace HighFive.Server.Web.Controllers
 
                 // see if the email has changed. if not, return NoChange()
                 // if so, change the email and save the object in the context
-                if (userToUpdate.Email != updatedUserVm.Email)
+                if (userToUpdate.Email != updatedUserViewModel.Email)
                 {
-                    userToUpdate.Email = updatedUserVm.Email;
+                    userToUpdate.Email = updatedUserViewModel.Email;
                     changed = true;
                 }
                 if (!changed) return Ok(new { Message = $"User {email} was not changed" });
@@ -171,8 +169,6 @@ namespace HighFive.Server.Web.Controllers
             }
             return BadRequest(new { Message = $"Failed to delete user {email}" });
         }
+        #endregion
     }
-
-    #endregion
-
 }

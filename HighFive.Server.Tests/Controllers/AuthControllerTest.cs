@@ -1,4 +1,4 @@
-﻿#region project references
+﻿#region references
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
