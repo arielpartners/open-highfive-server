@@ -62,8 +62,7 @@ namespace HighFive.Server.Services.Models
         {
             return _context.Users
                 .Include(u => u.Organization.Values)
-                .Where(u => u.Email == email)
-                .FirstOrDefault();
+                .FirstOrDefault(u => u.Email == email);
         }
 
         #endregion
@@ -101,8 +100,7 @@ namespace HighFive.Server.Services.Models
         public Organization GetOrganizationByName(string organizationName)
         {
             return _context.Organizations
-                .Where(o => o.Name == organizationName)
-                .FirstOrDefault();
+                .FirstOrDefault(o => o.Name == organizationName);
         }
 
         #endregion
@@ -120,12 +118,11 @@ namespace HighFive.Server.Services.Models
 
         public void AddCorporateValue(CorporateValue corporateValueName)
         {
-            CorporateValue corporateValue = GetCorporateValueByName(corporateValueName.Name);
+            var corporateValue = GetCorporateValueByName(corporateValueName.Name);
 
             if (corporateValue != null)
             {
-                HighFiveException ex = new HighFiveException("Corporate value already exists in the database");
-                throw ex;
+                throw new HighFiveException("Corporate value already exists in the database");
             }
 
             _context.Add(corporateValueName);
@@ -138,8 +135,7 @@ namespace HighFive.Server.Services.Models
         public CorporateValue GetCorporateValueByName(string corporateValueName)
         {
             return _context.CorporateValues
-                .Where(o => o.Name == corporateValueName)
-                .FirstOrDefault();
+                .FirstOrDefault(o => o.Name == corporateValueName);
         }
 
         #endregion

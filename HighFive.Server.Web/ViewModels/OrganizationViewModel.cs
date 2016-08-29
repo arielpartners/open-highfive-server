@@ -14,7 +14,7 @@ namespace HighFive.Server.Web.ViewModels
         [Required]
         [StringLength(100, MinimumLength = 5)]
         public string Name { get; set; }
-        public string Url { get; set; }
+        public string UrlPath { get; set; }
 
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         [Required]
