@@ -5,6 +5,9 @@ namespace HighFive.Server
 {
     public class Program
     {
+        private Program()
+        {
+        }
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
