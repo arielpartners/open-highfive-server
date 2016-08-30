@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 
 namespace HighFive.Server
-{
-    public class Program
+{  
+    public sealed class Program
     {
         private Program()
         {
