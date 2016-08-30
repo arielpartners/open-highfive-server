@@ -7,7 +7,7 @@
     <Rule Id="CA1024" Action="None" />
     <Rule Id="CA1305" Action="None" />
     <Rule Id="CA1704" Action="None" />
-    <Rule Id="CA1726" Action="Warning" />
+    <Rule Id="CA1726" Action="None" />
     <Rule Id="CA2210" Action="None" />
     <Rule Id="CA2227" Action="None" />
   </Rules>

@@ -78,9 +78,9 @@ namespace HighFive.Server.Services.Models
 
         #region AddOrganization
 
-        public void AddOrganization(Organization org)
+        public void AddOrganization(Organization organization)
         {
-            _context.Add(org);
+            _context.Add(organization);
         }
 
         #endregion
@@ -116,26 +116,26 @@ namespace HighFive.Server.Services.Models
 
         #region CorporateValue
 
-        public void AddCorporateValue(CorporateValue corporateValueName)
+        public void AddCorporateValue(CorporateValue corporateValue)
         {
-            var corporateValue = GetCorporateValueByName(corporateValueName.Name);
+            var value = GetCorporateValueByName(corporateValue.Name);
 
-            if (corporateValue != null)
+            if (value != null)
             {
                 throw new HighFiveException("Corporate value already exists in the database");
             }
 
-            _context.Add(corporateValueName);
+            _context.Add(value);
         }
 
         #endregion
 
         #region GetCorporateValueByName
 
-        public CorporateValue GetCorporateValueByName(string corporateValueName)
+        public CorporateValue GetCorporateValueByName(string name)
         {
             return _context.CorporateValues
-                .FirstOrDefault(o => o.Name == corporateValueName);
+                .FirstOrDefault(o => o.Name == name);
         }
 
         #endregion

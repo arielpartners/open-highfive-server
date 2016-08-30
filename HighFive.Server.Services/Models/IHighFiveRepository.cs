@@ -7,7 +7,7 @@ namespace HighFive.Server.Services.Models
     {
         IEnumerable<HighFiveUser> GetAllUsers();
         HighFiveUser GetUserByEmail(string email);
-        Organization GetOrganizationByName(string email);
+        Organization GetOrganizationByName(string organizationName);
         CorporateValue GetCorporateValueByName(string name);
 
         void AddUser(HighFiveUser user);

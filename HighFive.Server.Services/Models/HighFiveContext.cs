@@ -6,12 +6,12 @@ namespace HighFive.Server.Services.Models
 {
     public class HighFiveContext : IdentityDbContext<HighFiveUser>
     {
-        private IConfigurationRoot _config;
+        //private IConfigurationRoot _config;
 
         public HighFiveContext(IConfigurationRoot config, DbContextOptions<HighFiveContext> options)
             : base(options)
         {
-            _config = config;
+            // _config = config;  // CKS FxCop fix, this is (not yet) used
         }
 
         new public DbSet<HighFiveUser> Users { get; set; }
