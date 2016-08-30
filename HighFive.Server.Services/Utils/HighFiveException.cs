@@ -28,6 +28,7 @@ namespace HighFive.Server.Services.Utils
         }
 
         protected HighFiveException(SerializationInfo info, StreamingContext context)
+            :base(info, context)
         {
         }
     }
