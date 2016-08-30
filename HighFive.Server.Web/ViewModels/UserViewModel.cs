@@ -19,7 +19,7 @@ namespace HighFive.Server.Web.ViewModels
         [StringLength(100, MinimumLength = 5)]
         public string OrganizationName { get; set; }
         [StringLength(100)]
-        public string OrganizationUrl { get; set; }
+        public string OrganizationWebPath { get; set; }
         public string ReportsTo { get; set; }
         public string Department { get; set; }
         public string Location { get; set; }

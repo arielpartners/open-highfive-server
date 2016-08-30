@@ -16,7 +16,7 @@ namespace HighFive.Server.Services.Models
         [StringLength(100, MinimumLength = 5)]
         public string Name { get; set; }
         [StringLength(100)]
-        public string UrlPath { get; set; }
+        public string WebPath { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         public ICollection<CorporateValue> Values { get; set; }
     }

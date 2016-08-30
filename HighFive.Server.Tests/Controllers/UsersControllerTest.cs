@@ -31,7 +31,7 @@ namespace HighFive.Server.Web.Controllers
                 config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
                 config.CreateMap<HighFiveUser, UserViewModel>()
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
-                    .ForMember(g => g.OrganizationUrl, opt => opt.MapFrom(u => u.Organization.UrlPath));
+                    .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath));
             });
         }
 
