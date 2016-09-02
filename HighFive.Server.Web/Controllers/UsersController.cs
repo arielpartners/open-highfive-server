@@ -147,10 +147,6 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region Delete - DELETE api/users/cstrong@arielpartners.com
-
         // DELETE api/users/cstrong@arielpartners.com
         [HttpDelete("{email}")]
         public IActionResult Delete(string email)

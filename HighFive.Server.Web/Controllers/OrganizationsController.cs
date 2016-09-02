@@ -69,10 +69,14 @@ namespace HighFive.Server.Web.Controllers
                 _repository.AddOrganization(theNewOrganization);
                 if (await _repository.SaveChangesAsync()) return Created($"api/organization/{newOrganization.Name}", newOrganization);
             }
+            catch (HighFiveException ex)
+            {
+                _logger.LogError("Failed to add new organization: {0}", ex);
+                return BadRequest(new { ex.Message });
+            }
             catch (Exception ex)
             {
                 _logger.LogError("Failed to add new organization: {0}", ex);
-                if (ex.GetType().Name.Equals("HighFiveException")) return BadRequest(new { ex.Message });
             }
             return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
         }
@@ -106,10 +110,14 @@ namespace HighFive.Server.Web.Controllers
                 _repository.UpdateOrganization(organizationToUpdate);
                 if (await _repository.SaveChangesAsync()) return Ok(new { Message = $"Organization {organizationname} updated successfully" });
             }
+            catch(HighFiveException ex)
+            {
+                _logger.LogError("Failed to update organization: {0}", ex);
+                return BadRequest(new { ex.Message });
+            }
             catch (Exception ex)
             {
                 _logger.LogError("Failed to update organization: {0}", ex);
-                if (ex.GetType().Name.Equals("HighFiveException")) return BadRequest(new { ex.Message });
             }
             return BadRequest(new { Message = $"Failed to update organization {organizationname}" });
         }

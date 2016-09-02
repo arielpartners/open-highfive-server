@@ -227,7 +227,7 @@ namespace HighFive.Server.Web.Controllers
         private void AssertMessageProperty(string expectedMessage, object result)
         {
             var actualMessage = result.GetType().GetProperty("Message").GetValue(result, null);
-            expectedMessage.Should().Be(actualMessage as string);
+            actualMessage.Should().Be(expectedMessage as string);
         }
 
         #region properties

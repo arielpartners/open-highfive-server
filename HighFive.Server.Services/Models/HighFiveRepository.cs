@@ -81,14 +81,14 @@ namespace HighFive.Server.Services.Models
             return _context.Recognitions.ToList();
         }
 
-        public void UpdateOrganization(Organization organization)
+        public void UpdateOrganization(Organization organizationToUpdate)
         {
-            foreach (var cv in organization.Values)
+            foreach (var cv in organizationToUpdate.Values)
             {
                 var corpval = GetCorporateValueByNameAndDescription(cv.Name, cv.Description);
                 if (corpval == null) AddCorporateValue(cv);
             }
-            _context.Update(organization);
+            _context.Update(organizationToUpdate);
         }
 
         public void DeleteOrganization(Organization organization)
