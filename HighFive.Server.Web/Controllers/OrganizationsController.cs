@@ -19,17 +19,11 @@ namespace HighFive.Server.Web.Controllers
         private readonly IHighFiveRepository _repository;
         private readonly ILogger<OrganizationsController> _logger;
 
-        #region Constructor
-
         public OrganizationsController(IHighFiveRepository repository, ILogger<OrganizationsController> logger)
         {
             _repository = repository;
             _logger = logger;
         }
-
-        #endregion
-
-        #region GetAll
 
         [HttpGet("")]
         public IActionResult GetAll()
@@ -47,10 +41,6 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = "Failed to get Organizations" });
         }
 
-        #endregion
-
-        #region GetOrganizationByName - GET api/organizations/Ariel Partners
-
         [HttpGet("{organizationname}")]
         public IActionResult GetOrganizationByName(string organizationName)
         {
@@ -66,10 +56,6 @@ namespace HighFive.Server.Web.Controllers
             }
             return BadRequest(new { Message = $"Failed to get Organization {organizationName}" });
         }
-
-        #endregion
-
-        #region POST api/organizations - Post([FromBody]OrganizationViewModel newOrganization)
 
         // POST api/organizations
         [HttpPost]
@@ -90,10 +76,6 @@ namespace HighFive.Server.Web.Controllers
             }
             return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
         }
-
-        #endregion
-
-        #region Put - PUT api/organizations/Ariel Partners
 
         [HttpPut("{organizationname}")]
         public async Task<IActionResult> Put(string organizationname, [FromBody]OrganizationViewModel updatedOrganizationViewModel)
@@ -132,10 +114,6 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = $"Failed to update organization {organizationname}" });
         }
 
-        #endregion
-
-        #region Delete - DELETE api/organizations/Ariel Partners
-
         [HttpDelete("{organizationname}")]
         public async Task<IActionResult> Delete(string organizationName)
         {
@@ -152,6 +130,5 @@ namespace HighFive.Server.Web.Controllers
             }
             return BadRequest(new { Message = $"Failed to delete organization {organizationName}" });
         }
-        #endregion
     }
 }

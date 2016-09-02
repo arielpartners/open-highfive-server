@@ -13,6 +13,7 @@ using Newtonsoft.Json.Serialization;
 using System.IO;
 using HighFive.Server.Services.Models;
 using HighFive.Server.Web.ViewModels;
+using HighFive.Server.Web.Utils;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
@@ -48,6 +49,7 @@ namespace HighFive.Server
 
             //.AddEntityFrameworkStores<HighFiveContext>();
             services.AddScoped<IHighFiveRepository, HighFiveRepository>();
+            services.AddScoped<IWrapSignInManager<HighFiveUser>, WrapSignInManager<HighFiveUser>>();
             services.AddTransient<HighFiveContextSeedData>();
 
             services.AddIdentity<HighFiveUser, IdentityRole>(config =>

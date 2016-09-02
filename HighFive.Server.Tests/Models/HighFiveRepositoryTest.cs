@@ -20,12 +20,10 @@ namespace HighFive.Server.Models
     [TestClass]
     public class HighFiveRepositoryTest
     {
-        #region User Tests
-
-        #region TestGetAllUsers()
+        #region Repository_s
 
         [TestMethod]
-        public void TestGetAllUsers()
+        public void Repository_GetAllUsers()
         {
             var options = CreateNewContextOptions();
 
@@ -69,12 +67,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-
-        #region TestAddUser()
-
         [TestMethod]
-        public void TestAddUser()
+        public void Repository_AddUser()
         {
             var options = CreateNewContextOptions();
 
@@ -114,12 +108,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-
-        #region TestDeleteUser()
-
         [TestMethod]
-        public void TestDeleteUser()
+        public void Repository_DeleteUser()
         {
             var options = CreateNewContextOptions();
 
@@ -166,12 +156,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-
-        #region TestForDuplicateUserEmails()
-
         [TestMethod]
-        public void TestForDuplicateUserEmails()
+        public void Repository_ForDuplicateUserEmails()
         {
             var options = CreateNewContextOptions();
 
@@ -209,12 +195,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-
-        #region TestUpdateUser()
-
         [TestMethod]
-        public void TestUpdateUser()
+        public void Repository_UpdateUser()
         {
             var options = CreateNewContextOptions();
 
@@ -254,12 +236,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-
-        #region TestGetUserByEmail()
-
         [TestMethod]
-        public void TestGetUserByEmail()
+        public void Repository_GetUserByEmail()
         {
             var options = CreateNewContextOptions();
 
@@ -286,16 +264,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-
-        #endregion
-
-        #region Organization Tests
-
-        #region TestGetOrganizationByName()
-
         [TestMethod]
-        public void TestGetOrganizationByName()
+        public void Repository_GetOrganizationByName()
         {
             var options = CreateNewContextOptions();
 
@@ -320,12 +290,8 @@ namespace HighFive.Server.Models
             }
         }
 
-        #endregion
-        
-        #region TestAddOrganization()
-
         [TestMethod]
-        public void TestAddOrganization()
+        public void Repository_AddOrganization()
         {
             var options = CreateNewContextOptions();
 
@@ -366,9 +332,7 @@ namespace HighFive.Server.Models
 
         #endregion
 
-        #endregion
-
-        #region CreateNewContextOptions()
+        #region utilities
 
         private static DbContextOptions<HighFiveContext> CreateNewContextOptions()
         {
@@ -386,10 +350,6 @@ namespace HighFive.Server.Models
 
             return builder.Options;
         }
-
-        #endregion
-
-        #region Mock properties
 
         private IConfigurationRoot _config
         {

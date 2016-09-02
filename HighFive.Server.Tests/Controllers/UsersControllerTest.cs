@@ -22,7 +22,7 @@ namespace HighFive.Server.Web.Controllers
     [TestClass]
     public class UsersControllerTest
     {
-        #region Setup
+        #region setup
 
         public UsersControllerTest()
         {
@@ -37,12 +37,10 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region Users
-
-        #region TestGetAll_SunnyDay
+        #region tests
 
         [TestMethod]
-        public void TestGetAll_SunnyDay()
+        public void UsersController_GetAll_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -67,7 +65,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestGetAll_SimulatedServerFailure()
+        public void UsersController_GetAll_SimulatedServerFailure()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -83,12 +81,8 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region TestGetByEmail_SunnyDay
-
         [TestMethod]
-        public void TestGetByEmail_SunnyDay()
+        public void UsersController_GetByEmail_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -115,12 +109,9 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region TestGetByEmail_SimulatedServerFailure
 
         [TestMethod]
-        public void TestGetByEmail_SimulatedServerFailure()
+        public void UsersController_GetByEmail_SimulatedServerFailure()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -137,7 +128,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPost_SunnyDay()
+        public void UsersController_Post_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -163,7 +154,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPost_DuplicateUser()
+        public void UsersController_Post_DuplicateUser()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -188,7 +179,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPost_UnknownOrganization()
+        public void UsersController_Post_UnknownOrganization()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -203,16 +194,8 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #endregion
-
-        #region Organization
-
-        #region TestPost_SimulatedServerFailure
-
         [TestMethod]
-        public void TestPost_SimulatedServerFailure()
+        public void UsersController_Post_SimulatedServerFailure()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -235,12 +218,8 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region TestDelete_SunnyDay
-
         [TestMethod]
-        public void TestDelete_SunnyDay()
+        public void UsersController_Delete_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -274,12 +253,8 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region TestDelete_SimulatedServerFailure
-
         [TestMethod]
-        public void TestDelete_SimulatedServerFailure()
+        public void UsersController_Delete_SimulatedServerFailure()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -303,7 +278,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPut_UserNotFound()
+        public void UsersController_Put_UserNotFound()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -330,7 +305,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPut_SunnyDay()
+        public void UsersController_Put_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -363,7 +338,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPut_NoChange()
+        public void UsersController_Put_NoChange()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -390,7 +365,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPut_OrganizationNotFound()
+        public void UsersController_Put_OrganizationNotFound()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -417,7 +392,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPut_SimulateServerFailure()
+        public void UsersController_Put_SimulateServerFailure()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -445,9 +420,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #endregion
-
-        #region AssertMessageProperty
+        #region utilities
 
         private void AssertMessageProperty(string expectedMessage, object result)
         {
@@ -455,9 +428,6 @@ namespace HighFive.Server.Web.Controllers
             expectedMessage.Should().Be(actualMessage as string);
         }
 
-        #endregion
-
-        #region DbContextOptions
 
         private static DbContextOptions<HighFiveContext> CreateNewContextOptions()
         {
@@ -475,10 +445,6 @@ namespace HighFive.Server.Web.Controllers
 
             return builder.Options;
         }
-
-        #endregion
-
-        #region properties
 
         private IConfigurationRoot _config
         {

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using HighFive.Server.Services.Utils;
+using HighFive.Server.Web.Utils;
 
 #endregion
 
@@ -21,20 +22,14 @@ namespace HighFive.Server.Web.Controllers
     {
         private readonly IHighFiveRepository _repository;
         private readonly ILogger<AuthController> _logger;
-        private readonly SignInManager<HighFiveUser> _signInManager;
+        private readonly IWrapSignInManager<HighFiveUser> _signInManager;
 
-        #region Constructor
-
-        public AuthController(SignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<AuthController> logger)
+        public AuthController(IWrapSignInManager<HighFiveUser> signInManager, IHighFiveRepository repository, ILogger<AuthController> logger)
         {
             _repository = repository;
             _logger = logger;
             _signInManager = signInManager;
         }
-
-        #endregion
-
-        #region Login - POST api/values
 
         // POST api/values
         [HttpPost]
@@ -42,25 +37,20 @@ namespace HighFive.Server.Web.Controllers
         public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (model == null) return BadRequest(new { Message = "User/Password information missing" });
             try
             {
                 var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
-                if (!signInResult.Succeeded) return NotFound(new {Message = $"Invalid User/Password {model.Email}"});
+                if (!signInResult.Succeeded) return Unauthorized();
                 var usr = _repository.GetUserByEmail(model.Email);
-                if (usr == null) return NotFound(new { Message = $"User not found {model.Email}" });
+                if (usr == null) return NotFound(new { Message = $"User {model.Email} not found" });
                 return Ok(Mapper.Map<UserViewModel>(usr));
             }
             catch (HighFiveException ex)
             {
                 _logger.LogError("Login Failed for user: {0} {1}", model.Email, ex);
             }
-            return BadRequest(new { Message = "Failed to get user" });
+            return BadRequest(new { Message = $"Login Failed for user: {model.Email}" });
         }
-
-        #endregion
-
-        #region Delete - DELETE api/values/5
 
         // DELETE api/values/5
         [HttpDelete()]
@@ -78,6 +68,5 @@ namespace HighFive.Server.Web.Controllers
             return Ok(null);
         }
 
-        #endregion
     }
 }

@@ -31,10 +31,10 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestGet
+        #region tests
 
         [TestMethod]
-        public void TestGetAll_SunnyDay()
+        public void OrganizationsControllers_GetAll_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -54,7 +54,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestGetAll_SimulatedServerFailure()
+        public void OrganizationsControllers_GetAll_SimulatedServerFailure()
         {
             var repo = new Mock<IHighFiveRepository>();
             repo.Setup(r => r.GetAllOrganizations()).Throws<HighFiveException>();
@@ -67,7 +67,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestGetOrganizationByName_SunnyDay()
+        public void OrganizationsControllers_GetOrganizationByName_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -102,7 +102,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestGetOrganizationByName_SimulatedServerFailure()
+        public void OrganizationsControllers_GetOrganizationByName_SimulatedServerFailure()
         {
             var repo = new Mock<IHighFiveRepository>();
             repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<HighFiveException>();
@@ -114,12 +114,8 @@ namespace HighFive.Server.Web.Controllers
             AssertMessageProperty("Failed to get Organization Yeehaa", badRequestResult.Value);
         }
 
-        #endregion
-
-        #region TestPost
-
         [TestMethod]
-        public void TestPost_SunnyDay()
+        public void OrganizationsControllers_Post_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -136,7 +132,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPost_InvalidModel()
+        public void OrganizationsControllers_Post_InvalidModel()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -163,7 +159,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void TestPost_Error()
+        public void OrganizationsControllers_Post_Error()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -188,12 +184,8 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region TestPut
-
         [TestMethod]
-        public void TestPut_SunnyDay()
+        public void OrganizationsControllers_Put_SunnyDay()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -211,13 +203,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        #region TestDelete
-
-
-
-        #endregion
-
-        #region DbContextOptions
+        #region utilities
 
         private static DbContextOptions<HighFiveContext> CreateNewContextOptions()
         {
