@@ -5,19 +5,39 @@ namespace HighFive.Server.Services.Models
 {
     public interface IHighFiveRepository
     {
+        #region User
+        Task<bool> SaveChangesAsync(); //object GetTripsByUsername(string name);
         IEnumerable<HighFiveUser> GetAllUsers();
         HighFiveUser GetUserByEmail(string email);
-        Organization GetOrganizationByName(string organizationName);
-        CorporateValue GetCorporateValueByName(string name);
-
         void AddUser(HighFiveUser user);
         void UpdateUser(HighFiveUser user);
         void DeleteUser(HighFiveUser user);
-        void AddOrganization(Organization organization);
+        #endregion
+
+        #region CorporateValue
+        CorporateValue GetCorporateValueByName(string name);
         void AddCorporateValue(CorporateValue corporateValue);
+        CorporateValue GetCorporateValueByNameAndDescription(string name, string description);
+        void UpdateCorporateValue(CorporateValue cv);
+        void DeleteCorporateValue(CorporateValue cv);
+        #endregion
 
-        Task<bool> SaveChangesAsync(); //object GetTripsByUsername(string name);
-
+        #region Recognition
         IEnumerable<Recognition> GetAllRecognitions();
+        #endregion
+
+        #region Comment
+
+        
+
+        #endregion
+
+        #region Organization
+        void AddOrganization(Organization organization);
+        IEnumerable<Organization> GetAllOrganizations();
+        Organization GetOrganizationByName(string organizationName);
+        void UpdateOrganization(Organization organizationToUpdate);
+        void DeleteOrganization(Organization organization);
+        #endregion
     }
 }

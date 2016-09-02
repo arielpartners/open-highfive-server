@@ -19,9 +19,9 @@ namespace HighFive.Server.Web.Controllers
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-        private IHighFiveRepository _repository;
-        private ILogger<AuthController> _logger;
-        private SignInManager<HighFiveUser> _signInManager;
+        private readonly IHighFiveRepository _repository;
+        private readonly ILogger<AuthController> _logger;
+        private readonly SignInManager<HighFiveUser> _signInManager;
 
         #region Constructor
 
@@ -41,10 +41,10 @@ namespace HighFive.Server.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthViewModel model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             if (model == null) return BadRequest(new { Message = "User/Password information missing" });
             try
             {
-                //var user = AutoMapper.Mapper.Map<HighFiveUser>(model);
                 var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
                 if (!signInResult.Succeeded) return NotFound(new {Message = $"Invalid User/Password {model.Email}"});
                 var usr = _repository.GetUserByEmail(model.Email);

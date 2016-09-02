@@ -1,6 +1,3 @@
-#region references
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,14 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Utils;
 
-#endregion
-
 namespace HighFive.Server.Services.Models
 {
     public class HighFiveRepository : IHighFiveRepository
     {
-        private HighFiveContext _context;
-        private ILogger<HighFiveRepository> _logger;
+        private readonly HighFiveContext _context;
+        private readonly ILogger<HighFiveRepository> _logger;
 
         #region Constructor
 
@@ -27,24 +22,14 @@ namespace HighFive.Server.Services.Models
 
         #endregion
 
-        #region AddUser
+        #region Users
 
         public void AddUser(HighFiveUser user)
         {
-            HighFiveUser highFiveUser = GetUserByEmail(user.Email);
-
-            if (highFiveUser != null)
-            {
-                HighFiveException ex = new HighFiveException($"User {user.Email} already exists in the database");
-                throw ex;
-            }
-
-            _context.Add(user);
+            var highFiveUser = GetUserByEmail(user.Email);
+            if (highFiveUser != null) throw new HighFiveException($"User {user.Email} already exists in the database");
+            _context.Users.Add(user);
         }
-
-        #endregion
-
-        #region GetAllUsers
 
         public IEnumerable<HighFiveUser> GetAllUsers()
         {
@@ -54,10 +39,6 @@ namespace HighFive.Server.Services.Models
                       .ToList();
         }
 
-        #endregion
-
-        #region GetUserByEmail
-
         public HighFiveUser GetUserByEmail(string email)
         {
             return _context.Users
@@ -65,47 +46,10 @@ namespace HighFive.Server.Services.Models
                 .FirstOrDefault(u => u.Email == email);
         }
 
-        #endregion
-
-        #region UpdateUser
-
         public void UpdateUser(HighFiveUser user)
         {
             _context.Update(user);
         }
-
-        #endregion
-
-        #region AddOrganization
-
-        public void AddOrganization(Organization organization)
-        {
-            _context.Add(organization);
-        }
-
-        #endregion
-
-        #region GetAllRecognitions
-
-        public IEnumerable<Recognition> GetAllRecognitions()
-        {
-            _logger.LogInformation("Getting All Recognitions from the Database");
-            return _context.Recognitions.ToList();
-        }
-
-        #endregion
-
-        #region GetOrganizationByName
-
-        public Organization GetOrganizationByName(string organizationName)
-        {
-            return _context.Organizations
-                .FirstOrDefault(o => o.Name == organizationName);
-        }
-
-        #endregion
-
-        #region DeleteUser
 
         public void DeleteUser(HighFiveUser user)
         {
@@ -114,28 +58,86 @@ namespace HighFive.Server.Services.Models
 
         #endregion
 
-        #region CorporateValue
+        #region Organizations
 
-        public void AddCorporateValue(CorporateValue corporateValue)
+        public void AddOrganization(Organization organization)
         {
-            var value = GetCorporateValueByName(corporateValue.Name);
+            var org = GetOrganizationByName(organization.Name);
+            if (org != null) throw new HighFiveException($"Organization {organization.Name} already exists in the database");
+            _context.Organizations.Add(organization);
+        }
 
-            if (value != null)
+        public IEnumerable<Organization> GetAllOrganizations()
+        {
+            _logger.LogInformation("Getting All Organizations from the Database");
+            return _context.Organizations
+                        .Include(o => o.Values)
+                        .ToList();
+        }
+
+        public IEnumerable<Recognition> GetAllRecognitions()
+        {
+            _logger.LogInformation("Getting All Recognitions from the Database");
+            return _context.Recognitions.ToList();
+        }
+
+        public void UpdateOrganization(Organization organization)
+        {
+            foreach (var cv in organization.Values)
             {
-                throw new HighFiveException("Corporate value already exists in the database");
+                var corpval = GetCorporateValueByNameAndDescription(cv.Name, cv.Description);
+                if (corpval == null) AddCorporateValue(cv);
             }
+            _context.Update(organization);
+        }
 
-            _context.Add(value);
+        public void DeleteOrganization(Organization organization)
+        {
+            foreach (var cv in organization.Values)
+            {
+                DeleteCorporateValue(cv);
+            }
+            _context.Organizations.Remove(organization);
+        }
+
+        public Organization GetOrganizationByName(string organizationName)
+        {
+            return _context.Organizations
+                .Include(o => o.Values)
+                .FirstOrDefault(o => o.Name == organizationName);
         }
 
         #endregion
 
-        #region GetCorporateValueByName
+        #region CorporateValue
+
+        public void AddCorporateValue(CorporateValue corporateValue)
+        {
+            var corpValue = GetCorporateValueByName(corporateValue.Name);
+            if (corpValue != null) throw new HighFiveException($"Corporate value {corporateValue.Name} already exists in the database");
+            _context.CorporateValues.Add(corporateValue);
+        }
 
         public CorporateValue GetCorporateValueByName(string name)
         {
             return _context.CorporateValues
                 .FirstOrDefault(o => o.Name == name);
+        }
+
+        public CorporateValue GetCorporateValueByNameAndDescription(string name, string description)
+        {
+            return _context.CorporateValues
+                .FirstOrDefault(o => o.Name == name && o.Description == description);
+        }
+
+        public void UpdateCorporateValue(CorporateValue cv)
+        {
+            _context.CorporateValues.Update(cv);
+        }
+
+        public void DeleteCorporateValue(CorporateValue cv)
+        {
+            _context.CorporateValues.Remove(cv);
         }
 
         #endregion
@@ -144,7 +146,7 @@ namespace HighFive.Server.Services.Models
 
         public async Task<bool> SaveChangesAsync()
         {
-            return (await _context.SaveChangesAsync()) > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         #endregion

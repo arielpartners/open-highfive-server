@@ -18,8 +18,8 @@ namespace HighFive.Server.Web.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        private IHighFiveRepository _repository;
-        private ILogger<UsersController> _logger;
+        private readonly IHighFiveRepository _repository;
+        private readonly ILogger<UsersController> _logger;
 
         #region Constructor
 
