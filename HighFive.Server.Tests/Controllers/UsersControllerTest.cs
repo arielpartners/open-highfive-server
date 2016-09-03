@@ -82,6 +82,20 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
+        public void UsersController_GetAll_NoContent()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                var controller = new UsersController(repo, _controllerLogger);
+
+                var result = controller.GetAll();
+                result.Should().BeOfType<NoContentResult>();
+            }
+        }
+
+        [TestMethod]
         public void UsersController_GetByEmail_SunnyDay()
         {
             var options = CreateNewContextOptions();

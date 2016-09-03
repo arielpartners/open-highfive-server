@@ -57,7 +57,7 @@ namespace HighFive.Server.Models
                 int userCount = 0;
                 foreach (HighFiveUser highFiveUser in userList2)
                 {
-                    if(highFiveUser.Email== "a@b.com")
+                    if (highFiveUser.Email == "a@b.com")
                     {
                         userCount++;
                     }
@@ -327,6 +327,28 @@ namespace HighFive.Server.Models
                 Assert.IsNotNull(organization);
                 Assert.AreEqual("Macys", organization.Name);
                 Assert.AreEqual(organizationId, organization.Id);
+            }
+        }
+
+        [TestMethod]
+        public void Repository_IsConnected()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                repo.IsConnected();
+            }
+        }
+
+        [TestMethod]
+        public void Repository_AddCorporateValue()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                repo.AddCorporateValue(new CorporateValue {Name = "Corporate Value1"});
             }
         }
 

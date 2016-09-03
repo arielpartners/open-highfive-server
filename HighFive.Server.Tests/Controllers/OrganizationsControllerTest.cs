@@ -13,6 +13,7 @@ using FluentAssertions;
 using HighFive.Server.Services.Models;
 using HighFive.Server.Web.ViewModels;
 using HighFive.Server.Services.Utils;
+using HighFive.Server.Web.Utils;
 
 namespace HighFive.Server.Web.Controllers
 {
@@ -69,14 +70,15 @@ namespace HighFive.Server.Web.Controllers
         [TestMethod]
         public void OrganizationsControllers_GetAll_NoContent()
         {
-            var repo = new Mock<IHighFiveRepository>();
-            repo.Setup(r => r.GetAllOrganizations()).Throws<HighFiveException>();
-            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                var controller = new OrganizationsController(repo, _controllerLogger);
 
-            var result = controller.GetAll();
-            result.Should().BeOfType<BadRequestObjectResult>();
-            var badRequestResult = result as BadRequestObjectResult;
-            AssertMessageProperty("Failed to get Organizations", badRequestResult.Value);
+                var result = controller.GetAll();
+                result.Should().BeOfType<NoContentResult>();
+            }
         }
 
         [TestMethod]
@@ -191,7 +193,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void OrganizationsControllers_Post_SimulatedServerFailure()
+        public void OrganizationsControllers_Post_SimulatedServerFailure_HighFiveException()
         {
             var repo = new Mock<IHighFiveRepository>();
             repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<HighFiveException>();
@@ -205,6 +207,20 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
+        public void OrganizationsControllers_Post_SimulatedServerFailure_Exception()
+        {
+            var repo = new Mock<IHighFiveRepository>();
+            repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<Exception>();
+            repo.Setup(r => r.AddOrganization(It.IsAny<Organization>())).Throws<Exception>();
+            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+
+            var returnObject = controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+            returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = returnObject.Result as BadRequestObjectResult;
+            AssertMessageProperty("Failed to add new organization Macys", badRequestResult.Value);
+        }
+
+        [TestMethod]
         public void OrganizationsControllers_Put_SunnyDay()
         {
             var options = CreateNewContextOptions();
@@ -213,15 +229,17 @@ namespace HighFive.Server.Web.Controllers
                 var repo = new HighFiveRepository(context, _repoLogger);
                 var controller = new OrganizationsController(repo, _controllerLogger);
                 //Adding an Organization
-                controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+                controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name", Description = "Testing Description" } } });
 
-                var returnObject = controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+                var returnObject = controller.Put("Macys", new OrganizationViewModel { Name = "Macys " + DateTime.Now.TimeOfDay, Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name" + DateTime.Now.TimeOfDay, Description = "Testing Description" + DateTime.Now.TimeOfDay } } });
                 returnObject.Result.Should().BeOfType<OkObjectResult>();
+                var okObjectResult = returnObject.Result as OkObjectResult;
+                AssertMessageProperty("Organization Macys updated successfully", okObjectResult.Value);
             }
         }
 
         [TestMethod]
-        public void OrganizationsControllers_Put_SimulatedServerFailure()
+        public void OrganizationsControllers_Put_SimulatedServerFailure_HighFiveException()
         {
             var repo = new Mock<IHighFiveRepository>();
             repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<HighFiveException>();
@@ -232,6 +250,103 @@ namespace HighFive.Server.Web.Controllers
             returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
             var badRequestResult = returnObject.Result as BadRequestObjectResult;
             AssertMessageProperty("Exception of type \'HighFive.Server.Services.Utils.HighFiveException\' was thrown.", badRequestResult.Value);
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Put_SimulatedServerFailure_Exception()
+        {
+            var repo = new Mock<IHighFiveRepository>();
+            repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<Exception>();
+            repo.Setup(r => r.UpdateOrganization(It.IsAny<Organization>())).Throws<Exception>();
+            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+
+            var returnObject = controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+            returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = returnObject.Result as BadRequestObjectResult;
+            AssertMessageProperty("Failed to update organization Macys", badRequestResult.Value);
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Put_NotFound()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                var controller = new OrganizationsController(repo, _controllerLogger);
+
+                var returnObject = controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+                returnObject.Result.Should().BeOfType<NotFoundObjectResult>();
+                var notFoundObjectResult = returnObject.Result as NotFoundObjectResult;
+                AssertMessageProperty("Unable to find organization Macys", notFoundObjectResult.Value);
+            }
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Put_BadRequest()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                var controller = new OrganizationsController(repo, _controllerLogger);
+                //Adding an Organization
+                controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+
+                var returnObject = controller.Put("Macys", null);
+                returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
+                var badRequestObjectResult = returnObject.Result as BadRequestObjectResult;
+                AssertMessageProperty("Failed to update organization Macys", badRequestObjectResult.Value);
+            }
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Delete_SunnyDay()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                var controller = new OrganizationsController(repo, _controllerLogger);
+
+                controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+
+                var result = controller.Delete("Macys");
+                result.Result.Should().BeOfType<OkObjectResult>();
+                var okResult = result.Result as OkObjectResult;
+                AssertMessageProperty("Organization Macys record deleted", okResult.Value);
+            }
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Delete_SimulatedServerFailure()
+        {
+            var repo = new Mock<IHighFiveRepository>();
+            repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<HighFiveException>();
+            repo.Setup(r => r.DeleteOrganization(It.IsAny<Organization>())).Throws<HighFiveException>();
+            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+
+            controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+            var result = controller.Delete("Macys");
+            result.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            AssertMessageProperty("Failed to delete organization Macys", badRequestResult.Value);
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Delete_NotFound()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+                var controller = new OrganizationsController(repo, _controllerLogger);
+
+                var result = controller.Delete("Macys");
+                result.Result.Should().BeOfType<NotFoundObjectResult>();
+                var badRequestResult = result.Result as NotFoundObjectResult;
+                AssertMessageProperty("Unable to find organization Macys", badRequestResult.Value);
+            }
         }
 
         #endregion
@@ -260,7 +375,7 @@ namespace HighFive.Server.Web.Controllers
         private void AssertMessageProperty(string expectedMessage, object result)
         {
             var actualMessage = result.GetType().GetProperty("Message").GetValue(result, null);
-            actualMessage.Should().Be(expectedMessage as string);
+            actualMessage.Should().Be(expectedMessage);
         }
 
         #region properties
