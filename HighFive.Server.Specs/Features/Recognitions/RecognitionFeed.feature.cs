@@ -75,36 +75,36 @@ namespace HighFive.Server.Specs.Features.Recognitions
                         "DateCreated",
                         "Description"});
             table1.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
+                        "joe@email.com",
+                        "suresh@email.com",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
                         "Great job!"});
             table1.AddRow(new string[] {
-                        "matthew@yahoo.com",
-                        "sue@gmail.com",
+                        "matthew@email.com",
+                        "sue@email.com",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
                         "Great job!"});
             table1.AddRow(new string[] {
-                        "sue@yahoo.com",
-                        "dave@gmail.com",
+                        "sue@email.com",
+                        "dave@email.com",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",
                         "fantastic!"});
             table1.AddRow(new string[] {
-                        "nikhil@yahoo.com",
-                        "jose@gmail.com",
+                        "nikhil@email.com",
+                        "jose@email.com",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
                         "don\'t know what i would do without you"});
             table1.AddRow(new string[] {
-                        "john@yahoo.com",
-                        "tom@gmail.com",
+                        "john@email.com",
+                        "tom@email.com",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
@@ -135,36 +135,36 @@ this.FeatureBackground();
                         "DateCreated",
                         "Description"});
             table2.AddRow(new string[] {
-                        "matthew@yahoo.com",
-                        "sue@gmail.com",
+                        "matthew@email.com",
+                        "sue@email.com",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
                         "Great job!"});
             table2.AddRow(new string[] {
-                        "john@yahoo.com",
-                        "tom@gmail.com",
+                        "john@email.com",
+                        "tom@email.com",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
                         "ipsum laurem"});
             table2.AddRow(new string[] {
-                        "nikhil@yahoo.com",
-                        "jose@gmail.com",
+                        "nikhil@email.com",
+                        "jose@email.com",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
                         "don\'t know what i would do without you"});
             table2.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
+                        "joe@email.com",
+                        "suresh@email.com",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
                         "Great job!"});
             table2.AddRow(new string[] {
-                        "sue@yahoo.com",
-                        "dave@gmail.com",
+                        "sue@email.com",
+                        "dave@email.com",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",
@@ -247,36 +247,36 @@ this.FeatureBackground();
                         "DateCreated",
                         "Description"});
             table1.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
+                        "joe@email.com",
+                        "suresh@email.com",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
                         "Great job!"});
             table1.AddRow(new string[] {
-                        "matthew@yahoo.com",
-                        "sue@gmail.com",
+                        "matthew@email.com",
+                        "sue@email.com",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
                         "Great job!"});
             table1.AddRow(new string[] {
-                        "sue@yahoo.com",
-                        "dave@gmail.com",
+                        "sue@email.com",
+                        "dave@email.com",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",
                         "fantastic!"});
             table1.AddRow(new string[] {
-                        "nikhil@yahoo.com",
-                        "jose@gmail.com",
+                        "nikhil@email.com",
+                        "jose@email.com",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
                         "don\'t know what i would do without you"});
             table1.AddRow(new string[] {
-                        "john@yahoo.com",
-                        "tom@gmail.com",
+                        "john@email.com",
+                        "tom@email.com",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
@@ -309,36 +309,36 @@ this.FeatureBackground();
                         "DateCreated",
                         "Description"});
             table2.AddRow(new string[] {
-                        "matthew@yahoo.com",
-                        "sue@gmail.com",
+                        "matthew@email.com",
+                        "sue@email.com",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
                         "Great job!"});
             table2.AddRow(new string[] {
-                        "john@yahoo.com",
-                        "tom@gmail.com",
+                        "john@email.com",
+                        "tom@email.com",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
                         "ipsum laurem"});
             table2.AddRow(new string[] {
-                        "nikhil@yahoo.com",
-                        "jose@gmail.com",
+                        "nikhil@email.com",
+                        "jose@email.com",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
                         "don\'t know what i would do without you"});
             table2.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
+                        "joe@email.com",
+                        "suresh@email.com",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
                         "Great job!"});
             table2.AddRow(new string[] {
-                        "sue@yahoo.com",
-                        "dave@gmail.com",
+                        "sue@email.com",
+                        "dave@email.com",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",

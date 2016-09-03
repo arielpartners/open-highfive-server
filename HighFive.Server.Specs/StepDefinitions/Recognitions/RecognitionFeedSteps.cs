@@ -1,6 +1,4 @@
-﻿using System;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+﻿using TechTalk.SpecFlow;
 
 namespace HighFive.Server.Specs.StepDefinitions.Recognitions
 {

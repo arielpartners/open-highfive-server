@@ -101,6 +101,7 @@ namespace HighFive.Server
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
                     .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath));
                 config.CreateMap<OrganizationViewModel, Organization>().ReverseMap();
+                config.CreateMap<RecognitionViewModel, Recognition>().ReverseMap();
             });
 
             if (env.IsEnvironment("Development"))

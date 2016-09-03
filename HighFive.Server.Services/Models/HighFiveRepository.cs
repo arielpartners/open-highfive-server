@@ -75,13 +75,7 @@ namespace HighFive.Server.Services.Models
                         .ToList();
         }
 
-        public IEnumerable<Recognition> GetAllRecognitions()
-        {
-            _logger.LogInformation("Getting All Recognitions from the Database");
-            return _context.Recognitions.ToList();
-        }
-
-        public void UpdateOrganization(Organization organization)
+       public void UpdateOrganization(Organization organization)
         {
             foreach (var cv in organization.Values)
             {
@@ -142,6 +136,20 @@ namespace HighFive.Server.Services.Models
 
         #endregion
 
+        #region Recognitions
+
+        public IEnumerable<Recognition> GetAllRecognitions()
+        {
+            _logger.LogInformation("Getting All Recognitions");
+            return _context.Recognitions
+                    .Include(s => s.Sender.UserName)
+                    .Include(r => r.Receiver.UserName)
+                    .Include(o => o.Organization.Name)
+                    .Include(cv => cv.Value.Name)
+                    .ToList();
+        }
+
+        #endregion
         public async Task IsConnected()
         {
             await _context.Database.OpenConnectionAsync();
