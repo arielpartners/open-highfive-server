@@ -18,7 +18,7 @@ namespace HighFive.Server.Specs.Features.Recognitions
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("RecognitionFeed", Description="\tIn order to stay informed of the kudos that are being sent to people in my organ" +
-        "ization\r\n\tAs a user\r\n\tI want to be see recognitions", SourceFile="Features\\Recognitions\\RecognitionFeed.feature", SourceLine=0)]
+        "ization\r\n\tAs a user\r\n\tI want to be see the most recent recognitions", SourceFile="Features\\Recognitions\\RecognitionFeed.feature", SourceLine=0)]
     public partial class RecognitionFeedFeature
     {
         
@@ -32,7 +32,7 @@ namespace HighFive.Server.Specs.Features.Recognitions
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "RecognitionFeed", "\tIn order to stay informed of the kudos that are being sent to people in my organ" +
-                    "ization\r\n\tAs a user\r\n\tI want to be see recognitions", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ization\r\n\tAs a user\r\n\tI want to be see the most recent recognitions", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -68,36 +68,109 @@ namespace HighFive.Server.Specs.Features.Recognitions
 #line 6
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email",
-                        "Password",
-                        "FirstName",
-                        "LastName",
-                        "Organization"});
+                        "Sender",
+                        "Receiver",
+                        "CorporateValue",
+                        "Points",
+                        "DateCreated",
+                        "Description"});
             table1.AddRow(new string[] {
-                        "test.user@email.com",
-                        "password",
-                        "Test",
-                        "User",
-                        "arielpartners"});
+                        "joe@yahoo.com",
+                        "suresh@gmail.com",
+                        "Integrity",
+                        "30",
+                        "8/2/2016 08:15:00",
+                        "Great job!"});
+            table1.AddRow(new string[] {
+                        "matthew@yahoo.com",
+                        "sue@gmail.com",
+                        "Honesty",
+                        "10",
+                        "8/7/2016 14:21:00",
+                        "Great job!"});
+            table1.AddRow(new string[] {
+                        "sue@yahoo.com",
+                        "dave@gmail.com",
+                        "Vigilance",
+                        "50",
+                        "8/1/2016 10:15:00",
+                        "fantastic!"});
+            table1.AddRow(new string[] {
+                        "nikhil@yahoo.com",
+                        "jose@gmail.com",
+                        "Respect",
+                        "15",
+                        "8/2/2016 19:04:00",
+                        "don\'t know what i would do without you"});
+            table1.AddRow(new string[] {
+                        "john@yahoo.com",
+                        "tom@gmail.com",
+                        "Excellence",
+                        "70",
+                        "8/4/2016 09:44:00",
+                        "ipsum laurem"});
 #line 7
-testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
+testRunner.Given("the following recognitions exist in the system:", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("View All Recognitions", SourceLine=11)]
+        [TechTalk.SpecRun.ScenarioAttribute("View All Recognitions", SourceLine=15)]
         [TechTalk.SpecRun.IgnoreAttribute()]
         public virtual void ViewAllRecognitions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View All Recognitions", new string[] {
                         "ignore"});
-#line 12
+#line 16
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
-#line 13
+#line 17
  testRunner.When("I view the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 14
- testRunner.Then("I should see a list of recognitions sorted by date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender",
+                        "Receiver",
+                        "CorporateValue",
+                        "Points",
+                        "DateCreated",
+                        "Description"});
+            table2.AddRow(new string[] {
+                        "matthew@yahoo.com",
+                        "sue@gmail.com",
+                        "Honesty",
+                        "10",
+                        "8/7/2016 14:21:00",
+                        "Great job!"});
+            table2.AddRow(new string[] {
+                        "john@yahoo.com",
+                        "tom@gmail.com",
+                        "Excellence",
+                        "70",
+                        "8/4/2016 09:44:00",
+                        "ipsum laurem"});
+            table2.AddRow(new string[] {
+                        "nikhil@yahoo.com",
+                        "jose@gmail.com",
+                        "Respect",
+                        "15",
+                        "8/2/2016 19:04:00",
+                        "don\'t know what i would do without you"});
+            table2.AddRow(new string[] {
+                        "joe@yahoo.com",
+                        "suresh@gmail.com",
+                        "Integrity",
+                        "30",
+                        "8/2/2016 08:15:00",
+                        "Great job!"});
+            table2.AddRow(new string[] {
+                        "sue@yahoo.com",
+                        "dave@gmail.com",
+                        "Vigilance",
+                        "50",
+                        "8/1/2016 10:15:00",
+                        "fantastic!"});
+#line 18
+ testRunner.Then("I should see a list of recognitions sorted most recent first:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -125,7 +198,7 @@ this.FeatureBackground();
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "RecognitionFeed", "\tIn order to stay informed of the kudos that are being sent to people in my organ" +
-                    "ization\r\n\tAs a user\r\n\tI want to be see recognitions", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ization\r\n\tAs a user\r\n\tI want to be see the most recent recognitions", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -167,19 +240,49 @@ this.FeatureBackground();
 #line 6
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email",
-                        "Password",
-                        "FirstName",
-                        "LastName",
-                        "Organization"});
+                        "Sender",
+                        "Receiver",
+                        "CorporateValue",
+                        "Points",
+                        "DateCreated",
+                        "Description"});
             table1.AddRow(new string[] {
-                        "test.user@email.com",
-                        "password",
-                        "Test",
-                        "User",
-                        "arielpartners"});
+                        "joe@yahoo.com",
+                        "suresh@gmail.com",
+                        "Integrity",
+                        "30",
+                        "8/2/2016 08:15:00",
+                        "Great job!"});
+            table1.AddRow(new string[] {
+                        "matthew@yahoo.com",
+                        "sue@gmail.com",
+                        "Honesty",
+                        "10",
+                        "8/7/2016 14:21:00",
+                        "Great job!"});
+            table1.AddRow(new string[] {
+                        "sue@yahoo.com",
+                        "dave@gmail.com",
+                        "Vigilance",
+                        "50",
+                        "8/1/2016 10:15:00",
+                        "fantastic!"});
+            table1.AddRow(new string[] {
+                        "nikhil@yahoo.com",
+                        "jose@gmail.com",
+                        "Respect",
+                        "15",
+                        "8/2/2016 19:04:00",
+                        "don\'t know what i would do without you"});
+            table1.AddRow(new string[] {
+                        "john@yahoo.com",
+                        "tom@gmail.com",
+                        "Excellence",
+                        "70",
+                        "8/4/2016 09:44:00",
+                        "ipsum laurem"});
 #line 7
-testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
+testRunner.Given("the following recognitions exist in the system:", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
@@ -191,14 +294,57 @@ testRunner.Given("I am logged in as the following user:", ((string)(null)), tabl
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View All Recognitions", new string[] {
                         "ignore"});
-#line 12
+#line 16
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
-#line 13
+#line 17
  testRunner.When("I view the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 14
- testRunner.Then("I should see a list of recognitions sorted by date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender",
+                        "Receiver",
+                        "CorporateValue",
+                        "Points",
+                        "DateCreated",
+                        "Description"});
+            table2.AddRow(new string[] {
+                        "matthew@yahoo.com",
+                        "sue@gmail.com",
+                        "Honesty",
+                        "10",
+                        "8/7/2016 14:21:00",
+                        "Great job!"});
+            table2.AddRow(new string[] {
+                        "john@yahoo.com",
+                        "tom@gmail.com",
+                        "Excellence",
+                        "70",
+                        "8/4/2016 09:44:00",
+                        "ipsum laurem"});
+            table2.AddRow(new string[] {
+                        "nikhil@yahoo.com",
+                        "jose@gmail.com",
+                        "Respect",
+                        "15",
+                        "8/2/2016 19:04:00",
+                        "don\'t know what i would do without you"});
+            table2.AddRow(new string[] {
+                        "joe@yahoo.com",
+                        "suresh@gmail.com",
+                        "Integrity",
+                        "30",
+                        "8/2/2016 08:15:00",
+                        "Great job!"});
+            table2.AddRow(new string[] {
+                        "sue@yahoo.com",
+                        "dave@gmail.com",
+                        "Vigilance",
+                        "50",
+                        "8/1/2016 10:15:00",
+                        "fantastic!"});
+#line 18
+ testRunner.Then("I should see a list of recognitions sorted most recent first:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

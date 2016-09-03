@@ -1,29 +1,27 @@
 ﻿using System;
 using TechTalk.SpecFlow;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HighFive.Server.Services.Models;
+using TechTalk.SpecFlow.Assist;
 
-namespace HighFive.Server.Specs.StepDefinitions
+namespace HighFive.Server.Specs.StepDefinitions.Recognitions
 {
     [Binding]
     public class RecognitionFeedSteps
     {
         [Given]
-        public void Given_I_am_logged_in_as_the_following_user(Table table)
+        public void Given_the_following_recognitions_exist_in_the_system(Table table)
         {
             ScenarioContext.Current.Pending();
+            // for each item in the table, create a recognition
+            //var recognitions = table.CreateSet<RecognitionViewModel>();
+            // add recognitions to the in memory repository
         }
-
-        [When]
-        public void When_I_view_the_home_page()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
+        
         [Then]
-        public void Then_I_should_see_a_list_of_recognitions_sorted_by_date()
+        public void Then_I_should_see_a_list_of_recognitions_sorted_most_recent_first(Table table)
         {
             ScenarioContext.Current.Pending();
+            // call the recognitions controller getAll method
+            // assert that you get the recognitions back in the correct order, reverse sorted by date
         }
     }
 }

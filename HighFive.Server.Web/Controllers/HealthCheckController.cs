@@ -27,15 +27,7 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-        //
-        // "healthcheck": {
-        //  "healthy": true,
-        //  "message": "Health Check - App Service and backend - Good",
-        //  "version": "0.0.2",
-        //  "datestamp": "2016-09-03T14:23:00.000Z"
-        //},
-        //
-        [HttpGet("")]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Ping()
         {
@@ -46,10 +38,9 @@ namespace HighFive.Server.Web.Controllers
                 var healthcheck = new
                 {
                     Healthy = true,
-                    LoggerMessage = "Health Check - App Service and backend - Good",
+                    Message = "Health Check - App Service and backend - Good",
                     Version = version,
-                    Datestamp = DateTime.UtcNow
-
+                    Datestamp = FileLastWriteTime
                 };
                 return Ok(healthcheck);
             }
@@ -60,13 +51,13 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = "Failed Connecting to backend from API" });
         }
 
-        private string AppReleaseDate
+        private static DateTime FileLastWriteTime
         {
             get
             {
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 var fileInfo = new System.IO.FileInfo(assembly.Location);
-                return fileInfo.LastWriteTime.ToString("MM/dd/yyyy hh:mm:ss tttt");
+                return fileInfo.LastWriteTime.ToUniversalTime();
             }
         }
     }
