@@ -1,4 +1,5 @@
 ﻿{
+  "version": "0.0.2",
   "dependencies": {
     "AutoMapper": "5.1.1",
     "HighFive.Server.Web": "1.0.0-*",
@@ -25,31 +26,31 @@
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final",
     "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final"
-    },
+  },
 
-    "frameworks": {
-      "net461": {
-      }
-    },
+  "frameworks": {
+    "net461": {
+    }
+  },
 
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
 
-    "publishOptions": {
-      "include": [
-        "wwwroot",
-        "Views",
-        "Areas/**/Views",
-        "appsettings.json",
-        "web.config",
-        "Config"
-      ]
-    },
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "Views",
+      "Areas/**/Views",
+      "project.json",
+      "web.config",
+      "Config"
+    ]
+  },
 
-    "scripts": {
-      "prepublish": "dotnet ef database update",
-      "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-    }
+  "scripts": {
+    "prepublish": "dotnet ef database update",
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
+}

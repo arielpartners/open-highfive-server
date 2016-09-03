@@ -49,3 +49,6 @@ bin
 obj
 packages
 TestResults
+
+# publish-to-azure directories
+PublishProfiles

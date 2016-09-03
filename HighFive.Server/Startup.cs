@@ -27,9 +27,10 @@ namespace HighFive.Server
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(env.ContentRootPath, "Config"))
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .SetBasePath(Path.Combine(env.ContentRootPath))
+                .AddJsonFile($"project.json", optional: true, reloadOnChange: true) // for version
+                .AddJsonFile(Path.Combine("Config", "appsettings.json"), optional: true, reloadOnChange: true)
+                .AddJsonFile(Path.Combine("Config", $"appsettings.{env.EnvironmentName}.json"), optional: true)
                 .AddEnvironmentVariables();
             _config = builder.Build();
         }
@@ -43,7 +44,7 @@ namespace HighFive.Server
             services.AddDbContext<HighFiveContext>(options => options.UseSqlServer(connection,
                 b => b.MigrationsAssembly("HighFive.Server")));
             //
-            // Set migrations assembly to top level because it defaults to the same assmebly that the DbContext is in,
+            // Set migrations assembly to top level because it defaults to the same assembly that the DbContext is in,
             // but dotnet EF core does not yet support migrations from a class library
             //
 
