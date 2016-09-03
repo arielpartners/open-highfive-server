@@ -53,7 +53,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete()]
+        [HttpDelete]
         public async Task<IActionResult> Delete()
         {
             try

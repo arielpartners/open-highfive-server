@@ -207,6 +207,20 @@ namespace HighFive.Server.Web.Controllers
             }
         }
 
+        [TestMethod]
+        public void OrganizationsControllers_Put_SimulatedServerFailure()
+        {
+            var repo = new Mock<IHighFiveRepository>();
+            repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<HighFiveException>();
+            repo.Setup(r => r.UpdateOrganization(It.IsAny<Organization>())).Throws<HighFiveException>();
+            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+
+            var returnObject = controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+            returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = returnObject.Result as BadRequestObjectResult;
+            AssertMessageProperty("Exception of type \'HighFive.Server.Services.Utils.HighFiveException\' was thrown.", badRequestResult.Value);
+        }
+
         #endregion
 
         #region utilities

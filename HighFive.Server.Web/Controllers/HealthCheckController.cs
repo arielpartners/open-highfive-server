@@ -55,5 +55,15 @@ namespace HighFive.Server.Web.Controllers
             }
             return BadRequest(new { Message = "Failed Connecting to backend from API" });
         }
+
+        private string AppReleaseDate
+        {
+            get
+            {
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var fileInfo = new System.IO.FileInfo(assembly.Location);
+                return fileInfo.LastWriteTime.ToString("MM/dd/yyyy hh:mm:ss tttt");
+            }
+        }
     }
 }

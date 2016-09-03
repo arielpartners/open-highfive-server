@@ -3,6 +3,7 @@
 using AutoMapper;
 using FluentAssertions;
 using HighFive.Server.Services.Models;
+using HighFive.Server.Services.Utils;
 using HighFive.Server.Web.Utils;
 using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace HighFive.Server.Web.Controllers
         }
 
         #endregion
+
         #region tests
 
         [TestMethod]
@@ -50,7 +52,7 @@ namespace HighFive.Server.Web.Controllers
         public void AuthController_Login_FailedLogin()
         {
             var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
-            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<bool>(), It.IsAny<bool>()))
+            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(Microsoft.AspNetCore.Identity.SignInResult.Failed));
             var controller = new AuthController(signInManager.Object, _repository, _logger);
             var user = new AuthViewModel { Email = "test.user@email.com", Password = "UhOhThisIsNotTheCorrectPassword" };
@@ -63,10 +65,10 @@ namespace HighFive.Server.Web.Controllers
         public void AuthController_Login_UserNotFound()
         {
             var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
-            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<bool>(), It.IsAny<bool>()))
+            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(Microsoft.AspNetCore.Identity.SignInResult.Success));
             var repo = new Mock<IHighFiveRepository>();
-            repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Returns((HighFiveUser)null);
+            repo.Setup(r => r.GetUserByEmail(It.IsAny<string>())).Returns((HighFiveUser)null);
             var controller = new AuthController(signInManager.Object, repo.Object, _logger);
             var user = new AuthViewModel { Email = "test.user@email.com", Password = "password" };
             var result = controller.Login(user) as Task<IActionResult>;
@@ -80,19 +82,57 @@ namespace HighFive.Server.Web.Controllers
         public void AuthController_Login_Successful()
         {
             var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
-            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<bool>(), It.IsAny<bool>()))
+            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(Microsoft.AspNetCore.Identity.SignInResult.Success));
             var repo = new Mock<IHighFiveRepository>();
-            var user = new HighFiveUser() { Email = "test.user@email.com" };
-            repo.Setup(r => r.GetUserByEmail(It.IsAny<String>())).Returns(user);
+            var user = new HighFiveUser { Email = "test.user@email.com" };
+            repo.Setup(r => r.GetUserByEmail(It.IsAny<string>())).Returns(user);
             var controller = new AuthController(signInManager.Object, repo.Object, _logger);
             var authUser = new AuthViewModel { Email = "test.user@email.com", Password = "password" };
             var result = controller.Login(authUser) as Task<IActionResult>;
             var viewresult = result.Result;
             var okObjectResult = viewresult as OkObjectResult;
             okObjectResult.Value.ShouldBeEquivalentTo(
-                new UserViewModel() { Email = "test.user@email.com" }, options => options
+                new UserViewModel { Email = "test.user@email.com" }, options => options
                 .Excluding(ctx => ctx.SelectedMemberPath == "DateCreated"));
+        }
+
+        [TestMethod]
+        public void AuthController_Login_SimulatedServerFailure()
+        {
+            var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
+            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Throws<HighFiveException>();
+            var repo = new Mock<IHighFiveRepository>();
+            var controller = new AuthController(signInManager.Object, repo.Object, _logger);
+            var result = controller.Login(new AuthViewModel { Email = "test.user@email.com", Password = "password" }) as Task<IActionResult>;
+            result.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            AssertMessageProperty("Login Failed for user: test.user@email.com", badRequestResult.Value);
+        }
+
+        [TestMethod]
+        public void AuthController_Logout_Successful()
+        {
+            var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
+            signInManager.Setup(m=>m.SignOutAsync()).Returns(Task.FromResult(Microsoft.AspNetCore.Identity.SignInResult.Success));
+            var repo = new Mock<IHighFiveRepository>();
+            var controller = new AuthController(signInManager.Object, repo.Object, _logger);
+            var result = controller.Delete() as Task<IActionResult>;
+            var viewresult = result.Result;
+            var okObjectResult = viewresult as OkObjectResult;
+        }
+
+        [TestMethod]
+        public void AuthController_Logout_SimulatedServerFailure()
+        {
+            var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
+            signInManager.Setup(m => m.SignOutAsync()).Throws<HighFiveException>();
+            var repo = new Mock<IHighFiveRepository>();
+            var controller = new AuthController(signInManager.Object, repo.Object, _logger);
+            var result = controller.Delete() as Task<IActionResult>;
+            result.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            AssertMessageProperty("Failed to log user out.", badRequestResult.Value);
         }
 
         #endregion

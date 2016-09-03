@@ -1,9 +1,11 @@
-﻿using HighFive.Server.Services.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using HighFive.Server.Services.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 namespace HighFive.Server.Web.Utils
 {
+    [ExcludeFromCodeCoverage]
     public class WrapSignInManager<T>: IWrapSignInManager<T>
     {
         public WrapSignInManager(SignInManager<HighFiveUser> signInManager)
@@ -28,5 +30,4 @@ namespace HighFive.Server.Web.Utils
             return WrappedSignInManager.SignOutAsync();
         }
     }
-
 }

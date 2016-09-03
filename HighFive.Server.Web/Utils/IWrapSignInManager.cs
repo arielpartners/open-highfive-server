@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using HighFive.Server.Services.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace HighFive.Server.Web.Utils
@@ -12,5 +9,4 @@ namespace HighFive.Server.Web.Utils
         Task<SignInResult> PasswordSignInAsync(string userName, string password, bool isPersistent, bool lockoutOnFailure);
         Task SignOutAsync();
     }
-    
 }
