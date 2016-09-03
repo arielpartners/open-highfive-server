@@ -81,14 +81,14 @@ namespace HighFive.Server.Services.Models
             return _context.Recognitions.ToList();
         }
 
-        public void UpdateOrganization(Organization organizationToUpdate)
+        public void UpdateOrganization(Organization organization)
         {
-            foreach (var cv in organizationToUpdate.Values)
+            foreach (var cv in organization.Values)
             {
                 var corpval = GetCorporateValueByNameAndDescription(cv.Name, cv.Description);
                 if (corpval == null) AddCorporateValue(cv);
             }
-            _context.Update(organizationToUpdate);
+            _context.Update(organization);
         }
 
         public void DeleteOrganization(Organization organization)
@@ -118,10 +118,10 @@ namespace HighFive.Server.Services.Models
             _context.CorporateValues.Add(corporateValue);
         }
 
-        public CorporateValue GetCorporateValueByName(string name)
+        public CorporateValue GetCorporateValueByName(string corporateValueName)
         {
             return _context.CorporateValues
-                .FirstOrDefault(o => o.Name == name);
+                .FirstOrDefault(o => o.Name == corporateValueName);
         }
 
         public CorporateValue GetCorporateValueByNameAndDescription(string name, string description)
@@ -142,13 +142,15 @@ namespace HighFive.Server.Services.Models
 
         #endregion
 
-        #region SaveChangesAsync
+        public async Task IsConnected()
+        {
+            await _context.Database.OpenConnectionAsync();
+            _context.Database.CloseConnection();
+        }
 
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }
-
-        #endregion
     }
 }

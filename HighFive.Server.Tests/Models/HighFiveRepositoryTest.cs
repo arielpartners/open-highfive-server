@@ -351,29 +351,11 @@ namespace HighFive.Server.Models
             return builder.Options;
         }
 
-        private IConfigurationRoot _config
-        {
-            get
-            {
-                return new Mock<IConfigurationRoot>().Object;
-            }
-        }
+        private IConfigurationRoot _config => new Mock<IConfigurationRoot>().Object;
 
-        private ILogger<UsersController> _controllerLogger
-        {
-            get
-            {
-                return new Mock<ILogger<UsersController>>().Object;
-            }
-        }
+        private ILogger<UsersController> _controllerLogger => new Mock<ILogger<UsersController>>().Object;
 
-        private ILogger<HighFiveRepository> _repoLogger
-        {
-            get
-            {
-                return new Mock<ILogger<HighFiveRepository>>().Object;
-            }
-        }
+        private ILogger<HighFiveRepository> _repoLogger => new Mock<ILogger<HighFiveRepository>>().Object;
 
         #endregion
     }

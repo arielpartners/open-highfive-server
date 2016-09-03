@@ -39,7 +39,7 @@ namespace HighFive.Server.Web.Controllers
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
             {
-                context.Organizations.Add(new Organization { Name = "Ariel Partners", Values = new List<CorporateValue> { new CorporateValue { Name="Test Name", Description="Testing Description" } } });
+                context.Organizations.Add(new Organization { Name = "Ariel Partners", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name", Description = "Testing Description" } } });
                 context.SaveChanges();
 
                 var repo = new HighFiveRepository(context, _repoLogger);
@@ -153,13 +153,13 @@ namespace HighFive.Server.Web.Controllers
                 org.Result.Should().BeOfType<BadRequestObjectResult>();
                 var badRequestResult = org.Result as BadRequestObjectResult;
                 var errLst = badRequestResult.Value as SerializableError;
-                var errMsg = ((string[]) errLst["Name"]).Aggregate(string.Empty, (current, errVal) => current + errVal);
+                var errMsg = ((string[])errLst["Name"]).Aggregate(string.Empty, (current, errVal) => current + errVal);
                 Assert.AreEqual("The Name field is required.", errMsg);
             }
         }
 
         [TestMethod]
-        public void OrganizationsControllers_Post_Error()
+        public void OrganizationsControllers_Post_DuplicateOrganization()
         {
             var options = CreateNewContextOptions();
             using (var context = new HighFiveContext(_config, options))
@@ -168,20 +168,27 @@ namespace HighFive.Server.Web.Controllers
                 var controller = new OrganizationsController(repo, _controllerLogger);
                 //Adding an Organization
                 var returnObject = controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
-                
+
                 //Create an Organization with the same name
                 returnObject = controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name2", Description = "Testing Description2" } } });
                 returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
                 var badRequestResult = returnObject.Result as BadRequestObjectResult;
                 AssertMessageProperty("Organization Macys already exists in the database", badRequestResult.Value);
-
-                //Generate an error 
-                //repo.Setup(r => r.Post()).Throws<Exception>();
-                //returnObject = controller.Post(new OrganizationViewModel { Name = "Macys" });
-                //returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
-                //badRequestResult = returnObject.Result as BadRequestObjectResult;
-                //AssertMessageProperty("Failed to add new organization Macys", badRequestResult.Value);
             }
+        }
+
+        [TestMethod]
+        public void OrganizationsControllers_Post_SimulatedServerFailure()
+        {
+            var repo = new Mock<IHighFiveRepository>();
+            repo.Setup(r => r.GetOrganizationByName(It.IsAny<string>())).Throws<HighFiveException>();
+            repo.Setup(r => r.AddOrganization(It.IsAny<Organization>())).Throws<HighFiveException>();
+            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+
+            var returnObject = controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+            returnObject.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = returnObject.Result as BadRequestObjectResult;
+            AssertMessageProperty("Exception of type \'HighFive.Server.Services.Utils.HighFiveException\' was thrown.", badRequestResult.Value);
         }
 
         [TestMethod]
@@ -192,12 +199,11 @@ namespace HighFive.Server.Web.Controllers
             {
                 var repo = new HighFiveRepository(context, _repoLogger);
                 var controller = new OrganizationsController(repo, _controllerLogger);
+                //Adding an Organization
+                controller.Post(new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
 
-                var org = controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
-                //org.Result.Should().BeOfType<CreatedResult>();
-                //var createdResult = org.Result as CreatedResult;
-                //var organizationVm = createdResult.Value as OrganizationViewModel;
-                //organizationVm.Name.Should().Be("Macys");
+                var returnObject = controller.Put("Macys", new OrganizationViewModel { Name = "Macys", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name1", Description = "Testing Description1" } } });
+                returnObject.Result.Should().BeOfType<OkObjectResult>();
             }
         }
 

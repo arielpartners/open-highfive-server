@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 #endregion
 
+using System.ComponentModel.DataAnnotations;
+
 namespace HighFive.Server.Web.ViewModels
 {
     public class AuthViewModel

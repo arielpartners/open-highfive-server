@@ -15,7 +15,7 @@ namespace HighFive.Server.Services.Models
         #endregion
 
         #region CorporateValue
-        CorporateValue GetCorporateValueByName(string name);
+        CorporateValue GetCorporateValueByName(string corporateValueName);
         void AddCorporateValue(CorporateValue corporateValue);
         CorporateValue GetCorporateValueByNameAndDescription(string name, string description);
         void UpdateCorporateValue(CorporateValue cv);
@@ -36,8 +36,10 @@ namespace HighFive.Server.Services.Models
         void AddOrganization(Organization organization);
         IEnumerable<Organization> GetAllOrganizations();
         Organization GetOrganizationByName(string organizationName);
-        void UpdateOrganization(Organization organizationToUpdate);
+        void UpdateOrganization(Organization organization);
         void DeleteOrganization(Organization organization);
         #endregion
+
+        Task IsConnected();
     }
 }
