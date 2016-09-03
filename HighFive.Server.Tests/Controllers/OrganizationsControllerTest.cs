@@ -67,6 +67,19 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
+        public void OrganizationsControllers_GetAll_NoContent()
+        {
+            var repo = new Mock<IHighFiveRepository>();
+            repo.Setup(r => r.GetAllOrganizations()).Throws<HighFiveException>();
+            var controller = new OrganizationsController(repo.Object, _controllerLogger);
+
+            var result = controller.GetAll();
+            result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = result as BadRequestObjectResult;
+            AssertMessageProperty("Failed to get Organizations", badRequestResult.Value);
+        }
+
+        [TestMethod]
         public void OrganizationsControllers_GetOrganizationByName_SunnyDay()
         {
             var options = CreateNewContextOptions();
