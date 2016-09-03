@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.Extensions.Configuration;
 
 namespace HighFive.Server.Web.Controllers
 {
@@ -13,13 +14,15 @@ namespace HighFive.Server.Web.Controllers
     {
         private readonly IHighFiveRepository _repository;
         private readonly ILogger<HealthCheckController> _logger;
+        private readonly IConfigurationRoot _config;
 
         #region Constructor
 
-        public HealthCheckController(IHighFiveRepository repository, ILogger<HealthCheckController> logger)
+        public HealthCheckController(IConfigurationRoot config, IHighFiveRepository repository, ILogger<HealthCheckController> logger)
         {
             _repository = repository;
             _logger = logger;
+            _config = config;
         }
 
         #endregion
@@ -28,7 +31,7 @@ namespace HighFive.Server.Web.Controllers
         // "healthcheck": {
         //  "healthy": true,
         //  "message": "Health Check - App Service and backend - Good",
-        //  "version": "1.2",
+        //  "version": "0.0.2",
         //  "datestamp": "2016-09-03T14:23:00.000Z"
         //},
         //
@@ -39,11 +42,12 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 await _repository.IsConnected();
+                var version = _config["version"];
                 var healthcheck = new
                 {
                     Healthy = true,
                     LoggerMessage = "Health Check - App Service and backend - Good",
-                    Version = "1.2",
+                    Version = version,
                     Datestamp = DateTime.UtcNow
 
                 };

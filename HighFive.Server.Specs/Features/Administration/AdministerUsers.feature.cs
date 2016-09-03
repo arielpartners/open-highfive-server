@@ -99,39 +99,41 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Delete a user", SourceLine=18)]
+        [TechTalk.SpecRun.ScenarioAttribute("Delete a user", SourceLine=19)]
+        [TechTalk.SpecRun.IgnoreAttribute()]
         public virtual void DeleteAUser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a user", ((string[])(null)));
-#line 19
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a user", new string[] {
+                        "Ignore"});
+#line 20
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table4.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 20
+#line 21
  testRunner.Given("A user exists", ((string)(null)), table4, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table5.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 23
+#line 24
  testRunner.When("I delete the user", ((string)(null)), table5, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table6.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 26
+#line 27
  testRunner.Then("The user is removed from the system", ((string)(null)), table6, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table7.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 29
+#line 30
  testRunner.And("They can no longer login", ((string)(null)), table7, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -238,38 +240,40 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Delete a user")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "AdministerUsers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void DeleteAUser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a user", ((string[])(null)));
-#line 19
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a user", new string[] {
+                        "Ignore"});
+#line 20
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table4.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 20
+#line 21
  testRunner.Given("A user exists", ((string)(null)), table4, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table5.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 23
+#line 24
  testRunner.When("I delete the user", ((string)(null)), table5, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table6.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 26
+#line 27
  testRunner.Then("The user is removed from the system", ((string)(null)), table6, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email"});
             table7.AddRow(new string[] {
                         "existingUser@test.com"});
-#line 29
+#line 30
  testRunner.And("They can no longer login", ((string)(null)), table7, "And ");
 #line hidden
             this.ScenarioCleanup();

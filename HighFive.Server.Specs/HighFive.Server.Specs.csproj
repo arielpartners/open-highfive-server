@@ -272,8 +272,16 @@
       <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.1.0.0\lib\net451\Microsoft.Extensions.Caching.Memory.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.1.0.0\lib\netstandard1.1\Microsoft.Extensions.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.1.0.0\lib\netstandard1.1\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -330,6 +338,10 @@
     </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.1.0.0\lib\netstandard1.0\Microsoft.Extensions.Options.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.1.0.0\lib\netstandard1.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.PlatformAbstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -511,6 +523,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdministerUsers.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Administration\SystemVersion.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SystemVersion.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Authentication\Login.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -529,6 +546,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\Administration\AdministerOrganizationSteps.cs" />
     <Compile Include="StepDefinitions\Administration\AdministerUsersSteps.cs" />
+    <Compile Include="StepDefinitions\Administration\SystemVersionSteps.cs" />
     <Compile Include="StepDefinitions\Authentication\LoginSteps.cs" />
     <Compile Include="StepDefinitions\LogoutSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\RecognitionFeedSteps.cs" />
@@ -541,6 +559,10 @@
     <None Include="Features\Administration\AdministerOrganization.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AdministerOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Administration\SystemVersion.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SystemVersion.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Administration\AdministerUsers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

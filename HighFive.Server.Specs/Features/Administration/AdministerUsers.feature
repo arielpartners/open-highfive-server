@@ -16,6 +16,7 @@ Scenario: Create a new user
 	| Email            |
 	| newUser@test.com |
 
+@Ignore
 Scenario: Delete a user
 	Given A user exists
 	| Email                 |
