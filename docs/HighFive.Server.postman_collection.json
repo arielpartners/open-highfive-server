@@ -116,7 +116,7 @@
 		{
 			"id": "734ae87d-a394-18e9-dccf-1efc1aa158b2",
 			"headers": "",
-			"url": "{{host}}/api/metrics",
+			"url": "{{host}}/api/healthcheck",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "GET",
@@ -125,13 +125,12 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1472406605445,
+			"helperAttributes": {},
+			"time": 1472923274413,
 			"name": "/api/healthcheck",
 			"description": "Get a status message from the server",
 			"collectionId": "41ff0447-d75d-db57-6749-2388d1ecdbec",
-			"responses": [],
-			"folder": "167f69d5-208d-1c76-5ad5-0de909faebb6"
+			"responses": []
 		},
 		{
 			"id": "7d211854-c8f4-f0a3-db11-35c88faffa30",
