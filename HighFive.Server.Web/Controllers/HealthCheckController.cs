@@ -4,6 +4,7 @@ using HighFive.Server.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace HighFive.Server.Web.Controllers
 {
@@ -23,7 +24,14 @@ namespace HighFive.Server.Web.Controllers
 
         #endregion
 
-
+        //
+        // "healthcheck": {
+        //  "healthy": true,
+        //  "message": "Health Check - App Service and backend - Good",
+        //  "version": "1.2",
+        //  "datestamp": "2016-09-03T14:23:00.000Z"
+        //},
+        //
         [HttpGet("")]
         [AllowAnonymous]
         public async Task<IActionResult> Ping()
@@ -31,7 +39,15 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 await _repository.IsConnected();
-                return Ok("Health Check - App Service and backend - Good");
+                var healthcheck = new
+                {
+                    Healthy = true,
+                    LoggerMessage = "Health Check - App Service and backend - Good",
+                    Version = "1.2",
+                    Datestamp = DateTime.UtcNow
+
+                };
+                return Ok(healthcheck);
             }
             catch (DbException ex)
             {
