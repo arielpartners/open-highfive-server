@@ -27,5 +27,6 @@ namespace HighFive.Server.Web.ViewModels
         [Phone]
         public string Phone { get; set; }
         public DateTime HireDate { get; set; }
+        public int PointBalance { get; set; }
     }
 }

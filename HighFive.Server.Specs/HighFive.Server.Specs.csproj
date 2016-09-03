@@ -538,6 +538,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Logout.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Recognitions\CreateRecognition.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateRecognition.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Recognitions\RecognitionFeed.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -549,6 +554,7 @@
     <Compile Include="StepDefinitions\Administration\SystemVersionSteps.cs" />
     <Compile Include="StepDefinitions\Authentication\LoginSteps.cs" />
     <Compile Include="StepDefinitions\LogoutSteps.cs" />
+    <Compile Include="StepDefinitions\Recognitions\CreateRecognitionSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\RecognitionFeedSteps.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -575,6 +581,10 @@
     <None Include="Features\Authentication\Logout.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Logout.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Recognitions\CreateRecognition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateRecognition.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Recognitions\RecognitionFeed.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
