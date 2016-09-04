@@ -252,12 +252,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472860569366,
+			"time": 1473001474428,
 			"name": "/api/auth Login",
 			"description": "Login",
 			"collectionId": "41ff0447-d75d-db57-6749-2388d1ecdbec",
 			"responses": [],
-			"rawModeData": "{\n    \"password\": \"wefwef\"\n}"
+			"rawModeData": "{\n    \"email\": \"test.user@email.com\",\n    \"password\": \"password\"\n}"
 		},
 		{
 			"id": "deb67dfc-f1bf-3df1-6f88-dc9ef54fa24b",
