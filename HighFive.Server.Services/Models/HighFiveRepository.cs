@@ -138,6 +138,17 @@ namespace HighFive.Server.Services.Models
 
         #region Recognitions
 
+        public Recognition GetRecognitionById(int id)
+        {
+            _logger.LogInformation("Getting Recognition");
+            return _context.Recognitions
+                    .Include(s => s.Sender)
+                    .Include(r => r.Receiver)
+                    .Include(o => o.Organization)
+                    .Include(cv => cv.Value)
+                    .FirstOrDefault(x => x.Id==id);
+        }
+
         public IEnumerable<Recognition> GetAllRecognitions()
         {
             _logger.LogInformation("Getting All Recognitions");
@@ -147,6 +158,21 @@ namespace HighFive.Server.Services.Models
                     .Include(o => o.Organization)
                     .Include(cv => cv.Value)
                     .OrderByDescending(x => x.DateCreated).ToList();
+        }
+
+        public void AddRecognition(Recognition recognition)
+        {
+            _context.Recognitions.Add(recognition);
+        }
+
+        public void UpdateRecognition(Recognition recognition)
+        {
+            _context.Update(recognition);
+        }
+
+        public void DeleteRecognition(Recognition recognition)
+        {
+            _context.Recognitions.Remove(recognition);
         }
 
         #endregion

@@ -40,6 +40,7 @@ namespace HighFive.Server.Specs.StepDefinitions.Recognitions
                     .ForMember(g => g.CorporateValueName, opt => opt.MapFrom(u => u.Value.Name)).ReverseMap();
             });
             _options = CreateNewContextOptions();
+            _recognitions = new List<Recognition>();
         }
 
         #endregion
@@ -90,7 +91,6 @@ namespace HighFive.Server.Specs.StepDefinitions.Recognitions
                 context.SaveChanges();
                 //Create the Recognitions
                 var repo = new HighFiveRepository(context, _repoLogger);
-                _recognitions = new List<Recognition>();
                 // for each item in the table, create a recognition
                 foreach (RecognitionViewModel recViewModel in recognitionsLst)
                 {

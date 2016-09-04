@@ -61,25 +61,25 @@ namespace HighFive.Server.Specs.Features.Recognitions
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Successfully create a recognition", SourceLine=6)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
+        [TechTalk.SpecRun.ScenarioAttribute("Successfully create a recognition", new string[] {
+                "framework"}, SourceLine=6)]
         public virtual void SuccessfullyCreateARecognition()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully create a recognition", new string[] {
-                        "ignore"});
+                        "framework"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "First Name",
                         "Last Name",
-                        "email",
+                        "Email",
                         "Organization Name",
                         "Password"});
             table1.AddRow(new string[] {
                         "Joe",
                         "Blow",
-                        "joe.blow@yahoo.com",
+                        "joe.blow@email.com",
                         "Ariel Partners",
                         "password"});
 #line 8
@@ -89,11 +89,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Sender Email",
                         "Receiver Email",
                         "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
                         "Description"});
             table2.AddRow(new string[] {
-                        "joe.blow@yahoo.com",
-                        "suresh.nikam@gmail.com",
+                        "joe.blow@email.com",
+                        "suresh.nikam@email.com",
                         "Ariel Partners",
+                        "Integrity",
+                        "30",
                         "Great job!"});
 #line 11
  testRunner.When("I create the following recognition:", ((string)(null)), table2, "When ");
@@ -102,11 +106,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Sender Email",
                         "Receiver Email",
                         "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
                         "Description"});
             table3.AddRow(new string[] {
-                        "joe.blow@yahoo.com",
-                        "suresh.nikam@gmail.com",
+                        "joe.blow@email.com",
+                        "suresh.nikam@email.com",
                         "Ariel Partners",
+                        "Integrity",
+                        "30",
                         "Great job!"});
 #line 14
  testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table3, "Then ");
@@ -176,24 +184,24 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successfully create a recognition")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateRecognition")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("framework")]
         public virtual void SuccessfullyCreateARecognition()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully create a recognition", new string[] {
-                        "ignore"});
+                        "framework"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "First Name",
                         "Last Name",
-                        "email",
+                        "Email",
                         "Organization Name",
                         "Password"});
             table1.AddRow(new string[] {
                         "Joe",
                         "Blow",
-                        "joe.blow@yahoo.com",
+                        "joe.blow@email.com",
                         "Ariel Partners",
                         "password"});
 #line 8
@@ -203,11 +211,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Sender Email",
                         "Receiver Email",
                         "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
                         "Description"});
             table2.AddRow(new string[] {
-                        "joe.blow@yahoo.com",
-                        "suresh.nikam@gmail.com",
+                        "joe.blow@email.com",
+                        "suresh.nikam@email.com",
                         "Ariel Partners",
+                        "Integrity",
+                        "30",
                         "Great job!"});
 #line 11
  testRunner.When("I create the following recognition:", ((string)(null)), table2, "When ");
@@ -216,11 +228,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Sender Email",
                         "Receiver Email",
                         "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
                         "Description"});
             table3.AddRow(new string[] {
-                        "joe.blow@yahoo.com",
-                        "suresh.nikam@gmail.com",
+                        "joe.blow@email.com",
+                        "suresh.nikam@email.com",
                         "Ariel Partners",
+                        "Integrity",
+                        "30",
                         "Great job!"});
 #line 14
  testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table3, "Then ");

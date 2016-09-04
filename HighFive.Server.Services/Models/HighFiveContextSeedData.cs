@@ -27,6 +27,7 @@ namespace HighFive.Server.Services.Models
                     _context.Organizations.Add(new Organization
                         {
                             Name = "Ariel Partners",
+                            WebPath = "ariel-partners",
                             Values = new List<CorporateValue>
                             {
                                 new CorporateValue { Name="Commitment", Description="Committed to the long term success and happiness of our customers, our people, and our partners" },
