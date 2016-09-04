@@ -7,11 +7,11 @@ namespace HighFive.Server.Specs.StepDefinitions.Recognitions
     public class CreateRecognitionSteps
     {
         [Given]
-        public void Given_I_have_not_entered_any_recognitions()
+        public void Given_I_am_logged_in_as_the_following_user(Table table)
         {
             ScenarioContext.Current.Pending();
         }
-        
+
         [When]
         public void When_I_create_the_following_recognition(Table table)
         {

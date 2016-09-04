@@ -48,7 +48,8 @@
 			"name": "Recognitions",
 			"description": "Recognitions endpoints",
 			"order": [
-				"efdc308e-cb2f-f01b-ac35-f0e6e099fd09"
+				"efdc308e-cb2f-f01b-ac35-f0e6e099fd09",
+				"629ed4b8-214b-b37d-f643-2f5c46c446a6"
 			],
 			"owner": "933428"
 		},
@@ -91,6 +92,26 @@
 			"responses": [],
 			"rawModeData": "{\n    \"name\": \"Ariel Partners\"\n}",
 			"folder": "56e70eb2-fc07-3b4a-c34e-cc6be67e43b2"
+		},
+		{
+			"id": "629ed4b8-214b-b37d-f643-2f5c46c446a6",
+			"headers": "",
+			"url": "{{host}}/api/recognitions",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473006132387,
+			"name": "/api/recognitions",
+			"description": "Create a new recognition",
+			"collectionId": "41ff0447-d75d-db57-6749-2388d1ecdbec",
+			"responses": [],
+			"rawModeData": "{\n    \"senderName\": \"test.user@email.com\",\n    \"receiverName\": \"John.Doe@email.com\",\n    \"organizationName\": \"Ariel Partners\",\n    \"description\": \"you are awesome\"\n}"
 		},
 		{
 			"id": "69711af8-23e3-6cd1-c746-9d75abdd13e6",
@@ -252,12 +273,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472860569366,
+			"time": 1473001474428,
 			"name": "/api/auth Login",
 			"description": "Login",
 			"collectionId": "41ff0447-d75d-db57-6749-2388d1ecdbec",
 			"responses": [],
-			"rawModeData": "{\n    \"password\": \"wefwef\"\n}"
+			"rawModeData": "{\n    \"email\": \"test.user@email.com\",\n    \"password\": \"password\"\n}"
 		},
 		{
 			"id": "deb67dfc-f1bf-3df1-6f88-dc9ef54fa24b",

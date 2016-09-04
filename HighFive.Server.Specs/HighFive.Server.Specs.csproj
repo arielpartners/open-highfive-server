@@ -553,8 +553,8 @@
     <Compile Include="StepDefinitions\Administration\AdministerUsersSteps.cs" />
     <Compile Include="StepDefinitions\Administration\SystemVersionSteps.cs" />
     <Compile Include="StepDefinitions\Authentication\LoginSteps.cs" />
-    <Compile Include="StepDefinitions\LogoutSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\CreateRecognitionSteps.cs" />
+    <Compile Include="StepDefinitions\Authentication\LogoutSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\RecognitionFeedSteps.cs" />
   </ItemGroup>
   <ItemGroup>

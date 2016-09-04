@@ -3,73 +3,81 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Models;
-
+using FluentAssertions;
 using TechTalk.SpecFlow;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using System.Collections.Generic;
 using HighFive.Server.Web.Controllers;
+using HighFive.Server.Web.Utils;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HighFive.Server.Specs.StepDefinitions.Administration
 {
     [Binding]
     public class AdministerUsersSteps
     {
-        
+        private HighFiveRepository _reposCreateUser;
+        private HighFiveRepository _reposDeleteUser;
+
         [Given]
         public void Given_A_user_with_email_EMAIL_does_not_have_an_account(string email)
         {
+            //empty new context
             var options = CreateNewContextOptions();
-            using (var context = new HighFiveContext(_config, options))
-            {
-                context.Organizations.Add(new Organization { Name = "Ariel Partners", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name", Description = "Testing Description" } } });
-                context.SaveChanges();
+            var context = new HighFiveContext(_config, options);
+            context.Organizations.Add(new Organization { Name = "Ariel Partners", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name", Description = "Testing Description" } } });
+            context.SaveChanges();
+            _reposCreateUser = new HighFiveRepository(context, _repoLogger);
+        }
 
-                var repo = new HighFiveRepository(context, _repoLogger);
-                var controller = new UsersController(repo, _controllerLogger);
-            }
-        }
-        
         [Given]
-        public void Given_A_user_exists(Table table)
+        public void Given_A_user_with_username_EMAIL_and_password_PASSWORD_exists(string email, string password)
         {
-            ScenarioContext.Current.Pending();
+            var options = CreateNewContextOptions();
+            var context = new HighFiveContext(_config, options);
+            context.Organizations.Add(new Organization { Name = "Ariel Partners", Values = new List<CorporateValue> { new CorporateValue { Name = "Test Name", Description = "Testing Description" } } });
+            context.SaveChanges();
+            _reposDeleteUser = new HighFiveRepository(context, _repoLogger);
+            
+            var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>().Object;
+            var controller = new AuthController(signInManager, _reposDeleteUser, _controllerLogger);
+            // Following method needs to be implemented before SelfRegister can work
+            // or wrap UserManager and add to services
+            //var result = controller.SelfRegister(string username, string password, string organization)
         }
-        
+
         [When]
-        public void When_I_create_an_user_account_for_them(Table table)
+        public void When_I_create_an_user_account_with_email_of_EMAIL_password_of_PASSWORD_and_Organization_of_ORGANIZATION(string email, string password, string organization)
         {
+            var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>().Object;
+            var controller = new AuthController(signInManager, _reposCreateUser, _controllerLogger);
+            // Following method needs to be implemented before SelfRegister can work
+            //var result = controller.SelfRegister(string username, string password, string organization)
             ScenarioContext.Current.Pending();
         }
-        
+
         [When]
-        public void When_I_delete_the_user(Table table)
+        public void When_I_delete_the_user_with_username_EMAIL(string email)
         {
-            ScenarioContext.Current.Pending();
+            var controller = new UsersController(_reposDeleteUser, _userControllerLogger);
+            controller.Delete(email);
         }
-        
+
         [Then]
-        public void Then_an_account_should_be_created_for_them(Table table)
+        public void Then_an_account_should_be_created_for_them_with_a_username_EMAIL(string email)
         {
-            ScenarioContext.Current.Pending();
+            var controller = new UsersController(_reposCreateUser, _userControllerLogger);
+            var result = controller.GetByEmail(email);
+            result.Should().BeOfType<OkObjectResult>();
         }
-        
+
         [Then]
-        public void Then_they_can_login(Table table)
+        public void Then_The_user_with_username_EMAIL_is_removed_from_the_database(string email)
         {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Then]
-        public void Then_The_user_is_removed_from_the_system(Table table)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Then]
-        public void Then_They_can_no_longer_login(Table table)
-        {
-            ScenarioContext.Current.Pending();
+            var controller = new UsersController(_reposDeleteUser, _userControllerLogger);
+            var result = controller.GetByEmail(email);
+            result.Should().BeOfType<NotFoundObjectResult>();
         }
 
         #region utilities
@@ -97,7 +105,8 @@ namespace HighFive.Server.Specs.StepDefinitions.Administration
 
         private IConfigurationRoot _config => new Mock<IConfigurationRoot>().Object;
 
-        private ILogger<UsersController> _controllerLogger => new Mock<ILogger<UsersController>>().Object;
+        private ILogger<AuthController> _controllerLogger => new Mock<ILogger<AuthController>>().Object;
+        private ILogger<UsersController> _userControllerLogger => new Mock<ILogger<UsersController>>().Object;
 
         private ILogger<HighFiveRepository> _repoLogger => new Mock<ILogger<HighFiveRepository>>().Object;
 
