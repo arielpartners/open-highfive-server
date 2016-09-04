@@ -12,14 +12,14 @@ namespace HighFive.Server.Web.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class RecognitionController : Controller
+    public class RecognitionsController : Controller
     {
         private readonly IHighFiveRepository _repository;
-        private readonly ILogger<RecognitionController> _logger;
+        private readonly ILogger<RecognitionsController> _logger;
 
         #region Constructor
 
-        public RecognitionController(IHighFiveRepository repository, ILogger<RecognitionController> logger)
+        public RecognitionsController(IHighFiveRepository repository, ILogger<RecognitionsController> logger)
         {
             _repository = repository;
             _logger = logger;

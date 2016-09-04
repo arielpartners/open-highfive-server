@@ -142,14 +142,15 @@ namespace HighFive.Server.Services.Models
         {
             _logger.LogInformation("Getting All Recognitions");
             return _context.Recognitions
-                    .Include(s => s.Sender.UserName)
-                    .Include(r => r.Receiver.UserName)
-                    .Include(o => o.Organization.Name)
-                    .Include(cv => cv.Value.Name)
+                    .Include(s => s.Sender)
+                    .Include(r => r.Receiver)
+                    .Include(o => o.Organization)
+                    .Include(cv => cv.Value)
                     .ToList();
         }
 
         #endregion
+
         public async Task IsConnected()
         {
             await _context.Database.OpenConnectionAsync();
