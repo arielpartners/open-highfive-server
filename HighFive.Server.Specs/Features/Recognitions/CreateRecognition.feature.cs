@@ -69,42 +69,47 @@ namespace HighFive.Server.Specs.Features.Recognitions
                         "ignore"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
-#line 8
- testRunner.Given("I have not entered any recognitions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Sender",
-                        "Receiver",
-                        "CorporateValue",
-                        "Points",
-                        "DateCreated",
-                        "Description"});
+                        "First Name",
+                        "Last Name",
+                        "email",
+                        "Organization Name",
+                        "Password"});
             table1.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
-                        "Integrity",
-                        "30",
-                        "8/2/2016 08:15:00",
-                        "Great job!"});
-#line 9
- testRunner.When("I create the following recognition:", ((string)(null)), table1, "When ");
+                        "Joe",
+                        "Blow",
+                        "joe.blow@yahoo.com",
+                        "Ariel Partners",
+                        "password"});
+#line 8
+ testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Sender",
-                        "Receiver",
-                        "CorporateValue",
-                        "Points",
-                        "DateCreated",
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
                         "Description"});
             table2.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
-                        "Integrity",
-                        "30",
-                        "8/2/2016 08:15:00",
+                        "joe.blow@yahoo.com",
+                        "suresh.nikam@gmail.com",
+                        "Ariel Partners",
                         "Great job!"});
-#line 12
- testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table2, "Then ");
+#line 11
+ testRunner.When("I create the following recognition:", ((string)(null)), table2, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "Description"});
+            table3.AddRow(new string[] {
+                        "joe.blow@yahoo.com",
+                        "suresh.nikam@gmail.com",
+                        "Ariel Partners",
+                        "Great job!"});
+#line 14
+ testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table3, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -178,42 +183,47 @@ this.ScenarioSetup(scenarioInfo);
                         "ignore"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
-#line 8
- testRunner.Given("I have not entered any recognitions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Sender",
-                        "Receiver",
-                        "CorporateValue",
-                        "Points",
-                        "DateCreated",
-                        "Description"});
+                        "First Name",
+                        "Last Name",
+                        "email",
+                        "Organization Name",
+                        "Password"});
             table1.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
-                        "Integrity",
-                        "30",
-                        "8/2/2016 08:15:00",
-                        "Great job!"});
-#line 9
- testRunner.When("I create the following recognition:", ((string)(null)), table1, "When ");
+                        "Joe",
+                        "Blow",
+                        "joe.blow@yahoo.com",
+                        "Ariel Partners",
+                        "password"});
+#line 8
+ testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Sender",
-                        "Receiver",
-                        "CorporateValue",
-                        "Points",
-                        "DateCreated",
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
                         "Description"});
             table2.AddRow(new string[] {
-                        "joe@yahoo.com",
-                        "suresh@gmail.com",
-                        "Integrity",
-                        "30",
-                        "8/2/2016 08:15:00",
+                        "joe.blow@yahoo.com",
+                        "suresh.nikam@gmail.com",
+                        "Ariel Partners",
                         "Great job!"});
-#line 12
- testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table2, "Then ");
+#line 11
+ testRunner.When("I create the following recognition:", ((string)(null)), table2, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "Description"});
+            table3.AddRow(new string[] {
+                        "joe.blow@yahoo.com",
+                        "suresh.nikam@gmail.com",
+                        "Ariel Partners",
+                        "Great job!"});
+#line 14
+ testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table3, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

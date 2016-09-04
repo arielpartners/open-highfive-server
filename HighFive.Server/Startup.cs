@@ -102,8 +102,8 @@ namespace HighFive.Server
                     .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath));
                 config.CreateMap<OrganizationViewModel, Organization>().ReverseMap();
                 config.CreateMap<Recognition, RecognitionViewModel>()
-                    .ForMember(g => g.SenderName, opt => opt.MapFrom(u => u.Sender.UserName))
-                    .ForMember(g => g.ReceiverName, opt => opt.MapFrom(u => u.Receiver.UserName))
+                    .ForMember(g => g.SenderEmail, opt => opt.MapFrom(u => u.Sender.UserName))
+                    .ForMember(g => g.ReceiverEmail, opt => opt.MapFrom(u => u.Receiver.UserName))
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
                     .ForMember(g => g.CorporateValueName, opt => opt.MapFrom(u => u.Value.Name)).ReverseMap();
             });
