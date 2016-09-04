@@ -75,7 +75,7 @@ namespace HighFive.Server.Services.Models
                         .ToList();
         }
 
-       public void UpdateOrganization(Organization organization)
+        public void UpdateOrganization(Organization organization)
         {
             foreach (var cv in organization.Values)
             {
@@ -146,7 +146,7 @@ namespace HighFive.Server.Services.Models
                     .Include(r => r.Receiver)
                     .Include(o => o.Organization)
                     .Include(cv => cv.Value)
-                    .ToList();
+                    .OrderByDescending(x => x.DateCreated).ToList();
         }
 
         #endregion

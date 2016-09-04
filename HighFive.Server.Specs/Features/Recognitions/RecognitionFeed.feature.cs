@@ -70,13 +70,15 @@ namespace HighFive.Server.Specs.Features.Recognitions
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sender Email",
                         "Receiver Email",
-                        "CorporateValue",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
             table1.AddRow(new string[] {
                         "joe@email.com",
                         "suresh@email.com",
+                        "Ariel Partners",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
@@ -84,6 +86,7 @@ namespace HighFive.Server.Specs.Features.Recognitions
             table1.AddRow(new string[] {
                         "matthew@email.com",
                         "sue@email.com",
+                        "Ariel Partners",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
@@ -91,6 +94,7 @@ namespace HighFive.Server.Specs.Features.Recognitions
             table1.AddRow(new string[] {
                         "sue@email.com",
                         "dave@email.com",
+                        "Ariel Partners",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",
@@ -98,6 +102,7 @@ namespace HighFive.Server.Specs.Features.Recognitions
             table1.AddRow(new string[] {
                         "nikhil@email.com",
                         "jose@email.com",
+                        "Ariel Partners",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
@@ -105,6 +110,7 @@ namespace HighFive.Server.Specs.Features.Recognitions
             table1.AddRow(new string[] {
                         "john@email.com",
                         "tom@email.com",
+                        "Ariel Partners",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
@@ -114,12 +120,12 @@ testRunner.Given("the following recognitions exist in the system:", ((string)(nu
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("View All Recognitions", SourceLine=15)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
+        [TechTalk.SpecRun.ScenarioAttribute("View All Recognitions", new string[] {
+                "framework"}, SourceLine=15)]
         public virtual void ViewAllRecognitions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View All Recognitions", new string[] {
-                        "ignore"});
+                        "framework"});
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -130,13 +136,15 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sender Email",
                         "Receiver Email",
-                        "CorporateValue",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
             table2.AddRow(new string[] {
                         "matthew@email.com",
                         "sue@email.com",
+                        "Ariel Partners",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
@@ -144,6 +152,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "john@email.com",
                         "tom@email.com",
+                        "Ariel Partners",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
@@ -151,6 +160,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "nikhil@email.com",
                         "jose@email.com",
+                        "Ariel Partners",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
@@ -158,6 +168,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "joe@email.com",
                         "suresh@email.com",
+                        "Ariel Partners",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
@@ -165,6 +176,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "sue@email.com",
                         "dave@email.com",
+                        "Ariel Partners",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",
@@ -242,13 +254,15 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sender Email",
                         "Receiver Email",
-                        "CorporateValue",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
             table1.AddRow(new string[] {
                         "joe@email.com",
                         "suresh@email.com",
+                        "Ariel Partners",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
@@ -256,6 +270,7 @@ this.FeatureBackground();
             table1.AddRow(new string[] {
                         "matthew@email.com",
                         "sue@email.com",
+                        "Ariel Partners",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
@@ -263,6 +278,7 @@ this.FeatureBackground();
             table1.AddRow(new string[] {
                         "sue@email.com",
                         "dave@email.com",
+                        "Ariel Partners",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",
@@ -270,6 +286,7 @@ this.FeatureBackground();
             table1.AddRow(new string[] {
                         "nikhil@email.com",
                         "jose@email.com",
+                        "Ariel Partners",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
@@ -277,6 +294,7 @@ this.FeatureBackground();
             table1.AddRow(new string[] {
                         "john@email.com",
                         "tom@email.com",
+                        "Ariel Partners",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
@@ -289,11 +307,11 @@ testRunner.Given("the following recognitions exist in the system:", ((string)(nu
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("View All Recognitions")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RecognitionFeed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("framework")]
         public virtual void ViewAllRecognitions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View All Recognitions", new string[] {
-                        "ignore"});
+                        "framework"});
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -304,13 +322,15 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sender Email",
                         "Receiver Email",
-                        "CorporateValue",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
             table2.AddRow(new string[] {
                         "matthew@email.com",
                         "sue@email.com",
+                        "Ariel Partners",
                         "Honesty",
                         "10",
                         "8/7/2016 14:21:00",
@@ -318,6 +338,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "john@email.com",
                         "tom@email.com",
+                        "Ariel Partners",
                         "Excellence",
                         "70",
                         "8/4/2016 09:44:00",
@@ -325,6 +346,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "nikhil@email.com",
                         "jose@email.com",
+                        "Ariel Partners",
                         "Respect",
                         "15",
                         "8/2/2016 19:04:00",
@@ -332,6 +354,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "joe@email.com",
                         "suresh@email.com",
+                        "Ariel Partners",
                         "Integrity",
                         "30",
                         "8/2/2016 08:15:00",
@@ -339,6 +362,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "sue@email.com",
                         "dave@email.com",
+                        "Ariel Partners",
                         "Vigilance",
                         "50",
                         "8/1/2016 10:15:00",

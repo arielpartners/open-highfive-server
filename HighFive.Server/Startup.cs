@@ -96,14 +96,15 @@ namespace HighFive.Server
 
             Mapper.Initialize(config =>
             {
-                config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
                 config.CreateMap<HighFiveUser, UserViewModel>()
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
-                    .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath));
+                    .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath)).ReverseMap();
                 config.CreateMap<OrganizationViewModel, Organization>().ReverseMap();
                 config.CreateMap<Recognition, RecognitionViewModel>()
-                    .ForMember(g => g.SenderEmail, opt => opt.MapFrom(u => u.Sender.UserName))
-                    .ForMember(g => g.ReceiverEmail, opt => opt.MapFrom(u => u.Receiver.UserName))
+                    .ForMember(g => g.SenderName, opt => opt.MapFrom(u => u.Sender.FirstName + " " + u.Sender.LastName))
+                    .ForMember(g => g.SenderEmail, opt => opt.MapFrom(u => u.Sender.Email))
+                    .ForMember(g => g.ReceiverName, opt => opt.MapFrom(u => u.Receiver.FirstName + " " + u.Receiver.LastName))
+                    .ForMember(g => g.ReceiverEmail, opt => opt.MapFrom(u => u.Receiver.Email))
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
                     .ForMember(g => g.CorporateValueName, opt => opt.MapFrom(u => u.Value.Name)).ReverseMap();
             });

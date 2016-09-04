@@ -79,21 +79,21 @@ namespace HighFive.Server.Services.Models
 
                     var recognitionLst = new List<Recognition>
                         {
-                            new Recognition{Sender = test,Receiver = john,Organization = org,Value = commitment,DateCreated = Convert.ToDateTime("8/2/2016 4:0:9 PM").ToUniversalTime(),Description = "you are awesome"},
-                            new Recognition{Sender = joe,Receiver = john,Organization = org,Value = courage,DateCreated = Convert.ToDateTime("8/4/2016 8:10:15 AM").ToUniversalTime(),Description = "Great job!"},
-                            new Recognition{Sender = jane,Receiver = john,Organization = org,Value = excellence,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "fantastic!"},
-                            new Recognition{Sender = mathew,Receiver = john,Organization = org,Value = honesty,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "like your honesty. Keep it flowing"},
-                            new Recognition{Sender = kate,Receiver = john,Organization = org,Value = vigilance,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "very alert"},
-                            new Recognition{Sender = nova,Receiver = john,Organization = org,Value = respect,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "bow down!"},
-                            new Recognition{Sender = john,Receiver = test,Organization = org,Value = integrity,DateCreated = Convert.ToDateTime("8/5/2016 11:8:9 AM").ToUniversalTime(),Description = "don't know what i would do without you"},
-                            new Recognition{Sender = joe,Receiver = test,Organization = org,Value = commitment,DateCreated = Convert.ToDateTime("8/3/2016 9:0:9 AM").ToUniversalTime(),Description = "ipsum laurem"},
-                            new Recognition{Sender = jane,Receiver = test,Organization = org,Value = courage,DateCreated = Convert.ToDateTime("8/12/2016 3:15:9 PM").ToUniversalTime(),Description = "masha alla"},
-                            new Recognition{Sender = john,Receiver = joe,Organization = org,Value = excellence,DateCreated = Convert.ToDateTime("8/8/2016 2:17:19 PM").ToUniversalTime(),Description = "Super maan"},
-                            new Recognition{Sender = jane,Receiver = joe,Organization = org,Value = integrity,DateCreated = Convert.ToDateTime("8/10/2016 1:12:59 PM").ToUniversalTime(),Description = "Thats great"},
-                            new Recognition{Sender = test,Receiver = joe,Organization = org,Value = commitment,DateCreated = Convert.ToDateTime("8/15/2016 3:45:48 PM").ToUniversalTime(),Description = "aha"},
-                            new Recognition{Sender = test,Receiver = jane,Organization = org,Value = courage,DateCreated = Convert.ToDateTime("8/20/2016 5:0:19 PM").ToUniversalTime(),Description = "Whaaaassssuuupppp"},
-                            new Recognition{Sender = john,Receiver = jane,Organization = org,Value = excellence,DateCreated = Convert.ToDateTime("8/17/2016 3:10:19 PM").ToUniversalTime(),Description = "oh yeah"},
-                            new Recognition{Sender = joe,Receiver = jane,Organization = org,Value = integrity,DateCreated = Convert.ToDateTime("8/18/2016 4:10:8 PM").ToUniversalTime(),Description = "oyee maaa"}
+                            new Recognition{Sender = test,Receiver = john,Organization = org,Value = commitment,DateCreated = Convert.ToDateTime("8/2/2016 4:0:9 PM").ToUniversalTime(),Description = "you are awesome",Points = 10},
+                            new Recognition{Sender = joe,Receiver = john,Organization = org,Value = courage,DateCreated = Convert.ToDateTime("8/4/2016 8:10:15 AM").ToUniversalTime(),Description = "Great job!",Points = 20},
+                            new Recognition{Sender = jane,Receiver = john,Organization = org,Value = excellence,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "fantastic!",Points = 30},
+                            new Recognition{Sender = mathew,Receiver = john,Organization = org,Value = honesty,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "like your honesty. Keep it flowing",Points = 40},
+                            new Recognition{Sender = kate,Receiver = john,Organization = org,Value = vigilance,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "very alert",Points = 60},
+                            new Recognition{Sender = nova,Receiver = john,Organization = org,Value = respect,DateCreated = Convert.ToDateTime("8/7/2016 10:10:19 AM").ToUniversalTime(),Description = "bow down!",Points = 50},
+                            new Recognition{Sender = john,Receiver = test,Organization = org,Value = integrity,DateCreated = Convert.ToDateTime("8/5/2016 11:8:9 AM").ToUniversalTime(),Description = "don't know what i would do without you",Points = 70},
+                            new Recognition{Sender = joe,Receiver = test,Organization = org,Value = commitment,DateCreated = Convert.ToDateTime("8/3/2016 9:0:9 AM").ToUniversalTime(),Description = "ipsum laurem",Points = 10},
+                            new Recognition{Sender = jane,Receiver = test,Organization = org,Value = courage,DateCreated = Convert.ToDateTime("8/12/2016 3:15:9 PM").ToUniversalTime(),Description = "masha alla",Points = 20},
+                            new Recognition{Sender = john,Receiver = joe,Organization = org,Value = excellence,DateCreated = Convert.ToDateTime("8/8/2016 2:17:19 PM").ToUniversalTime(),Description = "Super maan",Points = 30},
+                            new Recognition{Sender = jane,Receiver = joe,Organization = org,Value = integrity,DateCreated = Convert.ToDateTime("8/10/2016 1:12:59 PM").ToUniversalTime(),Description = "Thats great",Points = 70},
+                            new Recognition{Sender = test,Receiver = joe,Organization = org,Value = commitment,DateCreated = Convert.ToDateTime("8/15/2016 3:45:48 PM").ToUniversalTime(),Description = "aha",Points = 10},
+                            new Recognition{Sender = test,Receiver = jane,Organization = org,Value = courage,DateCreated = Convert.ToDateTime("8/20/2016 5:0:19 PM").ToUniversalTime(),Description = "Whaaaassssuuupppp",Points = 20},
+                            new Recognition{Sender = john,Receiver = jane,Organization = org,Value = excellence,DateCreated = Convert.ToDateTime("8/17/2016 3:10:19 PM").ToUniversalTime(),Description = "oh yeah",Points = 30},
+                            new Recognition{Sender = joe,Receiver = jane,Organization = org,Value = integrity,DateCreated = Convert.ToDateTime("8/18/2016 4:10:8 PM").ToUniversalTime(),Description = "oyee maaa",Points = 70}
                         };
                     _context.Recognitions.AddRange(recognitionLst);
                     await _context.SaveChangesAsync();

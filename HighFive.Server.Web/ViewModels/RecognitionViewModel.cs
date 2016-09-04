@@ -5,6 +5,7 @@ namespace HighFive.Server.Web.ViewModels
 {
     public class RecognitionViewModel
     {
+        public int Id { get; set; }
         public string SenderName { get; set; }
         [Required]
         public string SenderEmail { get; set; }
