@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "AutoMapper": "5.1.1",
     "HighFive.Server.Web": "1.0.0-*",
