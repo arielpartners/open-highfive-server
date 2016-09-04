@@ -79,25 +79,6 @@ namespace HighFive.Server.Web.Controllers
         }
 
         [TestMethod]
-        public void AuthController_Login_Successful()
-        {
-            var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();
-            signInManager.Setup(m => m.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
-                .Returns(Task.FromResult(Microsoft.AspNetCore.Identity.SignInResult.Success));
-            var repo = new Mock<IHighFiveRepository>();
-            var user = new HighFiveUser { Email = "test.user@email.com" };
-            repo.Setup(r => r.GetUserByEmail(It.IsAny<string>())).Returns(user);
-            var controller = new AuthController(signInManager.Object, repo.Object, _logger);
-            var authUser = new AuthViewModel { Email = "test.user@email.com", Password = "password" };
-            var result = controller.Login(authUser) as Task<IActionResult>;
-            var viewresult = result.Result;
-            var okObjectResult = viewresult as OkObjectResult;
-            okObjectResult.Value.ShouldBeEquivalentTo(
-                new UserViewModel { Email = "test.user@email.com" }, options => options
-                .Excluding(ctx => ctx.SelectedMemberPath == "DateCreated"));
-        }
-
-        [TestMethod]
         public void AuthController_Login_SimulatedServerFailure()
         {
             var signInManager = new Mock<IWrapSignInManager<HighFiveUser>>();

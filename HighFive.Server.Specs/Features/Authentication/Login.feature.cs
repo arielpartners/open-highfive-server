@@ -72,25 +72,25 @@ namespace HighFive.Server.Specs.Features.Authentication
                         "Password",
                         "FirstName",
                         "LastName",
-                        "Organization"});
+                        "Organization",
+                        "Password"});
             table1.AddRow(new string[] {
                         "test.user@email.com",
                         "password",
                         "Test",
                         "User",
-                        "arielpartners"});
+                        "arielpartners",
+                        "password"});
 #line 7
  testRunner.Given("The following user exists:", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Successful login", SourceLine=11)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
+        [TechTalk.SpecRun.ScenarioAttribute("Successful login", SourceLine=10)]
         public virtual void SuccessfulLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login", new string[] {
-                        "ignore"});
-#line 12
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login", ((string[])(null)));
+#line 11
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
@@ -101,11 +101,9 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "test.user@email.com",
                         "password"});
-#line 13
- testRunner.Given("I fill in the login form info:", ((string)(null)), table2, "Given ");
+#line 12
+ testRunner.When("I login with the following information:", ((string)(null)), table2, "When ");
 #line 16
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
  testRunner.Then("the login will be successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -120,19 +118,17 @@ this.FeatureBackground();
                         "Test",
                         "User",
                         "arielpartners"});
-#line 18
+#line 17
  testRunner.And("the following information will be returned", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Unsuccessful login", SourceLine=22)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void UnsuccessfulLogin()
+        [TechTalk.SpecRun.ScenarioAttribute("Unsuccessful login wrong password", SourceLine=20)]
+        public virtual void UnsuccessfulLoginWrongPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccessful login", new string[] {
-                        "ignore"});
-#line 23
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccessful login wrong password", ((string[])(null)));
+#line 21
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
@@ -143,38 +139,9 @@ this.FeatureBackground();
             table4.AddRow(new string[] {
                         "test.user@email.com",
                         "wrongpassword"});
-#line 24
- testRunner.Given("I fill in the  login information:", ((string)(null)), table4, "Given ");
-#line 27
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
- testRunner.Then("the login will be unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Validate login field length", SourceLine=30)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void ValidateLoginFieldLength()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate login field length", new string[] {
-                        "ignore"});
-#line 31
-this.ScenarioSetup(scenarioInfo);
-#line 6
-this.FeatureBackground();
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email",
-                        "Password"});
-            table5.AddRow(new string[] {
-                        "test.user@email.com",
-                        "123456789012345678901234567890123456789012345678901"});
-#line 32
- testRunner.Given("I fill in the login information:", ((string)(null)), table5, "Given ");
-#line 35
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 36
+#line 22
+ testRunner.When("I login with the following information:", ((string)(null)), table4, "When ");
+#line 25
  testRunner.Then("the login will be unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -249,13 +216,15 @@ this.FeatureBackground();
                         "Password",
                         "FirstName",
                         "LastName",
-                        "Organization"});
+                        "Organization",
+                        "Password"});
             table1.AddRow(new string[] {
                         "test.user@email.com",
                         "password",
                         "Test",
                         "User",
-                        "arielpartners"});
+                        "arielpartners",
+                        "password"});
 #line 7
  testRunner.Given("The following user exists:", ((string)(null)), table1, "Given ");
 #line hidden
@@ -264,12 +233,10 @@ this.FeatureBackground();
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void SuccessfulLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login", new string[] {
-                        "ignore"});
-#line 12
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login", ((string[])(null)));
+#line 11
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
@@ -280,11 +247,9 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "test.user@email.com",
                         "password"});
-#line 13
- testRunner.Given("I fill in the login form info:", ((string)(null)), table2, "Given ");
+#line 12
+ testRunner.When("I login with the following information:", ((string)(null)), table2, "When ");
 #line 16
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
  testRunner.Then("the login will be successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -299,21 +264,19 @@ this.FeatureBackground();
                         "Test",
                         "User",
                         "arielpartners"});
-#line 18
+#line 17
  testRunner.And("the following information will be returned", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Unsuccessful login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Unsuccessful login wrong password")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        public virtual void UnsuccessfulLogin()
+        public virtual void UnsuccessfulLoginWrongPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccessful login", new string[] {
-                        "ignore"});
-#line 23
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccessful login wrong password", ((string[])(null)));
+#line 21
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
@@ -324,40 +287,9 @@ this.FeatureBackground();
             table4.AddRow(new string[] {
                         "test.user@email.com",
                         "wrongpassword"});
-#line 24
- testRunner.Given("I fill in the  login information:", ((string)(null)), table4, "Given ");
-#line 27
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
- testRunner.Then("the login will be unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate login field length")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        public virtual void ValidateLoginFieldLength()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate login field length", new string[] {
-                        "ignore"});
-#line 31
-this.ScenarioSetup(scenarioInfo);
-#line 6
-this.FeatureBackground();
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email",
-                        "Password"});
-            table5.AddRow(new string[] {
-                        "test.user@email.com",
-                        "123456789012345678901234567890123456789012345678901"});
-#line 32
- testRunner.Given("I fill in the login information:", ((string)(null)), table5, "Given ");
-#line 35
- testRunner.When("I login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 36
+#line 22
+ testRunner.When("I login with the following information:", ((string)(null)), table4, "When ");
+#line 25
  testRunner.Then("the login will be unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

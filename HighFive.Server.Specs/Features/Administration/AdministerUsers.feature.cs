@@ -72,69 +72,31 @@ namespace HighFive.Server.Specs.Features.Administration
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("A user with email account DefinitelyNotInTheDatabaseUser@test.com does not have a" +
-                    "n account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table1.AddRow(new string[] {
-                        "newUser@test.com"});
+ testRunner.Given("A user with email accountDefinitelyNotInTheDatabaseUser@test.com does not have an" +
+                    " account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.When("I create an user account for them", ((string)(null)), table1, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table2.AddRow(new string[] {
-                        "newUser@test.com"});
-#line 12
- testRunner.Then("an account should be created for them", ((string)(null)), table2, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table3.AddRow(new string[] {
-                        "newUser@test.com"});
-#line 15
- testRunner.And("they can login", ((string)(null)), table3, "And ");
+ testRunner.When("I create an user account with email of accountDefinitelyNotInTheDatabaseUser@test" +
+                    ".com password of passw0rd and Organization of Ariel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 10
+ testRunner.Then("an account should be created for them with a username newUser@test.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Delete a user", SourceLine=19)]
+        [TechTalk.SpecRun.ScenarioAttribute("Delete a user", SourceLine=12)]
         [TechTalk.SpecRun.IgnoreAttribute()]
         public virtual void DeleteAUser()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a user", new string[] {
                         "Ignore"});
-#line 20
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table4.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 21
- testRunner.Given("A user exists", ((string)(null)), table4, "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table5.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 24
- testRunner.When("I delete the user", ((string)(null)), table5, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table6.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 27
- testRunner.Then("The user is removed from the system", ((string)(null)), table6, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table7.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 30
- testRunner.And("They can no longer login", ((string)(null)), table7, "And ");
+#line 14
+ testRunner.Given("A user with username existingUser@test.com and password passw0rd exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 15
+ testRunner.When("I delete the user with username existingUser@test.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+ testRunner.Then("The user with username existingUser@test.com is removed from the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -210,29 +172,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("A user with email account DefinitelyNotInTheDatabaseUser@test.com does not have a" +
-                    "n account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table1.AddRow(new string[] {
-                        "newUser@test.com"});
+ testRunner.Given("A user with email accountDefinitelyNotInTheDatabaseUser@test.com does not have an" +
+                    " account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.When("I create an user account for them", ((string)(null)), table1, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table2.AddRow(new string[] {
-                        "newUser@test.com"});
-#line 12
- testRunner.Then("an account should be created for them", ((string)(null)), table2, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table3.AddRow(new string[] {
-                        "newUser@test.com"});
-#line 15
- testRunner.And("they can login", ((string)(null)), table3, "And ");
+ testRunner.When("I create an user account with email of accountDefinitelyNotInTheDatabaseUser@test" +
+                    ".com password of passw0rd and Organization of Ariel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 10
+ testRunner.Then("an account should be created for them with a username newUser@test.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -245,36 +191,14 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a user", new string[] {
                         "Ignore"});
-#line 20
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table4.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 21
- testRunner.Given("A user exists", ((string)(null)), table4, "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table5.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 24
- testRunner.When("I delete the user", ((string)(null)), table5, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table6.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 27
- testRunner.Then("The user is removed from the system", ((string)(null)), table6, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Email"});
-            table7.AddRow(new string[] {
-                        "existingUser@test.com"});
-#line 30
- testRunner.And("They can no longer login", ((string)(null)), table7, "And ");
+#line 14
+ testRunner.Given("A user with username existingUser@test.com and password passw0rd exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 15
+ testRunner.When("I delete the user with username existingUser@test.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+ testRunner.Then("The user with username existingUser@test.com is removed from the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

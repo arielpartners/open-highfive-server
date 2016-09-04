@@ -5,29 +5,13 @@
 
 @Ignore
 Scenario: Create a new user
-	Given A user with email account DefinitelyNotInTheDatabaseUser@test.com does not have an account
-	When I create an user account for them
-	| Email            |
-	| newUser@test.com |
-	Then an account should be created for them
-	| Email            |
-	| newUser@test.com |
-	And they can login
-	| Email            |
-	| newUser@test.com |
+	Given A user with email accountDefinitelyNotInTheDatabaseUser@test.com does not have an account
+	When I create an user account with email of accountDefinitelyNotInTheDatabaseUser@test.com password of passw0rd and Organization of Ariel
+	Then an account should be created for them with a username newUser@test.com
 
-@Ignore
+	@Ignore
 Scenario: Delete a user
-	Given A user exists
-	| Email                 |
-	| existingUser@test.com |
-	When I delete the user
-	| Email                 |
-	| existingUser@test.com |
-	Then The user is removed from the system
-	| Email                 |
-	| existingUser@test.com |
-	And They can no longer login
-	| Email                 |
-	| existingUser@test.com |
+	Given A user with username existingUser@test.com and password passw0rd exists
+	When I delete the user with username existingUser@test.com
+	Then The user with username existingUser@test.com is removed from the database
 
