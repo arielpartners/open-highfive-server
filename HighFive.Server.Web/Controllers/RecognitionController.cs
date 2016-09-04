@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using HighFive.Server.Services.Models;
 using HighFive.Server.Web.ViewModels;
