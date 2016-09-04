@@ -68,10 +68,10 @@ namespace HighFive.Server.Specs.Features.Recognitions
 #line 6
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "SenderName",
-                        "ReceiverName",
-                        "OrganizationName",
-                        "CorporateValueName",
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
@@ -134,10 +134,10 @@ this.FeatureBackground();
  testRunner.When("I view the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "SenderName",
-                        "ReceiverName",
-                        "OrganizationName",
-                        "CorporateValueName",
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
@@ -252,10 +252,10 @@ this.FeatureBackground();
 #line 6
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "SenderName",
-                        "ReceiverName",
-                        "OrganizationName",
-                        "CorporateValueName",
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});
@@ -320,10 +320,10 @@ this.FeatureBackground();
  testRunner.When("I view the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "SenderName",
-                        "ReceiverName",
-                        "OrganizationName",
-                        "CorporateValueName",
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "CorporateValue Name",
                         "Points",
                         "DateCreated",
                         "Description"});

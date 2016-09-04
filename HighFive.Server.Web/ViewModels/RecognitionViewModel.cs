@@ -6,13 +6,10 @@ namespace HighFive.Server.Web.ViewModels
     public class RecognitionViewModel
     {
         public int Id { get; set; }
-        [Required]
         public string SenderName { get; set; }
-        public string SenderEmail { get; set; }
         [Required]
         public string SenderEmail { get; set; }
         public string ReceiverName { get; set; }
-        public string ReceiverEmail { get; set; }
         [Required]
         public string ReceiverEmail { get; set; }
         [Required]

@@ -96,10 +96,9 @@ namespace HighFive.Server
 
             Mapper.Initialize(config =>
             {
-                config.CreateMap<UserViewModel, HighFiveUser>().ReverseMap();
                 config.CreateMap<HighFiveUser, UserViewModel>()
                     .ForMember(g => g.OrganizationName, opt => opt.MapFrom(u => u.Organization.Name))
-                    .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath));
+                    .ForMember(g => g.OrganizationWebPath, opt => opt.MapFrom(u => u.Organization.WebPath)).ReverseMap();
                 config.CreateMap<OrganizationViewModel, Organization>().ReverseMap();
                 config.CreateMap<Recognition, RecognitionViewModel>()
                     .ForMember(g => g.SenderName, opt => opt.MapFrom(u => u.Sender.FirstName + " " + u.Sender.LastName))
