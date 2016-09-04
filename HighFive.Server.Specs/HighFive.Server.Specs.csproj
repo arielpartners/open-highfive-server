@@ -538,6 +538,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Logout.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Points\DisplayPointBalance.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayPointBalance.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Recognitions\CreateRecognition.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -553,6 +558,7 @@
     <Compile Include="StepDefinitions\Administration\AdministerUsersSteps.cs" />
     <Compile Include="StepDefinitions\Administration\SystemVersionSteps.cs" />
     <Compile Include="StepDefinitions\Authentication\LoginSteps.cs" />
+    <Compile Include="StepDefinitions\Points\DisplayPointBalanceSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\CreateRecognitionSteps.cs" />
     <Compile Include="StepDefinitions\Authentication\LogoutSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\RecognitionFeedSteps.cs" />
@@ -581,6 +587,10 @@
     <None Include="Features\Authentication\Logout.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Logout.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Points\DisplayPointBalance.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DisplayPointBalance.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Recognitions\CreateRecognition.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
