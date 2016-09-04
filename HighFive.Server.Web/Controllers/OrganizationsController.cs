@@ -41,7 +41,7 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = "Failed to get Organizations" });
         }
 
-        [HttpGet("{organizationname}")]
+        [HttpGet("{organizationName}")]
         public IActionResult GetOrganizationByName(string organizationName)
         {
             try
@@ -81,7 +81,7 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = $"Failed to add new organization {newOrganization.Name}" });
         }
 
-        [HttpPut("{organizationname}")]
+        [HttpPut("{organizationName}")]
         public async Task<IActionResult> Put(string organizationname, [FromBody]OrganizationViewModel updatedOrganizationViewModel)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -122,7 +122,7 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = $"Failed to update organization {organizationname}" });
         }
 
-        [HttpDelete("{organizationname}")]
+        [HttpDelete("{organizationName}")]
         public async Task<IActionResult> Delete(string organizationName)
         {
             try

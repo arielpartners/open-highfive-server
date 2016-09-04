@@ -16,6 +16,6 @@ namespace HighFive.Server.Services.Models
         [StringLength(1000)]
         public string Description { get; set; }
         public ICollection<Comment> Comments { get; set; }
-
+        public int Points { get; set; }
     }
 }
