@@ -95,7 +95,7 @@
 		},
 		{
 			"id": "629ed4b8-214b-b37d-f643-2f5c46c446a6",
-			"headers": "",
+			"headers": "Content-Type: application/json\n",
 			"url": "{{host}}/api/recognitions",
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -106,12 +106,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1473006132387,
+			"time": 1473035375496,
 			"name": "/api/recognitions",
 			"description": "Create a new recognition",
 			"collectionId": "41ff0447-d75d-db57-6749-2388d1ecdbec",
 			"responses": [],
-			"rawModeData": "{\n    \"senderName\": \"test.user@email.com\",\n    \"receiverName\": \"John.Doe@email.com\",\n    \"organizationName\": \"Ariel Partners\",\n    \"description\": \"you are awesome\"\n}"
+			"rawModeData": "{\n    \"senderEmail\": \"test.user@email.com\",\n    \"receiverEmail\": \"John.Doe@email.com\",\n    \"organizationName\": \"Ariel Partners\",\n    \"corporateValueName\": \"Integrity\",\n    \"description\": \"yyyyy\"\n}"
 		},
 		{
 			"id": "69711af8-23e3-6cd1-c746-9d75abdd13e6",

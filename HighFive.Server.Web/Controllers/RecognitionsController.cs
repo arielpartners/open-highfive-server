@@ -73,8 +73,14 @@ namespace HighFive.Server.Web.Controllers
                 newRecognition.Receiver = _repository.GetUserByEmail(recognition.ReceiverEmail);
                 newRecognition.Organization = _repository.GetOrganizationByName(recognition.OrganizationName);
                 newRecognition.Value = _repository.GetCorporateValueByName(recognition.CorporateValueName);
+                newRecognition.DateCreated = DateTime.UtcNow;
                 _repository.AddRecognition(newRecognition);
-                if (await _repository.SaveChangesAsync()) return Created($"api/recognitions/{newRecognition.Id}", newRecognition);
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    var recognitionViewModel = Mapper.Map<RecognitionViewModel>(newRecognition);
+                    return Created($"api/recognitions/{newRecognition.Id}", recognitionViewModel);
+                }
             }
             catch (HighFiveException ex)
             {
