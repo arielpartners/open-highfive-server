@@ -1,6 +1,4 @@
-﻿#region references
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using HighFive.Server.Services.Models;
@@ -9,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using HighFive.Server.Services.Utils;
-
-#endregion
 
 namespace HighFive.Server.Web.Controllers
 {
@@ -34,7 +30,7 @@ namespace HighFive.Server.Web.Controllers
         #region GetAll - GET api/users
 
         // GET api/users
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult GetAll()
         {
             try

@@ -161,6 +161,17 @@ namespace HighFive.Server.Services.Models
                     .OrderByDescending(x => x.DateCreated).ToList();
         }
 
+        public IEnumerable<Recognition> GetRecognitionsBySender(string senderName)
+        {
+            return _context.Recognitions
+                    .Include(s => s.Sender)
+                    .Include(r => r.Receiver)
+                    .Include(o => o.Organization)
+                    .Include(cv => cv.Value)
+                    .Where(w => w.Sender.Email.Equals(senderName, StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(x => x.DateCreated).ToList();
+        }
+
         public IEnumerable<Recognition> GetAllRecognitions()
         {
             _logger.LogInformation("Getting All Recognitions");
@@ -193,27 +204,29 @@ namespace HighFive.Server.Services.Models
 
         public IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysToGoBack)
         {
-
-            DateTime weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
-            var query = (from r in _context.Recognitions
-                         where r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) &&
-                         r.DateCreated > weekago
-                         group r by r.Value.Name into m
-                         select new GroupedMetric()
-                         {
-                             CorporateValue = m.Key,
-                             Points = m.Sum(r => r.Points)
-                         });
-            try
+            _logger.LogInformation("Getting All Metrics");
+            var weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
+            var query = from r in _context.Recognitions
+                        where r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) &&
+                              r.DateCreated > weekago
+                        group r by r.Value.Name into m
+                        select new GroupedMetric
+                        {
+                            CorporateValue = m.Key,
+                            Points = m.Sum(r => r.Points)
+                        };
+            var metricsList = _context.CorporateValues
+                                .OrderBy(a => a.Name)
+                                .Select(a => new GroupedMetric {CorporateValue = a.Name, Points = 0}).ToList();
+            if (!metricsList.Any()) return new List<GroupedMetric>();
+            foreach (var groupedMetric in query)
             {
-                return query.ToList();
+                var metricItem = metricsList.FirstOrDefault(x => x.CorporateValue == groupedMetric.CorporateValue);
+                if (metricItem != null) metricItem.Points = groupedMetric.Points;
             }
-            catch(Exception e)
-            {
-                _logger.LogError($"Error fetching week metrics for {organizationName}");
-                return new List<GroupedMetric>();
-            }
+            return metricsList.ToList();
         }
+
         #endregion
 
         public async Task IsConnected()

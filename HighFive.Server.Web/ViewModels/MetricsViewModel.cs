@@ -1,8 +1,5 @@
 ﻿using HighFive.Server.Services.Utils;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HighFive.Server.Web.ViewModels
 {

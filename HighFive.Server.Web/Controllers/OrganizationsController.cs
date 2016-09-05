@@ -25,13 +25,13 @@ namespace HighFive.Server.Web.Controllers
             _logger = logger;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult GetAll()
         {
             try
             {
                 var organizations = _repository.GetAllOrganizations().ToList();
-                if (organizations.Count > 0) return Ok(Mapper.Map<List<OrganizationViewModel>>(organizations));
+                if (organizations.Any()) return Ok(Mapper.Map<List<OrganizationViewModel>>(organizations));
                 return NoContent();
             }
             catch (HighFiveException ex)

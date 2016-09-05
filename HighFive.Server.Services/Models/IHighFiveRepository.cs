@@ -26,8 +26,8 @@ namespace HighFive.Server.Services.Models
         #region Recognition
         Recognition GetRecognitionById(int id);
         IEnumerable<Recognition> GetRecognitionsByReceiver(string receiverName);
+        IEnumerable<Recognition> GetRecognitionsBySender(string senderName);
         IEnumerable<Recognition> GetAllRecognitions();
-
         void AddRecognition(Recognition recognition);
         void UpdateRecognition(Recognition recognition);
         void DeleteRecognition(Recognition recognition);
