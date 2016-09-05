@@ -40,7 +40,7 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 var users = _repository.GetAllUsers().ToList();
-                if (users.Count > 0) return Ok(Mapper.Map<List<UserViewModel>>(users));
+                if (users.Any()) return Ok(Mapper.Map<List<UserViewModel>>(users));
                 return NoContent();
             }
             catch (HighFiveException ex)

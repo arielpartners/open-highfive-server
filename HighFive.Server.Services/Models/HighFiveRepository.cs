@@ -147,7 +147,18 @@ namespace HighFive.Server.Services.Models
                     .Include(r => r.Receiver)
                     .Include(o => o.Organization)
                     .Include(cv => cv.Value)
-                    .FirstOrDefault(x => x.Id==id);
+                    .FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<Recognition> GetRecognitionsByReceiver(string receiverName)
+        {
+            return _context.Recognitions
+                    .Include(s => s.Sender)
+                    .Include(r => r.Receiver)
+                    .Include(o => o.Organization)
+                    .Include(cv => cv.Value)
+                    .Where(w => w.Receiver.Email.Equals(receiverName, StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(x => x.DateCreated).ToList();
         }
 
         public IEnumerable<Recognition> GetAllRecognitions()
@@ -182,7 +193,7 @@ namespace HighFive.Server.Services.Models
 
         public IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysToGoBack)
         {
-            
+
             DateTime weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
             var query = (from r in _context.Recognitions
                          where r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) &&
