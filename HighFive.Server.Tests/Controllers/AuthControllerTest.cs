@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Threading.Tasks;
 
 #endregion
@@ -18,7 +17,7 @@ using System.Threading.Tasks;
 namespace HighFive.Server.Web.Controllers
 {
     [TestClass]
-    public class AuthControllerTest : Controller
+    public class AuthControllerTest
     {
         #region setup
 

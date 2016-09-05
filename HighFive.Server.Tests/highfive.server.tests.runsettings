@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <!-- Without these settings, the tests fail with "attempt to access unloaded AppDomain exception -->
+  <!-- CKS: Note everything runs fine under resharper test runner  -->
+  <MSTest>
+    <ForcedLegacyMode>true</ForcedLegacyMode>
+    <InProcMode>true</InProcMode>
+  </MSTest>
+</RunSettings>

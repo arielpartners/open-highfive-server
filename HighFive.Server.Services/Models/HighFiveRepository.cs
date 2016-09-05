@@ -183,6 +183,11 @@ namespace HighFive.Server.Services.Models
             _context.Database.CloseConnection();
         }
 
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;

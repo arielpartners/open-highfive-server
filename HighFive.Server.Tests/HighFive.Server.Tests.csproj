@@ -503,6 +503,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="CodeAnalysisRules.ruleset" />
+    <None Include="highfive.server.tests.runsettings" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

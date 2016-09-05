@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
+using FluentAssertions;
+using HighFive.Server.Services.Models;
+using HighFive.Server.Services.Utils;
+using HighFive.Server.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
-using HighFive.Server.Services.Models;
-using HighFive.Server.Web.ViewModels;
-using HighFive.Server.Services.Utils;
-using HighFive.Server.Web.Utils;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HighFive.Server.Web.Controllers
 {
     [TestClass]
-    public class OrganizationControllerTest : Controller
+    public class OrganizationControllerTest
     {
         #region Constructor
 

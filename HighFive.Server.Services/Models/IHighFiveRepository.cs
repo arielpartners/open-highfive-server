@@ -45,5 +45,7 @@ namespace HighFive.Server.Services.Models
         #endregion
 
         Task IsConnected();
+
+        int SaveChanges();
     }
 }

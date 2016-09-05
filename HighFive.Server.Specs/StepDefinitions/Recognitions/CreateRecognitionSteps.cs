@@ -21,7 +21,7 @@ namespace HighFive.Server.Specs.StepDefinitions.Recognitions
     public class CreateRecognitionSteps
     {
         private IList<Recognition> _recognitions;
-        private HighFiveUser _loggedInUser;
+        //private HighFiveUser _loggedInUser;
         private readonly DbContextOptions<HighFiveContext> _options;
         private IList<RecognitionViewModel> _recognitionOutputList;
 
