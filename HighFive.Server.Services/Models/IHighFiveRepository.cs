@@ -25,6 +25,7 @@ namespace HighFive.Server.Services.Models
 
         #region Recognition
         Recognition GetRecognitionById(int id);
+        IEnumerable<Recognition> GetRecognitionsByReceiver(string receiverName);
         IEnumerable<Recognition> GetAllRecognitions();
 
         void AddRecognition(Recognition recognition);
@@ -37,6 +38,7 @@ namespace HighFive.Server.Services.Models
 
 
         #endregion
+
         #region Organization
         void AddOrganization(Organization organization);
         IEnumerable<Organization> GetAllOrganizations();
@@ -44,6 +46,7 @@ namespace HighFive.Server.Services.Models
         void UpdateOrganization(Organization organization);
         void DeleteOrganization(Organization organization);
         #endregion
+
         #region Metrics
         IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysBack);
         #endregion

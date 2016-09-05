@@ -36,7 +36,7 @@ namespace HighFive.Server.Web.Controllers
             try
             {
                 var recognitions = _repository.GetAllRecognitions().ToList();
-                if (recognitions.Count > 0) return Ok(Mapper.Map<List<RecognitionViewModel>>(recognitions));
+                if (recognitions.Any()) return Ok(Mapper.Map<List<RecognitionViewModel>>(recognitions));
                 return NoContent();
             }
             catch (DbException ex)
@@ -46,20 +46,36 @@ namespace HighFive.Server.Web.Controllers
             return BadRequest(new { Message = "Failed to get recognitions" });
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetRecognitionById(int id)
+        //[HttpGet("{id}")]
+        //public IActionResult GetRecognitionById(int id)
+        //{
+        //    try
+        //    {
+        //        var recognition = _repository.GetRecognitionById(id);
+        //        if (recognition!=null) return Ok(Mapper.Map<RecognitionViewModel>(recognition));
+        //        return NoContent();
+        //    }
+        //    catch (DbException ex)
+        //    {
+        //        _logger.LogError("Failed to get recognition: {0}", ex);
+        //    }
+        //    return BadRequest(new { Message = $"Failed to get recognition {id}" });
+        //}
+
+        [HttpGet("{receiverName}")]
+        public IActionResult GetRecognitionsByReceiver(string receiverName)
         {
             try
             {
-                var recognition = _repository.GetRecognitionById(id);
-                if (recognition!=null) return Ok(Mapper.Map<RecognitionViewModel>(recognition));
+                var recognitions = _repository.GetRecognitionsByReceiver(receiverName);
+                if (recognitions.Any()) return Ok(Mapper.Map<List<RecognitionViewModel>>(recognitions));
                 return NoContent();
             }
             catch (DbException ex)
             {
-                _logger.LogError("Failed to get recognition: {0}", ex);
+                _logger.LogError("Failed to get recognitions by receiver: {0}", ex);
             }
-            return BadRequest(new { Message = $"Failed to get recognition {id}" });
+            return BadRequest(new { Message = $"Failed to get recognitions by receiver {receiverName}" });
         }
 
         [HttpPost]
