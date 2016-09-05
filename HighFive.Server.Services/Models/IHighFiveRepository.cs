@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HighFive.Server.Services.Utils;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HighFive.Server.Services.Models
@@ -25,6 +26,7 @@ namespace HighFive.Server.Services.Models
         #region Recognition
         Recognition GetRecognitionById(int id);
         IEnumerable<Recognition> GetAllRecognitions();
+
         void AddRecognition(Recognition recognition);
         void UpdateRecognition(Recognition recognition);
         void DeleteRecognition(Recognition recognition);
@@ -35,13 +37,15 @@ namespace HighFive.Server.Services.Models
 
 
         #endregion
-
         #region Organization
         void AddOrganization(Organization organization);
         IEnumerable<Organization> GetAllOrganizations();
         Organization GetOrganizationByName(string organizationName);
         void UpdateOrganization(Organization organization);
         void DeleteOrganization(Organization organization);
+        #endregion
+        #region Metrics
+        IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysBack);
         #endregion
 
         Task IsConnected();

@@ -538,6 +538,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Logout.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Metrics\MonthCorpTrend.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthCorpTrend.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Metrics\ToDateCorpTrend.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToDateCorpTrend.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Metrics\WeekCorpTrend.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeekCorpTrend.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Metrics\YearCorpTrend.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YearCorpTrend.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Points\DisplayPointBalance.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -562,6 +582,7 @@
     <Compile Include="StepDefinitions\Recognitions\CreateRecognitionSteps.cs" />
     <Compile Include="StepDefinitions\Authentication\LogoutSteps.cs" />
     <Compile Include="StepDefinitions\Recognitions\RecognitionFeedSteps.cs" />
+    <Compile Include="StepDefinitions\Metrics\WeeklyCorporateTrendsSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -587,6 +608,22 @@
     <None Include="Features\Authentication\Logout.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Logout.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Metrics\MonthCorpTrend.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MonthCorpTrend.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Metrics\ToDateCorpTrend.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ToDateCorpTrend.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Metrics\WeekCorpTrend.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>WeekCorpTrend.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Metrics\YearCorpTrend.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>YearCorpTrend.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Points\DisplayPointBalance.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

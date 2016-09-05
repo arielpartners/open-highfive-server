@@ -12,6 +12,7 @@ using FluentAssertions;
 using HighFive.Server.Services.Models;
 using HighFive.Server.Web.Controllers;
 using HighFive.Server.Services.Utils;
+using System.Linq;
 
 #endregion
 
@@ -352,6 +353,50 @@ namespace HighFive.Server.Models
             }
         }
 
+        [TestMethod]
+        public void Repository_GetWeekMetrics()
+        {
+            var options = CreateNewContextOptions();
+            using (var context = new HighFiveContext(_config, options))
+            {
+                var repo = new HighFiveRepository(context, _repoLogger);
+
+                var corpVal1 = new CorporateValue { Name = "Corporate Value1" };
+                var corpVal2 = new CorporateValue { Name = "Corporate Value2" };
+                var corpVal3 = new CorporateValue { Name = "Corporate Value3" };
+
+                ICollection<CorporateValue> corpVals = new List<CorporateValue>();
+                corpVals.Add(corpVal1);
+                corpVals.Add(corpVal2);
+                corpVals.Add(corpVal3);
+
+                repo.AddCorporateValue(corpVal1);
+                repo.AddCorporateValue(corpVal2);
+                repo.AddCorporateValue(corpVal3);
+                repo.SaveChanges();
+
+                Organization org = new Organization { Name = "TestOrg", Values = corpVals };
+
+                repo.AddOrganization(org);
+
+                //DateCreated will be within a week since it is set to now
+                repo.AddRecognition(new Recognition { Value = repo.GetCorporateValueByName("Corporate Value1"), Organization = org, Points = 1 });
+                repo.AddRecognition(new Recognition { Value = repo.GetCorporateValueByName("Corporate Value1"), Organization = org, Points = 1 });
+                repo.AddRecognition(new Recognition { Value = repo.GetCorporateValueByName("Corporate Value2"), Organization = org, Points = 3 });
+                repo.AddRecognition(new Recognition { Value = repo.GetCorporateValueByName("Corporate Value3"), Organization = org, Points = 5 });
+
+                repo.SaveChanges();
+                var weekMetrics = repo.GetMetrics(org.Name, 7);
+                weekMetrics.Count.Should().Equals(3);
+                var met1 = weekMetrics.FirstOrDefault<GroupedMetric>(m => m.CorporateValue == "Corporate Value1");
+                met1.Points.Should().Equals(2);
+                var met2 = weekMetrics.FirstOrDefault<GroupedMetric>(m => m.CorporateValue == "Corporate Value2");
+                met1.Points.Should().Equals(2);
+                var met3 = weekMetrics.FirstOrDefault<GroupedMetric>(m => m.CorporateValue == "Corporate Value3");
+                met1.Points.Should().Equals(2);
+            }
+
+        }
         #endregion
 
         #region utilities

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Utils;
+using System;
 
 namespace HighFive.Server.Services.Models
 {
@@ -177,6 +178,33 @@ namespace HighFive.Server.Services.Models
 
         #endregion
 
+        #region Metrics
+
+        public IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysToGoBack)
+        {
+            
+            DateTime weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
+            var query = (from r in _context.Recognitions
+                         where r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) &&
+                         r.DateCreated > weekago
+                         group r by r.Value.Name into m
+                         select new GroupedMetric()
+                         {
+                             CorporateValue = m.Key,
+                             Points = m.Sum(r => r.Points)
+                         });
+            try
+            {
+                return query.ToList();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError($"Error fetching week metrics for {organizationName}");
+                return new List<GroupedMetric>();
+            }
+        }
+        #endregion
+
         public async Task IsConnected()
         {
             await _context.Database.OpenConnectionAsync();
@@ -192,5 +220,6 @@ namespace HighFive.Server.Services.Models
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
     }
 }
