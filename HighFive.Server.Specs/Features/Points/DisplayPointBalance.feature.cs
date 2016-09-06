@@ -18,7 +18,7 @@ namespace HighFive.Server.Specs.Features.Points
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("DisplayPointBalance", Description="\tIn order to know how many points I have to spend \r\n\tAs a user\r\n\tI want to see my" +
-        " points balance on the home page after i login ", SourceFile="Features\\Points\\DisplayPointBalance.feature", SourceLine=0)]
+        " points balance on the home page after i login \r\n\t;", SourceFile="Features\\Points\\DisplayPointBalance.feature", SourceLine=0)]
     public partial class DisplayPointBalanceFeature
     {
         
@@ -32,7 +32,7 @@ namespace HighFive.Server.Specs.Features.Points
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DisplayPointBalance", "\tIn order to know how many points I have to spend \r\n\tAs a user\r\n\tI want to see my" +
-                    " points balance on the home page after i login ", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    " points balance on the home page after i login \r\n\t;", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -63,16 +63,9 @@ namespace HighFive.Server.Specs.Features.Points
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Display point balance", new string[] {
-                "framework"}, SourceLine=7)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void DisplayPointBalance()
+        public virtual void FeatureBackground()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display point balance", new string[] {
-                        "ignore",
-                        "framework"});
-#line 8
-this.ScenarioSetup(scenarioInfo);
+#line 7
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "First Name",
@@ -83,19 +76,32 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Joe",
                         "Blow",
-                        "joe.blow@yahoo.com",
+                        "joe@yahoo.com",
                         "Ariel Partners",
                         "200"});
-#line 9
- testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
-#line 12
+#line 8
+testRunner.Given("I am logged in as the following user2:", ((string)(null)), table1, "Given ");
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Display point balance", new string[] {
+                "framework"}, SourceLine=12)]
+        public virtual void DisplayPointBalance()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display point balance", new string[] {
+                        "framework"});
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 14
  testRunner.When("I view my point balance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Points"});
             table2.AddRow(new string[] {
                         "200"});
-#line 13
+#line 15
  testRunner.Then("I should see the following point balance:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -124,7 +130,7 @@ this.ScenarioSetup(scenarioInfo);
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DisplayPointBalance", "\tIn order to know how many points I have to spend \r\n\tAs a user\r\n\tI want to see my" +
-                    " points balance on the home page after i login ", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    " points balance on the home page after i login \r\n\t;", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -161,18 +167,9 @@ this.ScenarioSetup(scenarioInfo);
             testRunner.CollectScenarioErrors();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Display point balance")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DisplayPointBalance")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("framework")]
-        public virtual void DisplayPointBalance()
+        public virtual void FeatureBackground()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display point balance", new string[] {
-                        "ignore",
-                        "framework"});
-#line 8
-this.ScenarioSetup(scenarioInfo);
+#line 7
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "First Name",
@@ -183,19 +180,34 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Joe",
                         "Blow",
-                        "joe.blow@yahoo.com",
+                        "joe@yahoo.com",
                         "Ariel Partners",
                         "200"});
-#line 9
- testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
-#line 12
+#line 8
+testRunner.Given("I am logged in as the following user2:", ((string)(null)), table1, "Given ");
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Display point balance")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DisplayPointBalance")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("framework")]
+        public virtual void DisplayPointBalance()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display point balance", new string[] {
+                        "framework"});
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 14
  testRunner.When("I view my point balance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Points"});
             table2.AddRow(new string[] {
                         "200"});
-#line 13
+#line 15
  testRunner.Then("I should see the following point balance:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
