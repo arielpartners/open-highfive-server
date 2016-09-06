@@ -387,12 +387,12 @@ namespace HighFive.Server.Models
 
                 repo.SaveChanges();
                 var weekMetrics = repo.GetMetrics(org.Name, 7);
-                weekMetrics.Count.Should().Equals(3);
-                var met1 = weekMetrics.FirstOrDefault<GroupedMetric>(m => m.CorporateValue == "Corporate Value1");
+                weekMetrics.ToList().Count.Should().Equals(3);
+                var met1 = weekMetrics.FirstOrDefault(m => m.CorporateValue == "Corporate Value1");
                 met1.Points.Should().Equals(2);
-                var met2 = weekMetrics.FirstOrDefault<GroupedMetric>(m => m.CorporateValue == "Corporate Value2");
+                var met2 = weekMetrics.FirstOrDefault(m => m.CorporateValue == "Corporate Value2");
                 met1.Points.Should().Equals(2);
-                var met3 = weekMetrics.FirstOrDefault<GroupedMetric>(m => m.CorporateValue == "Corporate Value3");
+                var met3 = weekMetrics.FirstOrDefault(m => m.CorporateValue == "Corporate Value3");
                 met1.Points.Should().Equals(2);
             }
 

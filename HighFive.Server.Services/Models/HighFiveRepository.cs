@@ -36,8 +36,8 @@ namespace HighFive.Server.Services.Models
         {
             _logger.LogInformation("Getting All Users from the Database");
             return _context.Users
-                      .Include(u => u.Organization.Values)
-                      .ToList();
+                .Include(u => u.Organization.Values)
+                .ToList();
         }
 
         public HighFiveUser GetUserByEmail(string email)
@@ -72,8 +72,8 @@ namespace HighFive.Server.Services.Models
         {
             _logger.LogInformation("Getting All Organizations from the Database");
             return _context.Organizations
-                        .Include(o => o.Values)
-                        .ToList();
+                .Include(o => o.Values)
+                .ToList();
         }
 
         public void UpdateOrganization(Organization organization)
@@ -97,14 +97,29 @@ namespace HighFive.Server.Services.Models
 
         public Organization GetOrganizationByName(string organizationName)
         {
-            return _context.Organizations
-                .Include(o => o.Values)
-                .FirstOrDefault(o => o.Name.Equals(organizationName,StringComparison.OrdinalIgnoreCase) || o.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase));
+            try
+            {
+                return _context.Organizations
+                    .Include(o => o.Values)
+                    .FirstOrDefault(o => o.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) || o.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion
 
         #region CorporateValue
+
+        public IEnumerable<CorporateValue> GetCorporateValuesByOrganizationName(string organizationName)
+        {
+            var organization = _context.Organizations
+                .Include(o => o.Values)
+                .FirstOrDefault(o => o.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) || o.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase));
+            return organization?.Values.ToList() ?? new List<CorporateValue>();
+        }
 
         public void AddCorporateValue(CorporateValue corporateValue)
         {
@@ -158,7 +173,7 @@ namespace HighFive.Server.Services.Models
                     .Include(o => o.Organization)
                     .Include(cv => cv.Value)
                     .Where(w => w.Receiver.Email.Equals(receiverName, StringComparison.OrdinalIgnoreCase))
-                    .OrderByDescending(x => x.DateCreated).ToList();
+                    .OrderByDescending(x => x.DateCreated).Take(20).ToList();
         }
 
         public IEnumerable<Recognition> GetRecognitionsBySender(string senderName)
@@ -169,7 +184,7 @@ namespace HighFive.Server.Services.Models
                     .Include(o => o.Organization)
                     .Include(cv => cv.Value)
                     .Where(w => w.Sender.Email.Equals(senderName, StringComparison.OrdinalIgnoreCase))
-                    .OrderByDescending(x => x.DateCreated).ToList();
+                    .OrderByDescending(x => x.DateCreated).Take(20).ToList();
         }
 
         public IEnumerable<Recognition> GetAllRecognitions()
@@ -180,7 +195,7 @@ namespace HighFive.Server.Services.Models
                     .Include(r => r.Receiver)
                     .Include(o => o.Organization)
                     .Include(cv => cv.Value)
-                    .OrderByDescending(x => x.DateCreated).ToList();
+                    .OrderByDescending(x => x.DateCreated).Take(20).ToList();
         }
 
         public void AddRecognition(Recognition recognition)
@@ -202,9 +217,13 @@ namespace HighFive.Server.Services.Models
 
         #region Metrics
 
-        public IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysToGoBack)
+        public IEnumerable<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysToGoBack)
         {
             _logger.LogInformation("Getting All Metrics");
+            var metricsList = new List<GroupedMetric>();
+            var organizationCorpoateValues = GetCorporateValuesByOrganizationName(organizationName).ToList();
+            if(!organizationCorpoateValues.Any()) return metricsList;
+
             var weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
             var query = from r in _context.Recognitions
                         where (r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) || r.Organization.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase)) &&
@@ -213,21 +232,19 @@ namespace HighFive.Server.Services.Models
                         select new GroupedMetric
                         {
                             CorporateValue = m.Key,
+                            TotalCount = m.Count(),
                             Points = m.Sum(r => r.Points)
                         };
-            var org = _context.Organizations
-                .Include(cv => cv.Values)
-                .FirstOrDefault(r=> r.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) || r.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase));
-
-            if (org == null) return new List<GroupedMetric>();
-            var metricsList = org.Values
-                .OrderBy(a => a.Name)
-                .Select(a => new GroupedMetric {CorporateValue = a.Name, Points = 0}).ToList();
-            if (!metricsList.Any()) return new List<GroupedMetric>();
+            metricsList = organizationCorpoateValues
+                                .OrderBy(a => a.Name)
+                                .Select(a => new GroupedMetric { CorporateValue = a.Name, TotalCount = 0, Points = 0 }).ToList();
+            if (!metricsList.Any()) return metricsList;
             foreach (var groupedMetric in query)
             {
                 var metricItem = metricsList.FirstOrDefault(x => x.CorporateValue == groupedMetric.CorporateValue);
-                if (metricItem != null) metricItem.Points = groupedMetric.Points;
+                if (metricItem == null) continue;
+                metricItem.TotalCount = groupedMetric.TotalCount;
+                metricItem.Points = groupedMetric.Points;
             }
             return metricsList.ToList();
         }

@@ -82,6 +82,10 @@ namespace HighFive.Server.Web.Controllers
         public async Task<IActionResult> Post([FromBody] RecognitionViewModel recognition)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (string.IsNullOrEmpty(recognition.SenderEmail)) return BadRequest(new { Message = "Missing Sender Information" });
+            if (string.IsNullOrEmpty(recognition.ReceiverEmail)) return BadRequest(new { Message = "Missing Receiver Information" });
+            if (string.IsNullOrEmpty(recognition.OrganizationName)) return BadRequest(new { Message = "Missing Organization Information" });
+            if (string.IsNullOrEmpty(recognition.CorporateValueName)) return BadRequest(new { Message = "Missing Corporate Value Information" });
             try
             {
                 var newRecognition = Mapper.Map<Recognition>(recognition);
@@ -91,12 +95,7 @@ namespace HighFive.Server.Web.Controllers
                 newRecognition.Value = _repository.GetCorporateValueByName(recognition.CorporateValueName);
                 newRecognition.DateCreated = DateTime.UtcNow;
                 _repository.AddRecognition(newRecognition);
-
-                if (await _repository.SaveChangesAsync())
-                {
-                    var recognitionViewModel = Mapper.Map<RecognitionViewModel>(newRecognition);
-                    return Created($"api/recognitions/{newRecognition.Id}", recognitionViewModel);
-                }
+                if (await _repository.SaveChangesAsync()) return Created($"api/recognitions/{newRecognition.Id}", Mapper.Map<RecognitionViewModel>(newRecognition));
             }
             catch (HighFiveException ex)
             {

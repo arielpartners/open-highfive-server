@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HighFive.Server.Services.Utils;
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,10 +33,10 @@ namespace HighFive.Server.Web.Controllers
             var viewModel = new MetricsViewModel();
             try
             {
-                viewModel.Week = _repository.GetMetrics(orgName, 7);
-                viewModel.Month = _repository.GetMetrics(orgName, 30);
-                viewModel.Year = _repository.GetMetrics(orgName, 365);
-                viewModel.ToDate = _repository.GetMetrics(orgName, (DateTime.Now - new DateTime(DateTime.Now.Year, 1, 1)).Days);
+                viewModel.Week = _repository.GetMetrics(orgName, 7).ToList();
+                viewModel.Month = _repository.GetMetrics(orgName, 30).ToList();
+                viewModel.Year = _repository.GetMetrics(orgName, 365).ToList();
+                viewModel.ToDate = _repository.GetMetrics(orgName, (DateTime.Now - new DateTime(DateTime.Now.Year, 1, 1)).Days).ToList();
                 return Ok(viewModel);
             }
             catch (HighFiveException ex)

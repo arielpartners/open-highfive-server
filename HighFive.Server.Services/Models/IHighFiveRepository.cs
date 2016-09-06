@@ -48,7 +48,7 @@ namespace HighFive.Server.Services.Models
         #endregion
 
         #region Metrics
-        IList<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysBack);
+        IEnumerable<GroupedMetric> GetMetrics(string organizationName, int numberOfDaysBack);
         #endregion
 
         Task IsConnected();
