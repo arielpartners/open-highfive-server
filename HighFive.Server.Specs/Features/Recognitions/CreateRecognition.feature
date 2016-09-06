@@ -14,7 +14,6 @@ Scenario: F-13 Successfully create a recognition for an existing user
 	| Sender Email       | Receiver Email         | Organization Name | CorporateValue Name | Points | Description |
 	| joe.blow@email.com | suresh.nikam@email.com | Ariel Partners    | Integrity           | 1      | Great job!  |
 
-@ignore
 Scenario: F-7 Successfully create a recognition for a new user
 	Given I am logged in as the following user:
 	| First Name | Last Name | Email              | Organization Name | Password |

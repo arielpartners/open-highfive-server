@@ -24,5 +24,28 @@ namespace HighFive.Server.Services.Models
         public string Phone { get; set; }
         public DateTime HireDate { get; set; }
 
+        public static string FirstNameFromName(string Name)
+        {
+            if (Name.IndexOf(" ") > 1)
+            {
+                return Name.Split()[0];
+            }
+            else
+            {
+                return Name;
+            }
+        }
+    
+        public static string LastNameFromName(string Name)
+        {
+            if (Name.IndexOf(" ") > 1)
+            {
+                return Name.Split()[1];
+            }
+            else
+            {
+                return Name;
+            }
+        }
     }
 }

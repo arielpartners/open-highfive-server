@@ -86,10 +86,10 @@ namespace HighFive.Server.Specs.Features.Authentication
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Successful login", SourceLine=10)]
-        public virtual void SuccessfulLogin()
+        [TechTalk.SpecRun.ScenarioAttribute("F-9 Successful login", SourceLine=10)]
+        public virtual void F_9SuccessfulLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Successful login", ((string[])(null)));
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -124,10 +124,10 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Unsuccessful login wrong password", SourceLine=20)]
-        public virtual void UnsuccessfulLoginWrongPassword()
+        [TechTalk.SpecRun.ScenarioAttribute("F-9 Unsuccessful login wrong password", SourceLine=20)]
+        public virtual void F_9UnsuccessfulLoginWrongPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccessful login wrong password", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Unsuccessful login wrong password", ((string[])(null)));
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -231,11 +231,11 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-9 Successful login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
-        public virtual void SuccessfulLogin()
+        public virtual void F_9SuccessfulLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Successful login", ((string[])(null)));
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -271,11 +271,11 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Unsuccessful login wrong password")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-9 Unsuccessful login wrong password")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
-        public virtual void UnsuccessfulLoginWrongPassword()
+        public virtual void F_9UnsuccessfulLoginWrongPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccessful login wrong password", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Unsuccessful login wrong password", ((string[])(null)));
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 6

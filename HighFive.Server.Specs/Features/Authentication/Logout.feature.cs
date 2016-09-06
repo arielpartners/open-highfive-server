@@ -84,11 +84,11 @@ namespace HighFive.Server.Specs.Features.Authentication
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Logout successful", SourceLine=11)]
+        [TechTalk.SpecRun.ScenarioAttribute("F-9 Logout successful", SourceLine=11)]
         [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void LogoutSuccessful()
+        public virtual void F_9LogoutSuccessful()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout successful", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Logout successful", new string[] {
                         "ignore"});
 #line 12
 this.ScenarioSetup(scenarioInfo);
@@ -111,11 +111,11 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Cannot logout if not logged in", SourceLine=19)]
+        [TechTalk.SpecRun.ScenarioAttribute("F-9 Cannot logout if not logged in", SourceLine=19)]
         [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void CannotLogoutIfNotLoggedIn()
+        public virtual void F_9CannotLogoutIfNotLoggedIn()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot logout if not logged in", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Cannot logout if not logged in", new string[] {
                         "ignore"});
 #line 20
 this.ScenarioSetup(scenarioInfo);
@@ -220,12 +220,12 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logout successful")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-9 Logout successful")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Logout")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        public virtual void LogoutSuccessful()
+        public virtual void F_9LogoutSuccessful()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout successful", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Logout successful", new string[] {
                         "ignore"});
 #line 12
 this.ScenarioSetup(scenarioInfo);
@@ -249,12 +249,12 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Cannot logout if not logged in")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-9 Cannot logout if not logged in")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Logout")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        public virtual void CannotLogoutIfNotLoggedIn()
+        public virtual void F_9CannotLogoutIfNotLoggedIn()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot logout if not logged in", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-9 Cannot logout if not logged in", new string[] {
                         "ignore"});
 #line 20
 this.ScenarioSetup(scenarioInfo);

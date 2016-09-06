@@ -120,13 +120,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("F-7 Successfully create a recognition for a new user", SourceLine=17)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
+        [TechTalk.SpecRun.ScenarioAttribute("F-7 Successfully create a recognition for a new user", SourceLine=16)]
         public virtual void F_7SuccessfullyCreateARecognitionForANewUser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-7 Successfully create a recognition for a new user", new string[] {
-                        "ignore"});
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-7 Successfully create a recognition for a new user", ((string[])(null)));
+#line 17
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -141,7 +139,7 @@ this.ScenarioSetup(scenarioInfo);
                         "joe.blow@email.com",
                         "Ariel Partners",
                         "password"});
-#line 19
+#line 18
  testRunner.Given("I am logged in as the following user:", ((string)(null)), table4, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -150,7 +148,7 @@ this.ScenarioSetup(scenarioInfo);
             table5.AddRow(new string[] {
                         "John Smith",
                         "john.smith@email.com"});
-#line 22
+#line 21
  testRunner.And("the following user does not exist:", ((string)(null)), table5, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -169,7 +167,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Integrity",
                         "1",
                         "Great job!"});
-#line 25
+#line 24
  testRunner.When("I create the following recognition:", ((string)(null)), table6, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -186,7 +184,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Integrity",
                         "1",
                         "Great job!"});
-#line 28
+#line 27
  testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table7, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -195,7 +193,7 @@ this.ScenarioSetup(scenarioInfo);
             table8.AddRow(new string[] {
                         "john.smith@email.com",
                         "John Smith"});
-#line 31
+#line 30
  testRunner.And("the following user should exist:", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -324,12 +322,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-7 Successfully create a recognition for a new user")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateRecognition")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void F_7SuccessfullyCreateARecognitionForANewUser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-7 Successfully create a recognition for a new user", new string[] {
-                        "ignore"});
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-7 Successfully create a recognition for a new user", ((string[])(null)));
+#line 17
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -344,7 +340,7 @@ this.ScenarioSetup(scenarioInfo);
                         "joe.blow@email.com",
                         "Ariel Partners",
                         "password"});
-#line 19
+#line 18
  testRunner.Given("I am logged in as the following user:", ((string)(null)), table4, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -353,7 +349,7 @@ this.ScenarioSetup(scenarioInfo);
             table5.AddRow(new string[] {
                         "John Smith",
                         "john.smith@email.com"});
-#line 22
+#line 21
  testRunner.And("the following user does not exist:", ((string)(null)), table5, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -372,7 +368,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Integrity",
                         "1",
                         "Great job!"});
-#line 25
+#line 24
  testRunner.When("I create the following recognition:", ((string)(null)), table6, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -389,7 +385,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Integrity",
                         "1",
                         "Great job!"});
-#line 28
+#line 27
  testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table7, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -398,7 +394,7 @@ this.ScenarioSetup(scenarioInfo);
             table8.AddRow(new string[] {
                         "john.smith@email.com",
                         "John Smith"});
-#line 31
+#line 30
  testRunner.And("the following user should exist:", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();

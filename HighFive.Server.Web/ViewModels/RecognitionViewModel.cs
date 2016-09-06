@@ -20,5 +20,8 @@ namespace HighFive.Server.Web.ViewModels
         public DateTime DateCreated { get; set; }
         public string Description { get; set; }
         public int Points { get; set; }
+
+        public string NewUserName { get; set; }
+        public string NewUserEmail { get; set; }
     }
 }

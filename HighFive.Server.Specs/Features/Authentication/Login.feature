@@ -8,7 +8,7 @@ Background:
 	| Email               | Password | FirstName | LastName | Organization  | Password |
 	| test.user@email.com | password | Test      | User     | arielpartners | password |
 
-Scenario: Successful login
+Scenario: F-9 Successful login
 	When I login with the following information:
 	| Email               | Password |
 	| test.user@email.com | password |
@@ -18,7 +18,7 @@ Scenario: Successful login
 	| Email               | Password | FirstName | LastName | Organization  |
 	| test.user@email.com | password | Test      | User     | arielpartners |
 		
-Scenario: Unsuccessful login wrong password
+Scenario: F-9 Unsuccessful login wrong password
 	When I login with the following information:
 	| Email               | Password      |
 	| test.user@email.com | wrongpassword |

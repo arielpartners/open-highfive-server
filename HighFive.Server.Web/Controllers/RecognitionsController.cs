@@ -83,18 +83,37 @@ namespace HighFive.Server.Web.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             if (string.IsNullOrEmpty(recognition.SenderEmail)) return BadRequest(new { Message = "Missing Sender Information" });
-            if (string.IsNullOrEmpty(recognition.ReceiverEmail)) return BadRequest(new { Message = "Missing Receiver Information" });
             if (string.IsNullOrEmpty(recognition.OrganizationName)) return BadRequest(new { Message = "Missing Organization Information" });
             if (string.IsNullOrEmpty(recognition.CorporateValueName)) return BadRequest(new { Message = "Missing Corporate Value Information" });
             try
             {
                 var newRecognition = Mapper.Map<Recognition>(recognition);
-                newRecognition.Sender = _repository.GetUserByEmail(recognition.SenderEmail);
-                if (newRecognition.Sender == null) return BadRequest(new {Message = "Missing Sender Information"});
-                newRecognition.Receiver = _repository.GetUserByEmail(recognition.ReceiverEmail);
-                if(newRecognition.Receiver == null) return BadRequest(new { Message = "Missing Receiver Information" });
                 newRecognition.Organization = _repository.GetOrganizationByName(recognition.OrganizationName);
-                if(newRecognition.Organization==null) return BadRequest(new { Message = "Missing Organization Information" });
+
+                if (!String.IsNullOrEmpty(recognition.NewUserEmail))
+                {
+                    // we need to make a new user
+                    var newUser = _repository.GetUserByEmail(recognition.NewUserEmail);
+                    if (newUser == null)
+                    {
+                        var theNewUser = new HighFiveUser()
+                        {
+                            Email = recognition.NewUserEmail,
+                            FirstName = HighFiveUser.FirstNameFromName(recognition.NewUserName),
+                            LastName = HighFiveUser.LastNameFromName(recognition.NewUserName),
+                            Organization = newRecognition.Organization
+                        };
+                        _repository.AddUser(theNewUser);
+                        await _repository.SaveChangesAsync();
+                    }
+                    newRecognition.Receiver = _repository.GetUserByEmail(recognition.NewUserEmail);
+                }
+                else
+                {
+                    newRecognition.Receiver = _repository.GetUserByEmail(recognition.ReceiverEmail);
+                }
+                
+                newRecognition.Sender = _repository.GetUserByEmail(recognition.SenderEmail);
                 newRecognition.Value = _repository.GetCorporateValueByName(recognition.CorporateValueName);
                 if(newRecognition.Value==null) return BadRequest(new { Message = "Missing Corporate Value Information" });
                 newRecognition.DateCreated = DateTime.UtcNow;

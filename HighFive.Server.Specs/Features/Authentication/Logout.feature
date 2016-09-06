@@ -9,7 +9,7 @@ Background:
 	| test.user@email.com | password | Test      | User     | arielpartners |
 
 @ignore
-Scenario: Logout successful
+Scenario: F-9 Logout successful
 	Given the following logged in user:
 	| Email               | Password |
 	| test.user@email.com | password |
@@ -17,7 +17,7 @@ Scenario: Logout successful
 	Then I should be logged out of the system
 
 @ignore
-Scenario: Cannot logout if not logged in
+Scenario: F-9 Cannot logout if not logged in
 	Given I am not logged in
 	When I logout
 	Then I should receive an error:
