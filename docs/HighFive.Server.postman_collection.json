@@ -1,83 +1,84 @@
 {
-	"id": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+	"id": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 	"name": "HighFive Server",
 	"description": "The ReSTful API for the HighFive Server",
 	"order": [],
 	"folders": [
 		{
-			"id": "460740d9-51f6-a688-b685-85a7b8925ca2",
+			"id": "4673289a-ba23-ef25-08ea-c163efbdad92",
 			"name": "Auth",
 			"description": "Authentication / login endpoints",
 			"order": [
-				"c0de3be5-7961-e9bb-a2e4-8e98f0c70ef3",
-				"a5a8d41e-4c92-9a48-3b52-fef77a364036"
+				"a194039c-27b8-07b7-c71a-47d4d954a4ef",
+				"dc12130b-7120-afdb-048a-4d3b54c7151c"
 			],
-			"owner": "933428",
+			"owner": "935608",
 			"collectionId": "35a10b4c-bb77-86d6-dc18-62e1d276e61f"
 		},
 		{
-			"id": "bc9df771-ca28-91a8-89c8-001c656cd932",
+			"id": "4a0a2952-5a90-6bec-75d4-37cc085ebefe",
 			"name": "Health Check",
 			"description": "make sure the server is healthy",
 			"order": [
-				"38f8365a-a67e-479c-28c3-49a8d5c706c0"
+				"44da8a59-cd97-883d-16fa-1f2af087c650"
 			],
-			"owner": "933428"
+			"owner": "935608"
 		},
 		{
-			"id": "30ed8ae1-ca8f-c59c-9408-0e5675ad10ed",
+			"id": "b037d59d-03f0-71d9-acfe-39f0c9bdbe99",
 			"name": "Metrics",
 			"description": "Summary information and metrics endpoints",
 			"order": [
-				"c7123905-bb06-73cc-e65d-8b95ce0aa2da"
+				"1076e863-7314-a2fe-ec15-646a9cffe832"
 			],
-			"owner": "933428"
+			"owner": "935608"
 		},
 		{
-			"id": "69d4d46a-9060-e620-7e01-24d1892f2407",
+			"id": "bf76602f-25f3-cc5e-d9a0-b1e76a325e4b",
 			"name": "Organizations",
 			"description": "Organization endpoints",
 			"order": [
-				"175cc5b7-934a-b048-1833-26520f767215",
-				"557ab2fd-9916-0fc3-bb50-75eb78a087cf",
-				"72f75978-837f-ae6a-024a-48d3466db541"
+				"024e8493-f125-23f7-5019-26fb00762d2b",
+				"190f8b23-41af-72f9-4f97-5c170ed9d961",
+				"8198d362-2a29-9a5c-8dc0-39208614cb04"
 			],
-			"owner": "933428",
+			"owner": "935608",
 			"collectionId": "4c172144-5546-2a2b-b41a-e94e5cb57e59"
 		},
 		{
-			"id": "7d56da41-73c8-9616-32c8-49c67f3c4e0d",
+			"id": "851e38c0-a93e-81a4-ef01-76f1df0128a4",
 			"name": "Recognitions",
 			"description": "Recognitions endpoints",
 			"order": [
-				"977028d9-ccb7-5ef0-974c-ca02af218d01",
-				"f11f7c37-1962-4886-f018-ff79bb955076",
-				"c56f44af-fa9a-cdd9-d611-652ac17bd8e3",
-				"df9c7ac5-75a0-6f0f-0f6d-7ad98378b5ca"
+				"8560ab0e-f011-69cd-57c5-07e2e065952b",
+				"1893aa4d-595f-8710-0ebb-0ad605f75616",
+				"0302b45c-2128-5035-815a-76db71457642",
+				"927188d2-76ff-5742-dd22-8eac1cd25da3"
 			],
-			"owner": "933428"
+			"owner": "935608"
 		},
 		{
-			"id": "7a12b898-e990-5813-072a-239cc1c08905",
+			"id": "eb5c4bfe-96da-add9-557e-7802a39b132b",
 			"name": "Users",
 			"description": "User Endpoints",
 			"order": [
-				"9842e057-8fee-b084-40dd-8a9ba5e4d95e",
-				"f32e4b61-cdaa-0612-ca20-99d7a7645fcb",
-				"395ca5ae-a913-d8bd-8535-eded6cadccad",
-				"b1157305-3ec3-3e9b-bba5-c840dddb44cc",
-				"2fa9f99f-ac00-54d0-1056-f79e78124334"
+				"e1755ad8-ef96-4e14-5742-5b18c635a958",
+				"863fe80a-bd62-cf78-789a-900d097b1015",
+				"c0fd2d3f-b980-6c0d-c9b2-eb29b8a0137a",
+				"ccbc0d5a-159b-9e1f-4a7c-7c110b9a0643",
+				"2f29c73e-2ee6-5b4b-d30f-5f41181d218b"
 			],
-			"owner": "933428"
+			"owner": "935608"
 		}
 	],
 	"timestamp": 1471631590758,
-	"owner": "933428",
+	"owner": "935608",
 	"public": false,
 	"published": false,
+	"hasRequests": true,
 	"requests": [
 		{
-			"id": "175cc5b7-934a-b048-1833-26520f767215",
+			"id": "024e8493-f125-23f7-5019-26fb00762d2b",
 			"headers": "",
 			"url": "{{host}}/api/organizations",
 			"preRequestScript": null,
@@ -92,18 +93,102 @@
 			"time": 1473115674066,
 			"name": "/api/organizations",
 			"description": "Get information for all organizations",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
 			"rawModeData": "{\n    \"name\": \"Ariel Partners\"\n}",
-			"folder": "69d4d46a-9060-e620-7e01-24d1892f2407"
+			"folder": "bf76602f-25f3-cc5e-d9a0-b1e76a325e4b"
 		},
 		{
-			"id": "2fa9f99f-ac00-54d0-1056-f79e78124334",
+			"id": "0302b45c-2128-5035-815a-76db71457642",
+			"headers": "Content-Type: application/json\n",
+			"url": "{{host}}/api/recognitions",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473174446666,
+			"name": "/api/recognitions Existing User",
+			"description": "Create a new recognition for an existing user",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": [],
+			"rawModeData": "{\n    \"senderEmail\": \"test.user@hq.dhs.gov\",\n    \"receiverEmail\": \"John.Doe@hq.dhs.gov\",\n    \"organizationName\": \"DHS\",\n    \"corporateValueName\": \"Teamwork\",\n    \"description\": \"wonderful job!\",\n    \"points\":\"1\"\n}"
+		},
+		{
+			"id": "1076e863-7314-a2fe-ec15-646a9cffe832",
+			"headers": "",
+			"url": "{{host}}/api/metrics/:orgName",
+			"preRequestScript": null,
+			"pathVariables": {
+				"orgName": "DHS"
+			},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473174486196,
+			"name": "/api/metrics",
+			"description": "Get information for all summary metrics in the system",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": []
+		},
+		{
+			"id": "1893aa4d-595f-8710-0ebb-0ad605f75616",
+			"headers": "",
+			"url": "{{host}}/api/recognitions/:receiverName",
+			"preRequestScript": null,
+			"pathVariables": {
+				"receiverName": "John.Doe@hq.dhs.gov"
+			},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473174394668,
+			"name": "/api/recognitions/:receiverName",
+			"description": "Get information for all recognitions by receiver in the system\nYou can use a query string",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": []
+		},
+		{
+			"id": "190f8b23-41af-72f9-4f97-5c170ed9d961",
+			"headers": "organizationName: Ariel Partners\n",
+			"url": "{{host}}/api/organizations/:organizationName",
+			"preRequestScript": null,
+			"pathVariables": {
+				"organizationName": "DHS"
+			},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473174469288,
+			"name": "/api/organizations/:organizationName",
+			"description": "Get information for an organization",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": [],
+			"rawModeData": "{\n    \"name\": \"Ariel Partners\"\n}"
+		},
+		{
+			"id": "2f29c73e-2ee6-5b4b-d30f-5f41181d218b",
 			"headers": "",
 			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
 			"pathVariables": {
-				"email": "test.user@email.com"
+				"email": "test.user@hq.dhs.gov"
 			},
 			"method": "DELETE",
 			"data": null,
@@ -112,15 +197,14 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472409790333,
+			"time": 1473174380374,
 			"name": "/api/users/testuser@email.com",
 			"description": "Delete testuser@email.com",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"folder": "7a12b898-e990-5813-072a-239cc1c08905"
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": []
 		},
 		{
-			"id": "38f8365a-a67e-479c-28c3-49a8d5c706c0",
+			"id": "44da8a59-cd97-883d-16fa-1f2af087c650",
 			"headers": "",
 			"url": "{{host}}/api/healthcheck",
 			"preRequestScript": null,
@@ -135,56 +219,12 @@
 			"time": 1472923274413,
 			"name": "/api/healthcheck",
 			"description": "Get a status message from the server",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
-			"folder": "bc9df771-ca28-91a8-89c8-001c656cd932"
+			"folder": "4a0a2952-5a90-6bec-75d4-37cc085ebefe"
 		},
 		{
-			"id": "395ca5ae-a913-d8bd-8535-eded6cadccad",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{host}}/api/users/",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1472410285100,
-			"name": "/api/users/   Self Signup",
-			"description": "Create a new user: self signup",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"rawModeData": "{\n    \"email\": \"test.user@email.com\",\n    \"password\": \"abc123\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"organization\": \"arielpartners\"\n}",
-			"folder": "7a12b898-e990-5813-072a-239cc1c08905"
-		},
-		{
-			"id": "557ab2fd-9916-0fc3-bb50-75eb78a087cf",
-			"headers": "organizationName: Ariel Partners\n",
-			"url": "{{host}}/api/organizations/:organizationName",
-			"preRequestScript": null,
-			"pathVariables": {
-				"organizationName": "Ariel Partners"
-			},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1473115706263,
-			"name": "/api/organizations/:organizationName",
-			"description": "Get information for an organization",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"rawModeData": "{\n    \"name\": \"Ariel Partners\"\n}",
-			"folder": "69d4d46a-9060-e620-7e01-24d1892f2407"
-		},
-		{
-			"id": "72f75978-837f-ae6a-024a-48d3466db541",
+			"id": "8198d362-2a29-9a5c-8dc0-39208614cb04",
 			"headers": "Content-Type: application/javascript\n",
 			"url": "{{host}}/api/organizations",
 			"preRequestScript": null,
@@ -196,16 +236,15 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472409527144,
+			"time": 1473174478081,
 			"name": "/api/organizations",
 			"description": "Create a new organization",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
-			"rawModeData": "{\n    \"name\": \"Ariel Partners\"\n}",
-			"folder": "69d4d46a-9060-e620-7e01-24d1892f2407"
+			"rawModeData": "{\n    \"name\": \"DHS\"\n}"
 		},
 		{
-			"id": "977028d9-ccb7-5ef0-974c-ca02af218d01",
+			"id": "8560ab0e-f011-69cd-57c5-07e2e065952b",
 			"headers": "",
 			"url": "{{host}}/api/recognitions",
 			"preRequestScript": null,
@@ -220,16 +259,18 @@
 			"time": 1472406621796,
 			"name": "/api/recognitions",
 			"description": "Get information for all recognitions in the system\nYou can use a query string",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
-			"folder": "7d56da41-73c8-9616-32c8-49c67f3c4e0d"
+			"folder": "851e38c0-a93e-81a4-ef01-76f1df0128a4"
 		},
 		{
-			"id": "9842e057-8fee-b084-40dd-8a9ba5e4d95e",
+			"id": "863fe80a-bd62-cf78-789a-900d097b1015",
 			"headers": "",
-			"url": "{{host}}/api/users/",
+			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
-			"pathVariables": {},
+			"pathVariables": {
+				"email": "test.user@hq.dhs.gov"
+			},
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
@@ -237,36 +278,75 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472409581548,
-			"name": "/api/users/",
-			"description": "Get information for all users",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"folder": "7a12b898-e990-5813-072a-239cc1c08905"
+			"time": 1473174335972,
+			"name": "/api/users/testuser@email.com",
+			"description": "Get information for testuser@email.com",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": []
 		},
 		{
-			"id": "a5a8d41e-4c92-9a48-3b52-fef77a364036",
+			"id": "927188d2-76ff-5742-dd22-8eac1cd25da3",
 			"headers": "Content-Type: application/json\n",
-			"url": "{{host}}/api/auth",
+			"url": "{{host}}/api/recognitions",
 			"preRequestScript": null,
 			"pathVariables": {},
-			"method": "DELETE",
+			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472410562300,
-			"name": "/api/auth   Logout",
-			"description": "Logout",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"time": 1473173187253,
+			"name": "/api/recognitions New User",
+			"description": "Create a new recognition, while simultaneously adding a new user to the system",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
-			"rawModeData": "",
-			"folder": "460740d9-51f6-a688-b685-85a7b8925ca2"
+			"rawModeData": "{\n    \"senderEmail\": \"test.user@email.com\",\n    \"receiverEmail\": \"AddNew\",\n    \"organizationName\": \"Ariel Partners\",\n    \"corporateValueName\": \"Integrity\",\n    \"description\": \"You are great\",\n    \"newUserName\": \"Joe Blow\",\n    \"newUserEmail\": \"joe.blow@emal.com\"\n}",
+			"folder": "851e38c0-a93e-81a4-ef01-76f1df0128a4"
 		},
 		{
-			"id": "b1157305-3ec3-3e9b-bba5-c840dddb44cc",
+			"id": "a194039c-27b8-07b7-c71a-47d4d954a4ef",
+			"headers": "Content-Type: application/json\n",
+			"url": "{{host}}/api/auth",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473174500840,
+			"name": "/api/auth Login",
+			"description": "Login",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": [],
+			"rawModeData": "{\n    \"email\": \"test.user@hq.dhs.gov\",\n    \"password\": \"password\"\n}"
+		},
+		{
+			"id": "c0fd2d3f-b980-6c0d-c9b2-eb29b8a0137a",
+			"headers": "Content-Type: application/json\n",
+			"url": "{{host}}/api/users/",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1473174352829,
+			"name": "/api/users/   Self Signup",
+			"description": "Create a new user: self signup",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
+			"responses": [],
+			"rawModeData": "{\n    \"email\": \"test.user@hq.dhs.gov\",\n    \"password\": \"password\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"organization\": \"DHS\"\n}"
+		},
+		{
+			"id": "ccbc0d5a-159b-9e1f-4a7c-7c110b9a0643",
 			"headers": "",
 			"url": "{{host}}/api/users/:email",
 			"preRequestScript": null,
@@ -283,60 +363,38 @@
 			"time": 1472409785125,
 			"name": "/api/users/testuser@email.com Update Profile",
 			"description": "Update my user profile with additional information",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
 			"rawModeData": "{\n    \"firstName\": \"Craeg\",\n    \"lastName\": \"Strong\",\n    \"organization\": \"ArielPartners\",\n    \"email\": \"cstrong@arielpartners.com\",\n    \"reportsTo\": \"sstrong@arielpartners.com\",\n    \"department\": \"R&D\",\n    \"location\": \"New York, NY\",\n    \"title\": \"CTO\",\n    \"phone\": \"917-992-0259\",\n    \"hireDate\": \"4/1/2000\"\n}",
-			"folder": "7a12b898-e990-5813-072a-239cc1c08905"
+			"folder": "eb5c4bfe-96da-add9-557e-7802a39b132b"
 		},
 		{
-			"id": "c0de3be5-7961-e9bb-a2e4-8e98f0c70ef3",
+			"id": "dc12130b-7120-afdb-048a-4d3b54c7151c",
 			"headers": "Content-Type: application/json\n",
 			"url": "{{host}}/api/auth",
 			"preRequestScript": null,
 			"pathVariables": {},
-			"method": "POST",
+			"method": "DELETE",
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1473001474428,
-			"name": "/api/auth Login",
-			"description": "Login",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"time": 1472410562300,
+			"name": "/api/auth   Logout",
+			"description": "Logout",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
-			"rawModeData": "{\n    \"email\": \"test.user@email.com\",\n    \"password\": \"password\"\n}",
-			"folder": "460740d9-51f6-a688-b685-85a7b8925ca2"
+			"rawModeData": "",
+			"folder": "4673289a-ba23-ef25-08ea-c163efbdad92"
 		},
 		{
-			"id": "c56f44af-fa9a-cdd9-d611-652ac17bd8e3",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{host}}/api/recognitions",
+			"id": "e1755ad8-ef96-4e14-5742-5b18c635a958",
+			"headers": "",
+			"url": "{{host}}/api/users/",
 			"preRequestScript": null,
 			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1473173149528,
-			"name": "/api/recognitions Existing User",
-			"description": "Create a new recognition for an existing user",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"rawModeData": "{\n    \"senderEmail\": \"test.user@email.com\",\n    \"receiverEmail\": \"John.Doe@email.com\",\n    \"organizationName\": \"Ariel Partners\",\n    \"corporateValueName\": \"Integrity\",\n    \"description\": \"wonderful job!\"\n}"
-		},
-		{
-			"id": "c7123905-bb06-73cc-e65d-8b95ce0aa2da",
-			"headers": "",
-			"url": "{{host}}/api/metrics/:orgName",
-			"preRequestScript": null,
-			"pathVariables": {
-				"orgName": "Ariel Partners"
-			},
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
@@ -344,76 +402,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1473115858442,
-			"name": "/api/metrics",
-			"description": "Get information for all summary metrics in the system",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
+			"time": 1472409581548,
+			"name": "/api/users/",
+			"description": "Get information for all users",
+			"collectionId": "8fd719df-66ac-c18c-4829-5e1d2c308756",
 			"responses": [],
-			"folder": "30ed8ae1-ca8f-c59c-9408-0e5675ad10ed"
-		},
-		{
-			"id": "df9c7ac5-75a0-6f0f-0f6d-7ad98378b5ca",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{host}}/api/recognitions",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1473173187253,
-			"name": "/api/recognitions New User",
-			"description": "Create a new recognition, while simultaneously adding a new user to the system",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"rawModeData": "{\n    \"senderEmail\": \"test.user@email.com\",\n    \"receiverEmail\": \"AddNew\",\n    \"organizationName\": \"Ariel Partners\",\n    \"corporateValueName\": \"Integrity\",\n    \"description\": \"You are great\",\n    \"newUserName\": \"Joe Blow\",\n    \"newUserEmail\": \"joe.blow@emal.com\"\n}"
-		},
-		{
-			"id": "f11f7c37-1962-4886-f018-ff79bb955076",
-			"headers": "",
-			"url": "{{host}}/api/recognitions/:receiverName",
-			"preRequestScript": null,
-			"pathVariables": {
-				"receiverName": "John.Doe@email.com"
-			},
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1473115509724,
-			"name": "/api/recognitions/:receiverName",
-			"description": "Get information for all recognitions by receiver in the system\nYou can use a query string",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"folder": "7d56da41-73c8-9616-32c8-49c67f3c4e0d"
-		},
-		{
-			"id": "f32e4b61-cdaa-0612-ca20-99d7a7645fcb",
-			"headers": "",
-			"url": "{{host}}/api/users/:email",
-			"preRequestScript": null,
-			"pathVariables": {
-				"email": "test.user@email.com"
-			},
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1472409780509,
-			"name": "/api/users/testuser@email.com",
-			"description": "Get information for testuser@email.com",
-			"collectionId": "c458171c-98e3-b0e0-9329-dd7626ee9add",
-			"responses": [],
-			"folder": "7a12b898-e990-5813-072a-239cc1c08905"
+			"folder": "eb5c4bfe-96da-add9-557e-7802a39b132b"
 		}
 	]
 }

@@ -573,6 +573,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RecognitionFeed.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Setup\SeedData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeedData.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\Administration\AdministerOrganizationSteps.cs" />
     <Compile Include="StepDefinitions\Administration\AdministerUsersSteps.cs" />
@@ -637,6 +642,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RecognitionFeed.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Setup\SeedData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SeedData.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="runtests.cmd" />
     <None Include="SpecRunTestProfile.xsd">
@@ -645,6 +654,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="StepDefinitions\Setup\" />
     <Folder Include="Support\" />
   </ItemGroup>
   <ItemGroup>

@@ -105,6 +105,7 @@ namespace HighFive.Server.Services.Models
             }
             catch (Exception ex)
             {
+                _logger.LogError("Error getting OrganizationByName " + organizationName + " Error: " + ex.Message);
                 return null;
             }
         }
@@ -222,7 +223,7 @@ namespace HighFive.Server.Services.Models
             _logger.LogInformation("Getting All Metrics");
             var metricsList = new List<GroupedMetric>();
             var organizationCorpoateValues = GetCorporateValuesByOrganizationName(organizationName).ToList();
-            if(!organizationCorpoateValues.Any()) return metricsList;
+            if (!organizationCorpoateValues.Any()) return metricsList;
 
             var weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
             var query = from r in _context.Recognitions

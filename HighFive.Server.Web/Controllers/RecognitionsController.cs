@@ -90,9 +90,13 @@ namespace HighFive.Server.Web.Controllers
             {
                 var newRecognition = Mapper.Map<Recognition>(recognition);
                 newRecognition.Sender = _repository.GetUserByEmail(recognition.SenderEmail);
+                if (newRecognition.Sender == null) return BadRequest(new {Message = "Missing Sender Information"});
                 newRecognition.Receiver = _repository.GetUserByEmail(recognition.ReceiverEmail);
+                if(newRecognition.Receiver == null) return BadRequest(new { Message = "Missing Receiver Information" });
                 newRecognition.Organization = _repository.GetOrganizationByName(recognition.OrganizationName);
+                if(newRecognition.Organization==null) return BadRequest(new { Message = "Missing Organization Information" });
                 newRecognition.Value = _repository.GetCorporateValueByName(recognition.CorporateValueName);
+                if(newRecognition.Value==null) return BadRequest(new { Message = "Missing Corporate Value Information" });
                 newRecognition.DateCreated = DateTime.UtcNow;
                 _repository.AddRecognition(newRecognition);
                 if (await _repository.SaveChangesAsync()) return Created($"api/recognitions/{newRecognition.Id}", Mapper.Map<RecognitionViewModel>(newRecognition));
