@@ -99,7 +99,7 @@ namespace HighFive.Server.Services.Models
         {
             return _context.Organizations
                 .Include(o => o.Values)
-                .FirstOrDefault(o => o.Name == organizationName);
+                .FirstOrDefault(o => o.Name.Equals(organizationName,StringComparison.OrdinalIgnoreCase) || o.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase));
         }
 
         #endregion
@@ -207,7 +207,7 @@ namespace HighFive.Server.Services.Models
             _logger.LogInformation("Getting All Metrics");
             var weekago = DateTime.UtcNow.AddDays(-numberOfDaysToGoBack);
             var query = from r in _context.Recognitions
-                        where r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) &&
+                        where (r.Organization.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) || r.Organization.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase)) &&
                               r.DateCreated > weekago
                         group r by r.Value.Name into m
                         select new GroupedMetric
@@ -215,9 +215,14 @@ namespace HighFive.Server.Services.Models
                             CorporateValue = m.Key,
                             Points = m.Sum(r => r.Points)
                         };
-            var metricsList = _context.CorporateValues
-                                .OrderBy(a => a.Name)
-                                .Select(a => new GroupedMetric {CorporateValue = a.Name, Points = 0}).ToList();
+            var org = _context.Organizations
+                .Include(cv => cv.Values)
+                .FirstOrDefault(r=> r.Name.Equals(organizationName, StringComparison.OrdinalIgnoreCase) || r.WebPath.Equals(organizationName, StringComparison.OrdinalIgnoreCase));
+
+            if (org == null) return new List<GroupedMetric>();
+            var metricsList = org.Values
+                .OrderBy(a => a.Name)
+                .Select(a => new GroupedMetric {CorporateValue = a.Name, Points = 0}).ToList();
             if (!metricsList.Any()) return new List<GroupedMetric>();
             foreach (var groupedMetric in query)
             {

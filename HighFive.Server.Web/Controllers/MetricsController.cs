@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HighFive.Server.Web.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class MetricsController : Controller
     {
