@@ -137,7 +137,20 @@ namespace HighFive.Server.Specs.StepDefinitions.Recognitions
                 index++;
             }
         }
-        
+
+        [Given]
+        public void Given_the_following_user_does_not_exist(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then]
+        public void Then_the_following_user_should_exist(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+
         #region utilities
 
         private void AssertMessageProperty(string expectedMessage, object result, string propertyName = "Message")

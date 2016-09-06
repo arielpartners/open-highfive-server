@@ -61,13 +61,11 @@ namespace HighFive.Server.Specs.Features.Recognitions
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Successfully create a recognition", new string[] {
-                "framework"}, SourceLine=6)]
-        public virtual void SuccessfullyCreateARecognition()
+        [TechTalk.SpecRun.ScenarioAttribute("F-13 Successfully create a recognition for an existing user", SourceLine=5)]
+        public virtual void F_13SuccessfullyCreateARecognitionForAnExistingUser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully create a recognition", new string[] {
-                        "framework"});
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-13 Successfully create a recognition for an existing user", ((string[])(null)));
+#line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -82,7 +80,7 @@ this.ScenarioSetup(scenarioInfo);
                         "joe.blow@email.com",
                         "Ariel Partners",
                         "password"});
-#line 8
+#line 7
  testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -97,9 +95,9 @@ this.ScenarioSetup(scenarioInfo);
                         "suresh.nikam@email.com",
                         "Ariel Partners",
                         "Integrity",
-                        "30",
+                        "1",
                         "Great job!"});
-#line 11
+#line 10
  testRunner.When("I create the following recognition:", ((string)(null)), table2, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -114,10 +112,91 @@ this.ScenarioSetup(scenarioInfo);
                         "suresh.nikam@email.com",
                         "Ariel Partners",
                         "Integrity",
-                        "30",
+                        "1",
                         "Great job!"});
-#line 14
+#line 13
  testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table3, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("F-7 Successfully create a recognition for a new user", SourceLine=17)]
+        [TechTalk.SpecRun.IgnoreAttribute()]
+        public virtual void F_7SuccessfullyCreateARecognitionForANewUser()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-7 Successfully create a recognition for a new user", new string[] {
+                        "ignore"});
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "First Name",
+                        "Last Name",
+                        "Email",
+                        "Organization Name",
+                        "Password"});
+            table4.AddRow(new string[] {
+                        "Joe",
+                        "Blow",
+                        "joe.blow@email.com",
+                        "Ariel Partners",
+                        "password"});
+#line 19
+ testRunner.Given("I am logged in as the following user:", ((string)(null)), table4, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Email"});
+            table5.AddRow(new string[] {
+                        "John Smith",
+                        "john.smith@email.com"});
+#line 22
+ testRunner.And("the following user does not exist:", ((string)(null)), table5, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender Email",
+                        "New User Email",
+                        "New User Name",
+                        "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
+                        "Description"});
+            table6.AddRow(new string[] {
+                        "joe.blow@email.com",
+                        "john.smith@email.com",
+                        "John Smith",
+                        "Ariel Partners",
+                        "Integrity",
+                        "1",
+                        "Great job!"});
+#line 25
+ testRunner.When("I create the following recognition:", ((string)(null)), table6, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
+                        "Description"});
+            table7.AddRow(new string[] {
+                        "joe.blow@email.com",
+                        "john.smith@email.com",
+                        "Ariel Partners",
+                        "Integrity",
+                        "1",
+                        "Great job!"});
+#line 28
+ testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table7, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Email",
+                        "Name"});
+            table8.AddRow(new string[] {
+                        "john.smith@email.com",
+                        "John Smith"});
+#line 31
+ testRunner.And("the following user should exist:", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -182,14 +261,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successfully create a recognition")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-13 Successfully create a recognition for an existing user")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateRecognition")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("framework")]
-        public virtual void SuccessfullyCreateARecognition()
+        public virtual void F_13SuccessfullyCreateARecognitionForAnExistingUser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully create a recognition", new string[] {
-                        "framework"});
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-13 Successfully create a recognition for an existing user", ((string[])(null)));
+#line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -204,7 +281,7 @@ this.ScenarioSetup(scenarioInfo);
                         "joe.blow@email.com",
                         "Ariel Partners",
                         "password"});
-#line 8
+#line 7
  testRunner.Given("I am logged in as the following user:", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -219,9 +296,9 @@ this.ScenarioSetup(scenarioInfo);
                         "suresh.nikam@email.com",
                         "Ariel Partners",
                         "Integrity",
-                        "30",
+                        "1",
                         "Great job!"});
-#line 11
+#line 10
  testRunner.When("I create the following recognition:", ((string)(null)), table2, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -236,10 +313,93 @@ this.ScenarioSetup(scenarioInfo);
                         "suresh.nikam@email.com",
                         "Ariel Partners",
                         "Integrity",
-                        "30",
+                        "1",
                         "Great job!"});
-#line 14
+#line 13
  testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table3, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("F-7 Successfully create a recognition for a new user")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateRecognition")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        public virtual void F_7SuccessfullyCreateARecognitionForANewUser()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("F-7 Successfully create a recognition for a new user", new string[] {
+                        "ignore"});
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "First Name",
+                        "Last Name",
+                        "Email",
+                        "Organization Name",
+                        "Password"});
+            table4.AddRow(new string[] {
+                        "Joe",
+                        "Blow",
+                        "joe.blow@email.com",
+                        "Ariel Partners",
+                        "password"});
+#line 19
+ testRunner.Given("I am logged in as the following user:", ((string)(null)), table4, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Email"});
+            table5.AddRow(new string[] {
+                        "John Smith",
+                        "john.smith@email.com"});
+#line 22
+ testRunner.And("the following user does not exist:", ((string)(null)), table5, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender Email",
+                        "New User Email",
+                        "New User Name",
+                        "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
+                        "Description"});
+            table6.AddRow(new string[] {
+                        "joe.blow@email.com",
+                        "john.smith@email.com",
+                        "John Smith",
+                        "Ariel Partners",
+                        "Integrity",
+                        "1",
+                        "Great job!"});
+#line 25
+ testRunner.When("I create the following recognition:", ((string)(null)), table6, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sender Email",
+                        "Receiver Email",
+                        "Organization Name",
+                        "CorporateValue Name",
+                        "Points",
+                        "Description"});
+            table7.AddRow(new string[] {
+                        "joe.blow@email.com",
+                        "john.smith@email.com",
+                        "Ariel Partners",
+                        "Integrity",
+                        "1",
+                        "Great job!"});
+#line 28
+ testRunner.Then("the system should confirm that the following recognition has been created:", ((string)(null)), table7, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Email",
+                        "Name"});
+            table8.AddRow(new string[] {
+                        "john.smith@email.com",
+                        "John Smith"});
+#line 31
+ testRunner.And("the following user should exist:", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
